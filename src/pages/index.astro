@@ -6,10 +6,11 @@ import Paragraph from "@/components/Typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import ButtonWrapper from "@/components/Wrapper/ButtonWrapper.astro";
 import SectionHeroMain from "@/components/custom/SectionHeroMain.astro";
+import MarqueeTopics from "@/components/custom/MarqueeTopics.astro";
 import SectionHeading from "@/components/custom/SectionHeading.astro";
 import CardGrid from "@/components/custom/CardGrid.astro";
 import ContentCard from "@/components/custom/ContentCard.astro";
-import MusicRelease from "@/components/custom/MusicRelease.astro";
+import MusicReleases from "@/components/custom/MusicReleases.astro";
 import EmailCopy from "@/components/custom/EmailCopy.astro";
 import IdentityList from "@/components/custom/IdentityList.astro";
 import RepoChips from "@/components/custom/RepoChips.astro";
@@ -99,13 +100,15 @@ const channels = [
 >
   <SectionHeroMain />
 
+  <MarqueeTopics />
+
   <Section id="que-es">
-    <ContentWrapper>
+    <ContentWrapper variant="columns">
       <SectionHeading
         eyebrow="Qué es RefactorIA"
         title="Criterio de ingeniería, no ruido."
       />
-      <div class="prose-stack_wrap">
+      <div class="prose-stack_wrap" slot="column2">
         <Paragraph>
           RefactorIA es una comunidad en español para developers que modernizan
           sistemas de verdad: los que tienen usuarios, datos y una historia que
@@ -114,7 +117,7 @@ const channels = [
         <Paragraph>
           El punto de partida es el mundo PCSoft, y el techo no existe:
           cualquier developer en transición hacia arquitecturas modernas o
-          integrando IA en su flujo tiene lugar acá.
+          integrando IA en su flujo tiene su lugar acá.
         </Paragraph>
         <Paragraph>
           Hablamos de software engineering, arquitectura, migraciones, open
@@ -122,9 +125,8 @@ const channels = [
           construir y sostener software en producción.
         </Paragraph>
         <Paragraph>
-          Nada de frases de marketing. Lo que compartimos es lo que probamos:
-          qué funcionó, qué falló, cuánto costó y qué haríamos distinto la
-          próxima vez.
+          Sin frases de marketing. Compartimos lo que probamos: qué funcionó,
+          qué falló, cuánto costó y qué haríamos distinto la próxima vez.
         </Paragraph>
       </div>
     </ContentWrapper>
@@ -178,37 +180,32 @@ const channels = [
     </ContentWrapper>
   </Section>
 
-  <Section id="music">
-    <ContentWrapper>
+  <Section id="music" theme="brand" paddingTop="large" paddingBottom="large">
+    <ContentWrapper centered>
       <SectionHeading
+        centered
         eyebrow="RefactorIA Music"
         title="El software también se canta."
       />
-      <div class="prose-stack_wrap">
-        <Paragraph>
-          Publicamos música original inspirada en la cultura developer: bugs,
-          deploys, IA y sus contradicciones. La producción usa inteligencia
-          artificial de punta a punta y lo decimos sin vueltas: es otro
-          experimento de la comunidad, distribuido en las plataformas
-          habituales.
-        </Paragraph>
-      </div>
-      <MusicRelease
-        title="P(DOOM)"
-        spotifyUrl="https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w"
-      />
+      <Paragraph class="text-center">
+        Publicamos música original inspirada en la cultura developer: bugs,
+        deploys, IA y sus contradicciones. La producción usa inteligencia
+        artificial de punta a punta y lo decimos sin vueltas: es otro
+        experimento de la comunidad, distribuido en las plataformas habituales.
+      </Paragraph>
+      <MusicReleases />
     </ContentWrapper>
   </Section>
 
   <Section id="about">
-    <ContentWrapper>
-      <SectionHeading
-        eyebrow="Quién está detrás"
-        title="Creada y dirigida por Juan Barbat."
-      />
+    <ContentWrapper variant="columns">
       <div class="prose-stack_wrap">
+        <SectionHeading
+          eyebrow="Quién está detrás"
+          title="Creada y dirigida por Juan Barbat."
+        />
         <Paragraph>
-          RefactorIA es un proyecto independiente creado y dirigido por{" "}
+          RefactorIA es una comunidad independiente creada y dirigida por{" "}
           <a href="https://github.com/barbatdev" rel="noopener">
             Juan Barbat
           </a>, que responde por el proyecto en todas sus plataformas: este
@@ -216,19 +213,17 @@ const channels = [
           RefactorIA Music.
         </Paragraph>
       </div>
-      <IdentityList />
+      <IdentityList slot="column2" />
     </ContentWrapper>
   </Section>
 
-  <Section id="contacto">
-    <ContentWrapper>
-      <SectionHeading eyebrow="Contacto" title="Escribinos." />
-      <div class="prose-stack_wrap">
-        <Paragraph>
-          Propuestas, consultas o verificación de identidad: el email oficial de
-          RefactorIA es:
-        </Paragraph>
-      </div>
+  <Section id="contacto" paddingTop="large" paddingBottom="large">
+    <ContentWrapper centered>
+      <SectionHeading centered eyebrow="Contacto" title="Escribinos." />
+      <Paragraph class="text-center">
+        Propuestas, consultas o verificación de identidad: el email oficial de
+        RefactorIA es:
+      </Paragraph>
       <EmailCopy email="juan@refactoria.dev" />
     </ContentWrapper>
   </Section>
@@ -239,7 +234,7 @@ const channels = [
     .prose-stack_wrap {
       display: grid;
       gap: var(--space-4);
-      max-width: 62rem;
+      max-width: 40rem;
     }
 
     .prose-stack_wrap :global(a) {
@@ -254,8 +249,9 @@ const channels = [
       }
     }
 
-    #contacto .prose-stack_wrap {
-      margin-bottom: var(--space-4);
+    #music .prose-stack_wrap,
+    #music :global(.section-head_wrap) {
+      max-width: none;
     }
   }
 </style>

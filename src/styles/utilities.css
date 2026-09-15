@@ -1081,3 +1081,7 @@
   inset: 0% 0% auto;
   overflow: hidden;
 }
+
+.text-center {
+  text-align: center;
+}

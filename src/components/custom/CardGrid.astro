@@ -1,11 +1,30 @@
 ---
 /** Responsive grid for content cards: one column on small screens, two on
- * mid sizes, three from 64rem up. */
+ * mid sizes, three from 64rem up. Cards inside get a pointer spotlight. */
 ---
 
 <div class="cardgrid_layout">
   <slot />
 </div>
+
+<script>
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (fine) {
+    document.querySelectorAll(".cardgrid_layout").forEach((grid) => {
+      grid.addEventListener("pointermove", (ev) => {
+        const pointer = ev as PointerEvent;
+        const card = (pointer.target as HTMLElement).closest<HTMLElement>(
+          ".content-card_wrap",
+        );
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--spot-x", `${pointer.clientX - rect.left}px`);
+        card.style.setProperty("--spot-y", `${pointer.clientY - rect.top}px`);
+      });
+    });
+  }
+</script>
 
 <style is:global>
   @layer components {
