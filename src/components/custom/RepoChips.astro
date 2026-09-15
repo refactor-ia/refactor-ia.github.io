@@ -1,0 +1,38 @@
+---
+import Button from "@/components/Button.astro";
+
+interface Repo {
+  name: string;
+  href: string;
+}
+
+const repos: Repo[] = [
+  { name: "cortex", href: "https://github.com/refactor-ia/cortex" },
+  { name: "presupuestos", href: "https://github.com/refactor-ia/presupuestos" },
+  {
+    name: "streamdeck-nan",
+    href: "https://github.com/refactor-ia/streamdeck-nan",
+  },
+];
+---
+
+<div class="repo-chips_wrap">
+  {
+    repos.map((repo) => (
+      <Button element="link" href={repo.href} class="mono-label" rel="noopener">
+        {repo.name}
+      </Button>
+    ))
+  }
+</div>
+
+<style is:global>
+  @layer components {
+    .repo-chips_wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-block: var(--space-5);
+    }
+  }
+</style>

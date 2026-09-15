@@ -1,0 +1,196 @@
+---
+import { SITE_NAME } from "@/consts.ts";
+
+interface Props {
+  /** Set to `false` to skip rendering this component and its children. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+
+const official = {
+  githubCreator: "https://github.com/barbatdev",
+  githubOrg: "https://github.com/refactor-ia",
+  youtubeMain: "https://www.youtube.com/@RefactorIA",
+  youtubeDevs: "https://www.youtube.com/@RefactorIADevs",
+  discord: "https://discord.gg/D3PhJ477Bj",
+  spotify: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+};
+---
+
+{
+  render && (
+    <footer class="footer_wrap">
+      <div class="footer_inner">
+        <div class="footer_grid">
+          <div class="footer_brand">
+            <p class="footer_wordmark">
+              {SITE_NAME}
+              <span class="footer_cursor">_</span>
+            </p>
+            <p class="footer_motto">
+              Modernize with engineering judgment. No hype.
+            </p>
+            <p class="footer_creator">
+              Proyecto independiente creado y dirigido por{" "}
+              <a href={official.githubCreator} rel="noopener">
+                Juan Barbat
+              </a>
+              .
+            </p>
+          </div>
+          <nav class="footer_col" aria-label="Identidad oficial">
+            <p class="footer_heading mono-label">Identidad</p>
+            <a href={official.githubCreator} rel="noopener">
+              github.com/barbatdev
+            </a>
+            <a href={official.githubOrg} rel="noopener">
+              github.com/refactor-ia
+            </a>
+            <a href={official.youtubeMain} rel="noopener">
+              youtube.com/@RefactorIA
+            </a>
+            <a href={official.youtubeDevs} rel="noopener">
+              youtube.com/@RefactorIADevs
+            </a>
+          </nav>
+          <nav class="footer_col" aria-label="Comunidad y música">
+            <p class="footer_heading mono-label">Comunidad</p>
+            <a href={official.discord} rel="noopener">
+              Discord
+            </a>
+            <a href={official.spotify} rel="noopener">
+              Spotify
+            </a>
+            <a href="mailto:juan@refactoria.dev">juan@refactoria.dev</a>
+            <a href="https://refactoria.dev">refactoria.dev</a>
+          </nav>
+        </div>
+        <div class="footer_bottom">
+          <p class="footer_copyright text-style-small">
+            &copy; <span id="year">{new Date().getFullYear()}</span>&#160;
+            {SITE_NAME} · Hecho sin hype.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+<script>
+  const year = document.querySelector<HTMLSpanElement>("#year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear().toString();
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .footer_wrap {
+      display: flex;
+      justify-content: center;
+      padding-block: var(--section-space-small);
+      padding-inline: var(--site-margin);
+      background-color: var(--background);
+      color: var(--text);
+      border-top: var(--border-width) solid var(--border);
+    }
+
+    .footer_inner {
+      width: 100%;
+      max-width: var(--max-width-main);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .footer_grid {
+      display: grid;
+      gap: var(--space-6);
+    }
+
+    @media (width >= 44rem) {
+      .footer_grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer_brand p {
+      max-width: 26rem;
+      margin: 0 0 var(--space-2);
+      color: var(--text-2);
+    }
+
+    .footer_wordmark {
+      color: var(--text);
+      font-weight: var(--primary-bold);
+      font-size: 1.1rem;
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    .footer_cursor {
+      color: var(--brand-500);
+      animation: footer-cursor-blink 1.2s steps(2, start) infinite;
+    }
+
+    @keyframes footer-cursor-blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .footer_creator a {
+      color: var(--text);
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: color-mix(in srgb, var(--brand-500), white 30%);
+        }
+      }
+    }
+
+    .footer_heading {
+      margin: 0 0 var(--space-2);
+      color: var(--text-2);
+      font-size: 0.75rem;
+      font-weight: var(--primary-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer_col {
+      display: grid;
+      gap: var(--space-2);
+      align-content: start;
+    }
+
+    .footer_col a {
+      width: fit-content;
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+      text-decoration: none;
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: var(--text);
+        }
+      }
+    }
+
+    .footer_bottom {
+      padding-top: var(--space-4);
+      border-top: var(--border-width) solid var(--border);
+    }
+
+    .footer_copyright {
+      color: var(--text-2);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .footer_cursor {
+        animation: none;
+      }
+    }
+  }
+</style>

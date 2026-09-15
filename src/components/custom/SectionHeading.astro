@@ -1,0 +1,29 @@
+---
+import Eyebrow from "@/components/Typography/Eyebrow.astro";
+import Heading from "@/components/Typography/Heading.astro";
+
+interface Props {
+  /** Small label shown above the title. */
+  eyebrow: string;
+  /** Section title text. */
+  title: string;
+}
+
+const { eyebrow, title } = Astro.props;
+---
+
+<div class="section-head_wrap">
+  <Eyebrow class="mono-label">{eyebrow}</Eyebrow>
+  <Heading tag="h2" variant="h2">{title}</Heading>
+</div>
+
+<style is:global>
+  @layer components {
+    .section-head_wrap {
+      display: grid;
+      gap: var(--space-3);
+      justify-items: start;
+      margin-bottom: var(--space-6);
+    }
+  }
+</style>

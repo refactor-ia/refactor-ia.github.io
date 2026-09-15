@@ -1,0 +1,80 @@
+---
+import Button from "@/components/Button.astro";
+
+interface Props {
+  /** Address shown as text and copied to the clipboard. */
+  email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<p class="emailcopy_wrap" data-email={email}>
+  <a class="emailcopy_link mono-label" href={`mailto:${email}`}>{email}</a>
+  <Button
+    element="button"
+    type="button"
+    emphasis="secondary"
+    class="emailcopy_button"
+    hidden
+  >
+    <span class="emailcopy_label">Copiar</span>
+  </Button>
+</p>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>(".emailcopy_wrap");
+
+  if (wrap) {
+    const button = wrap.querySelector<HTMLButtonElement>(".emailcopy_button");
+    const label = wrap.querySelector<HTMLElement>(".emailcopy_label");
+    button?.removeAttribute("hidden");
+
+    button?.addEventListener("click", async () => {
+      const email = wrap.dataset.email ?? "";
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        /* Clipboard unavailable: the mailto link right beside it still works. */
+        return;
+      }
+      if (label) label.textContent = "Copiado ✓";
+      button.classList.add("copied");
+      setTimeout(() => {
+        if (label) label.textContent = "Copiar";
+        button.classList.remove("copied");
+      }, 2000);
+    });
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .emailcopy_wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      margin: 0;
+    }
+
+    .emailcopy_link {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      font-size: 1.15rem;
+      text-decoration-thickness: var(--border-width);
+      text-underline-offset: 0.2em;
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: color-mix(in srgb, var(--brand-500), white 55%);
+        }
+      }
+    }
+
+    .emailcopy_button.copied {
+      border-color: color-mix(in srgb, var(--brand-500) 70%, transparent);
+      box-shadow: 0 0 18px -2px
+        color-mix(in srgb, var(--brand-500) 55%, transparent);
+    }
+  }
+</style>

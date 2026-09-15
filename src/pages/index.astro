@@ -1,307 +1,261 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import ButtonWrapper from "@/components/Wrapper/ButtonWrapper.astro";
+import SectionHeroMain from "@/components/custom/SectionHeroMain.astro";
+import SectionHeading from "@/components/custom/SectionHeading.astro";
+import CardGrid from "@/components/custom/CardGrid.astro";
+import ContentCard from "@/components/custom/ContentCard.astro";
+import MusicRelease from "@/components/custom/MusicRelease.astro";
+import EmailCopy from "@/components/custom/EmailCopy.astro";
+import IdentityList from "@/components/custom/IdentityList.astro";
+import RepoChips from "@/components/custom/RepoChips.astro";
 
-const officialLinks = {
-  discord: 'https://discord.gg/D3PhJ477Bj',
-  githubOrg: 'https://github.com/refactor-ia',
-  githubCreator: 'https://github.com/barbatdev',
-  youtubeMain: 'https://www.youtube.com/@RefactorIA',
-  youtubeDevs: 'https://www.youtube.com/@RefactorIADevs',
-  spotify: 'https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w'
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://refactoria.dev/#organization",
+      name: "RefactorIA",
+      url: "https://refactoria.dev/",
+      email: "juan@refactoria.dev",
+      logo: "https://refactoria.dev/og-image.png",
+      description:
+        "Comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo.",
+      founder: { "@id": "https://refactoria.dev/#juan-barbat" },
+      sameAs: [
+        "https://github.com/refactor-ia",
+        "https://github.com/barbatdev",
+        "https://www.youtube.com/@RefactorIA",
+        "https://www.youtube.com/@RefactorIADevs",
+        "https://discord.gg/D3PhJ477Bj",
+        "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://refactoria.dev/#juan-barbat",
+      name: "Juan Barbat",
+      url: "https://github.com/barbatdev",
+      jobTitle: "Creador y responsable de RefactorIA",
+      worksFor: { "@id": "https://refactoria.dev/#organization" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://refactoria.dev/#website",
+      url: "https://refactoria.dev/",
+      name: "RefactorIA",
+      inLanguage: "es",
+      publisher: { "@id": "https://refactoria.dev/#organization" },
+    },
+  ],
 };
-
-const repos = [
-  { name: 'cortex', url: 'https://github.com/refactor-ia/cortex' },
-  { name: 'presupuestos', url: 'https://github.com/refactor-ia/presupuestos' },
-  { name: 'streamdeck-nan', url: 'https://github.com/refactor-ia/streamdeck-nan' }
-];
 
 const channels = [
   {
-    name: 'RefactorIA Devs',
-    url: officialLinks.youtubeDevs,
-    description: 'Tutoriales y contenido curado para aprender con criterio, no con copy/paste.'
+    title: "RefactorIA Devs",
+    href: "https://www.youtube.com/@RefactorIADevs",
+    description:
+      "Tutoriales y contenido curado para aprender con criterio, no con copy/paste.",
   },
   {
-    name: 'RefactorIA Labs',
-    url: officialLinks.youtubeMain,
-    description: 'Streams, experimentos y sesiones largas construyendo en vivo, con lo que sale mal incluido.'
-  }
+    title: "RefactorIA Labs",
+    href: "https://www.youtube.com/@RefactorIA",
+    description:
+      "Streams, experimentos y sesiones largas construyendo en vivo, con lo que sale mal incluido.",
+  },
+  {
+    title: "TurboTips",
+    description:
+      "Consejos cortos para destrabar el trabajo real del día a día.",
+  },
+  {
+    title: "Snippetazos",
+    description:
+      "Fragmentos de código listos para usar, con el criterio detrás de cada línea.",
+  },
+  {
+    title: "DevLore",
+    description:
+      "Decisiones de arquitectura, trade-offs y lecciones que deja el software que sobrevive.",
+  },
+  {
+    title: "Migraciones",
+    description:
+      "Casos reales de modernización: cambiar de stack sin tirar lo que funciona.",
+  },
 ];
-
-const formats = [
-  {
-    name: 'TurboTips',
-    description: 'Consejos cortos para destrabar el trabajo real del día a día.'
-  },
-  {
-    name: 'Snippetazos',
-    description: 'Fragmentos de código listos para usar, con el criterio detrás de cada línea.'
-  },
-  {
-    name: 'DevLore',
-    description: 'Decisiones de arquitectura, trade-offs y lecciones que deja el software que sobrevive.'
-  },
-  {
-    name: 'Migraciones',
-    description: 'Casos reales de modernización: cambiar de stack sin tirar lo que funciona.'
-  }
-];
-
-const musicPlatforms = [
-  { name: 'Spotify', url: officialLinks.spotify, available: true },
-  { name: 'Apple Music', url: null, available: false },
-  { name: 'YouTube Music', url: null, available: false }
-];
-
-const beardArt = [
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⢰⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⢀⣿⣷⣄⣀⣤⣶⣶⣶⣶⣤⣄⣀⣾⣿⡂⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⣽⣿⣿⣿⣿⠋⢉⣥⣤⣉⠉⣿⣿⣿⣿⣿⡂⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⢨⣿⣿⣿⣿⣿⣿⡟⠉⠉⢻⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠈⣽⣿⣿⣿⣿⣿⡇⠀⠀⠀⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⠀⠀⣸⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠈⢹⣿⣿⣿⣿⣿⡄⢀⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢿⣿⣿⣿⣷⣼⣿⣿⣿⣿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠹⣿⣿⣿⣿⣿⣿⡿⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⢻⣿⣿⣿⠏⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-  '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀'
-].join('\n');
-
-const year = new Date().getFullYear();
 ---
 
-<BaseLayout
+<Layout
+  theme="dark"
   title="RefactorIA | Modernize with engineering judgment. No hype."
   description="RefactorIA es una comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo. Experiencia real, sistemas en producción y open source. Creada y dirigida por Juan Barbat."
+  jsonLd={jsonLd}
 >
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-  <header class="site-header">
-    <div class="shell header-content">
-      <a class="wordmark" href="/" aria-label="RefactorIA, inicio">RefactorIA<span class="cursor">_</span></a>
-      <nav aria-label="Navegación principal">
-        <a href="#que-es">Qué es</a>
-        <a href="#formatos">Contenido</a>
-        <a href="#oss">Open Source</a>
-        <a href="#music">Music</a>
-        <a href="#about">About</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
-  </header>
+  <SectionHeroMain />
 
-  <main id="contenido">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div class="hero-text">
-          <p class="eyebrow">Comunidad de desarrollo en español</p>
-          <h1 id="hero-title">RefactorIA</h1>
-          <p class="motto">Modernize with engineering judgment. <span class="motto-accent">No hype.</span></p>
-          <p class="hero-copy">
-            Software, arquitectura, modernización e IA aplicada al desarrollo. Hablamos desde
-            sistemas reales en producción: qué funciona, qué no y qué hacer con eso.
-          </p>
-          <div class="actions" aria-label="Canales de RefactorIA">
-            <a class="button button-primary" href={officialLinks.discord}>Entrar al Discord</a>
-            <a class="button button-secondary" href={officialLinks.githubOrg}>Ver proyectos</a>
-            <a class="button button-secondary" href={officialLinks.youtubeMain}>Mirar contenido</a>
-          </div>
-        </div>
-        <pre class="hero-art" aria-hidden="true">{beardArt}</pre>
+  <Section id="que-es">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Qué es RefactorIA"
+        title="Criterio de ingeniería, no ruido."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          RefactorIA es una comunidad en español para developers que modernizan
+          sistemas de verdad: los que tienen usuarios, datos y una historia que
+          no se borra con un deploy.
+        </Paragraph>
+        <Paragraph>
+          El punto de partida es el mundo PCSoft, y el techo no existe:
+          cualquier developer en transición hacia arquitecturas modernas o
+          integrando IA en su flujo tiene lugar acá.
+        </Paragraph>
+        <Paragraph>
+          Hablamos de software engineering, arquitectura, migraciones, open
+          source e IA aplicada al desarrollo. Siempre desde la experiencia de
+          construir y sostener software en producción.
+        </Paragraph>
+        <Paragraph>
+          Nada de frases de marketing. Lo que compartimos es lo que probamos:
+          qué funcionó, qué falló, cuánto costó y qué haríamos distinto la
+          próxima vez.
+        </Paragraph>
       </div>
-    </section>
+    </ContentWrapper>
+  </Section>
 
-    <section id="que-es" class="section shell" aria-labelledby="what-title">
-      <div class="section-heading">
-        <p class="eyebrow">Qué es RefactorIA</p>
-        <h2 id="what-title">Criterio de ingeniería, no ruido.</h2>
-      </div>
-      <div class="prose-grid">
-        <p>
-          RefactorIA es una comunidad en español para developers que modernizan sistemas de
-          verdad: los que tienen usuarios, datos y una historia que no se borra con un deploy.
-        </p>
-        <p>
-          El punto de partida es el mundo PCSoft, y el techo no existe: cualquier developer en
-          transición hacia arquitecturas modernas o integrando IA en su flujo tiene lugar acá.
-        </p>
-        <p>
-          Hablamos de software engineering, arquitectura, migraciones, open source e IA aplicada
-          al desarrollo. Siempre desde la experiencia de construir y sostener software en
-          producción.
-        </p>
-        <p>
-          Nada de frases de marketing. Lo que compartimos es lo que probamos: qué funcionó, qué
-          falló, cuánto costó y qué haríamos distinto la próxima vez.
-        </p>
-      </div>
-    </section>
-
-    <section id="formatos" class="section shell" aria-labelledby="formats-title">
-      <div class="section-heading">
-        <p class="eyebrow">Contenido</p>
-        <h2 id="formats-title">Hecho para leer, mirar y usar en tu proyecto.</h2>
-      </div>
-      <div class="category-grid">
+  <Section id="formatos">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Contenido"
+        title="Hecho para leer, mirar y usar en tu proyecto."
+      />
+      <CardGrid>
         {
           channels.map((channel) => (
-            <a class="category-card category-card-link" href={channel.url}>
-              <h3>{channel.name}</h3>
-              <p>{channel.description}</p>
-            </a>
+            <ContentCard title={channel.title} href={channel.href}>
+              {channel.description}
+            </ContentCard>
           ))
         }
-        {
-          formats.map((format) => (
-            <article class="category-card">
-              <h3>{format.name}</h3>
-              <p>{format.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+      </CardGrid>
+    </ContentWrapper>
+  </Section>
 
-    <section id="oss" class="section shell" aria-labelledby="oss-title">
-      <div class="section-heading">
-        <p class="eyebrow">Open Source</p>
-        <h2 id="oss-title">Código abierto, con el proceso a la vista.</h2>
+  <Section id="oss">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Open Source"
+        title="Código abierto, con el proceso a la vista."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Los proyectos de la comunidad viven en la organización{" "}
+          <a href="https://github.com/refactor-ia" rel="noopener">
+            github.com/refactor-ia
+          </a>: herramientas, experimentos y el código que sale de los streams.
+          Sin métricas infladas: entrá, mirá el código y sacá tus propias
+          conclusiones.
+        </Paragraph>
       </div>
-      <div class="prose-grid">
-        <p>
-          Los proyectos de la comunidad viven en la organización
-          <a href={officialLinks.githubOrg}>github.com/refactor-ia</a>: herramientas, experimentos
-          y el código que sale de los streams. Sin métricas infladas: entrá, mirá el código y
-          sacá tus propias conclusiones.
-        </p>
-      </div>
-      <p class="repo-label">Repos activos:</p>
-      <ul class="repo-list">
-        {
-          repos.map((repo) => (
-            <li>
-              <a href={repo.url}>{repo.name}</a>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="actions">
-        <a class="button button-secondary" href={officialLinks.githubOrg}>Ver la organización en GitHub</a>
-      </div>
-    </section>
+      <RepoChips />
+      <ButtonWrapper>
+        <Button
+          element="link"
+          emphasis="secondary"
+          href="https://github.com/refactor-ia"
+          rel="noopener"
+        >
+          Ver la organización en GitHub
+        </Button>
+      </ButtonWrapper>
+    </ContentWrapper>
+  </Section>
 
-    <section id="music" class="section shell" aria-labelledby="music-title">
-      <div class="section-heading">
-        <p class="eyebrow">RefactorIA Music</p>
-        <h2 id="music-title">El software también se canta.</h2>
-      </div>
-      <div class="prose-grid">
-        <p>
-          Publicamos música original inspirada en la cultura developer: bugs, deploys, IA y sus
-          contradicciones. La producción usa inteligencia artificial de punta a punta y lo decimos
-          sin vueltas: es otro experimento de la comunidad, distribuido en las plataformas
+  <Section id="music">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="RefactorIA Music"
+        title="El software también se canta."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Publicamos música original inspirada en la cultura developer: bugs,
+          deploys, IA y sus contradicciones. La producción usa inteligencia
+          artificial de punta a punta y lo decimos sin vueltas: es otro
+          experimento de la comunidad, distribuido en las plataformas
           habituales.
-        </p>
+        </Paragraph>
       </div>
-      <div class="release-card">
-        <p class="release-label">Primer single</p>
-        <p class="release-title">P(DOOM)</p>
-        <div class="actions">
-          {
-            musicPlatforms.map((platform) =>
-              platform.available ? (
-                <a class="button button-primary" href={platform.url}>
-                  Escuchar en {platform.name}
-                </a>
-              ) : (
-                <span class="button button-disabled" aria-disabled="true">
-                  {platform.name} · pronto
-                </span>
-              )
-            )
-          }
-        </div>
-        <p class="release-note">Los próximos releases se anuncian primero en el Discord.</p>
-      </div>
-    </section>
+      <MusicRelease
+        title="P(DOOM)"
+        spotifyUrl="https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w"
+      />
+    </ContentWrapper>
+  </Section>
 
-    <section id="about" class="section shell" aria-labelledby="about-title">
-      <div class="section-heading">
-        <p class="eyebrow">Quién está detrás</p>
-        <h2 id="about-title">Creada y dirigida por Juan Barbat.</h2>
+  <Section id="about">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Quién está detrás"
+        title="Creada y dirigida por Juan Barbat."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          RefactorIA es un proyecto independiente creado y dirigido por{" "}
+          <a href="https://github.com/barbatdev" rel="noopener">
+            Juan Barbat
+          </a>, que responde por el proyecto en todas sus plataformas: este
+          sitio, la organización de GitHub, los dos canales de YouTube y
+          RefactorIA Music.
+        </Paragraph>
       </div>
-      <div class="prose-grid">
-        <p>
-          RefactorIA es un proyecto independiente creado y dirigido por
-          <a href={officialLinks.githubCreator}>Juan Barbat</a>, que responde por el proyecto en
-          todas sus plataformas: este sitio, la organización de GitHub, los dos canales de
-          YouTube y RefactorIA Music.
-        </p>
-      </div>
-      <ul class="identity-list">
-        <li>
-          GitHub personal: <a href={officialLinks.githubCreator}>github.com/barbatdev</a>
-        </li>
-        <li>
-          Organización: <a href={officialLinks.githubOrg}>github.com/refactor-ia</a>
-        </li>
-        <li>
-          YouTube principal: <a href={officialLinks.youtubeMain}>youtube.com/@RefactorIA</a>
-        </li>
-        <li>
-          YouTube técnico: <a href={officialLinks.youtubeDevs}>youtube.com/@RefactorIADevs</a>
-        </li>
-        <li>
-          Música: <a href={officialLinks.spotify}>RefactorIA en Spotify</a>
-        </li>
-      </ul>
-    </section>
+      <IdentityList />
+    </ContentWrapper>
+  </Section>
 
-    <section id="contacto" class="section shell" aria-labelledby="contact-title">
-      <div class="section-heading">
-        <p class="eyebrow">Contacto</p>
-        <h2 id="contact-title">Escribinos.</h2>
+  <Section id="contacto">
+    <ContentWrapper>
+      <SectionHeading eyebrow="Contacto" title="Escribinos." />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Propuestas, consultas o verificación de identidad: el email oficial de
+          RefactorIA es:
+        </Paragraph>
       </div>
-      <div class="prose-grid">
-        <p>
-          Propuestas, consultas o verificación de identidad: el email oficial de RefactorIA es
-          <a class="email-line" href="mailto:juan@refactoria.dev">juan@refactoria.dev</a>.
-        </p>
-      </div>
-    </section>
-  </main>
+      <EmailCopy email="juan@refactoria.dev" />
+    </ContentWrapper>
+  </Section>
+</Layout>
 
-  <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div class="footer-brand">
-        <p class="footer-wordmark">RefactorIA<span class="cursor">_</span></p>
-        <p>Modernize with engineering judgment. No hype.</p>
-        <p>
-          Proyecto independiente creado y dirigido por
-          <a href={officialLinks.githubCreator}>Juan Barbat</a>.
-        </p>
-      </div>
-      <nav class="footer-col" aria-label="Identidad oficial">
-        <p class="footer-heading">Identidad</p>
-        <a href={officialLinks.githubCreator}>github.com/barbatdev</a>
-        <a href={officialLinks.githubOrg}>github.com/refactor-ia</a>
-        <a href={officialLinks.youtubeMain}>youtube.com/@RefactorIA</a>
-        <a href={officialLinks.youtubeDevs}>youtube.com/@RefactorIADevs</a>
-      </nav>
-      <nav class="footer-col" aria-label="Comunidad y música">
-        <p class="footer-heading">Comunidad</p>
-        <a href={officialLinks.discord}>Discord</a>
-        <a href={officialLinks.spotify}>Spotify</a>
-        <a href="mailto:juan@refactoria.dev">juan@refactoria.dev</a>
-        <a href="https://refactoria.dev">refactoria.dev</a>
-      </nav>
-    </div>
-    <div class="shell footer-bottom">
-      <p>© {year} RefactorIA · Hecho sin hype.</p>
-    </div>
-  </footer>
-</BaseLayout>
+<style is:global>
+  @layer components {
+    .prose-stack_wrap {
+      display: grid;
+      gap: var(--space-4);
+      max-width: 62rem;
+    }
+
+    .prose-stack_wrap :global(a) {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      text-decoration-thickness: var(--border-width);
+      text-underline-offset: 0.2em;
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: color-mix(in srgb, var(--brand-500), white 55%);
+        }
+      }
+    }
+
+    #contacto .prose-stack_wrap {
+      margin-bottom: var(--space-4);
+    }
+  }
+</style>

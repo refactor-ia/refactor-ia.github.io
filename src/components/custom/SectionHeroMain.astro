@@ -1,0 +1,192 @@
+---
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import ButtonWrapper from "@/components/Wrapper/ButtonWrapper.astro";
+import Eyebrow from "@/components/Typography/Eyebrow.astro";
+import Heading from "@/components/Typography/Heading.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+
+const typedPhrase = "Modernize with engineering judgment.";
+
+const beardRows = [
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⢰⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⢀⣿⣷⣄⣀⣤⣶⣶⣶⣶⣤⣄⣀⣾⣿⡂⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⣽⣿⣿⣿⣿⠋⢉⣥⣤⣉⠉⣿⣿⣿⣿⣿⡂⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⢨⣿⣿⣿⣿⣿⣿⡟⠉⠉⢻⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠈⣽⣿⣿⣿⣿⣿⡇⠀⠀⠀⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⠀⠀⣸⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠈⢹⣿⣿⣿⣿⣿⡄⢀⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢿⣿⣿⣿⣷⣼⣿⣿⣿⣿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠹⣿⣿⣿⣿⣿⣿⡿⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⢻⣿⣿⣿⠏⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+];
+---
+
+<Section id="hero" paddingTop="even" paddingBottom="even">
+  <ContentWrapper>
+    <div class="hero-intro_wrap">
+      <Eyebrow class="mono-label">Comunidad de desarrollo en español</Eyebrow>
+      <Heading tag="h1" variant="display">RefactorIA</Heading>
+      <p class="hero-motto mono-label" aria-label={`${typedPhrase} No hype.`}>
+        <span
+          class="hero-motto_typed"
+          data-text={typedPhrase}
+          aria-hidden="true">{typedPhrase}</span
+        >
+        <span class="hero-motto_accent" aria-hidden="true">No hype.</span>
+        <span class="hero-motto_cursor" aria-hidden="true">▌</span>
+      </p>
+      <Paragraph variant="large">
+        Software, arquitectura, modernización e IA aplicada al desarrollo.
+        Hablamos desde sistemas reales en producción: qué funciona, qué no y qué
+        hacer con eso.
+      </Paragraph>
+      <ButtonWrapper>
+        <Button
+          element="link"
+          href="https://discord.gg/D3PhJ477Bj"
+          rel="noopener"
+        >
+          Entrar al Discord
+        </Button>
+        <Button
+          element="link"
+          emphasis="secondary"
+          href="https://github.com/refactor-ia"
+          rel="noopener"
+        >
+          Ver proyectos
+        </Button>
+        <Button
+          element="link"
+          emphasis="secondary"
+          href="https://www.youtube.com/@RefactorIA"
+          rel="noopener"
+        >
+          Mirar contenido
+        </Button>
+      </ButtonWrapper>
+    </div>
+    <pre
+      class="hero-beard"
+      slot="column2"
+      aria-hidden="true">{
+      beardRows.map((row, index) => (
+        <span class="hero-beard_row" style={`--row-index: ${index}`}>{row + "\n"}</span>
+      ))
+    }</pre>
+  </ContentWrapper>
+</Section>
+
+<script>
+  const motto = document.querySelector<HTMLElement>(".hero-motto");
+  const typed = document.querySelector<HTMLElement>(".hero-motto_typed");
+  const accent = document.querySelector<HTMLElement>(".hero-motto_accent");
+
+  if (motto && typed && accent) {
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!reduce) {
+      motto.classList.add("is-typing");
+      const full = typed.dataset.text ?? "";
+      typed.textContent = "";
+      let index = 0;
+      const tick = () => {
+        typed.textContent = full.slice(0, index++);
+        if (index <= full.length) {
+          setTimeout(tick, 28);
+        } else {
+          accent.classList.add("shown");
+        }
+      };
+      setTimeout(tick, 350);
+    }
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .hero-intro_wrap {
+      display: grid;
+      gap: var(--space-4);
+      justify-items: start;
+    }
+
+    .hero-motto {
+      margin: 0;
+      color: var(--text-2);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      letter-spacing: 0;
+    }
+
+    .hero-motto_accent {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      transition: opacity var(--hover-duration) var(--hover-ease);
+    }
+
+    .hero-motto.is-typing .hero-motto_accent {
+      opacity: 0;
+    }
+
+    .hero-motto.is-typing .hero-motto_accent.shown {
+      opacity: 1;
+    }
+
+    .hero-motto_cursor {
+      color: var(--brand-500);
+      animation: hero-cursor-blink 1.1s steps(2, start) infinite;
+    }
+
+    @keyframes hero-cursor-blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .hero-beard {
+      margin: 0;
+      overflow-x: auto;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: clamp(0.4rem, 1.4vw, 0.85rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+      opacity: 0.92;
+    }
+
+    .hero-beard_row {
+      display: block;
+      opacity: 0;
+      transform: translateY(0.25em);
+      animation: hero-beard-reveal 480ms var(--hover-ease) forwards;
+      animation-delay: calc(var(--row-index) * 70ms + 250ms);
+    }
+
+    @keyframes hero-beard-reveal {
+      to {
+        opacity: 0.92;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-motto_cursor {
+        animation: none;
+      }
+
+      .hero-beard_row {
+        opacity: 0.92;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+</style>
