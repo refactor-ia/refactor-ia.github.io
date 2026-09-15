@@ -19,6 +19,8 @@ const links = {
   youtubeDevs: "https://www.youtube.com/@RefactorIADevs",
   spotify: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
   spotifyAlbum: "https://open.spotify.com/album/3RBxTEy92zSYDZNuctzUXh",
+  appleMusic: "https://music.apple.com/us/artist/refactoria/6811690240",
+  youtubeMusic: "https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
 };
 
 test("renders the Spanish public landing contract", () => {
@@ -94,6 +96,14 @@ test("renders the Spanish public landing contract", () => {
   assert.ok(
     $('a[href="' + links.spotifyAlbum + '"]').length >= 1,
     "links the Spotify album",
+  );
+  assert.ok(
+    $('a[href="' + links.appleMusic + '"]').length >= 1,
+    "links the Apple Music artist",
+  );
+  assert.ok(
+    $('a[href="' + links.youtubeMusic + '"]').length >= 1,
+    "links the YouTube Music channel",
   );
   assert.ok(
     $('a[href="mailto:juan@refactoria.dev"]').length >= 1,

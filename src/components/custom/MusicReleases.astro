@@ -1,4 +1,5 @@
 ---
+import Button from "@/components/Button.astro";
 import Eyebrow from "@/components/Typography/Eyebrow.astro";
 import Icon from "@/components/Media/Icon.astro";
 import play from "@/assets/icons/play.svg";
@@ -61,6 +62,24 @@ const releases: Release[] = [
       </a>
     ))
   }
+</div>
+<div class="releases_platforms">
+  <Button
+    element="link"
+    href="https://music.apple.com/us/artist/refactoria/6811690240"
+    class="mono-label"
+    rel="noopener"
+  >
+    Apple Music
+  </Button>
+  <Button
+    element="link"
+    href="https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw"
+    class="mono-label"
+    rel="noopener"
+  >
+    YouTube Music
+  </Button>
 </div>
 <p class="releases_note">
   Los próximos lanzamientos se anuncian primero en Discord.
@@ -195,6 +214,14 @@ const releases: Release[] = [
       color: var(--text-2);
       font-size: var(--text-small, 0.85rem);
       transition: color var(--hover-duration) var(--hover-ease);
+    }
+
+    .releases_platforms {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: var(--_alignment, flex-start);
+      gap: var(--space-3);
+      margin-top: var(--space-2);
     }
 
     .releases_note {
