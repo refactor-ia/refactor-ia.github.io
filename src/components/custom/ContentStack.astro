@@ -1,0 +1,20 @@
+---
+/** Single-root content stack for slots: Lumos wraps multi-root slot content
+ * in an anonymous div, which defeats `.layout > *` spacing. Wrapping here
+ * keeps one root so row gaps and margin trims work as designed. */
+---
+
+<div class="content-stack_wrap">
+  <slot />
+</div>
+
+<style is:global>
+  @layer components {
+    .content-stack_wrap {
+      display: grid;
+      gap: var(--space-6);
+      width: 100%;
+      justify-items: var(--_alignment, start);
+    }
+  }
+</style>

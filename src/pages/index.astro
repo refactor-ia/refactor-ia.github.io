@@ -8,6 +8,7 @@ import ButtonWrapper from "@/components/Wrapper/ButtonWrapper.astro";
 import SectionHeroMain from "@/components/custom/SectionHeroMain.astro";
 import MarqueeTopics from "@/components/custom/MarqueeTopics.astro";
 import SectionHeading from "@/components/custom/SectionHeading.astro";
+import ContentStack from "@/components/custom/ContentStack.astro";
 import CardGrid from "@/components/custom/CardGrid.astro";
 import ContentCard from "@/components/custom/ContentCard.astro";
 import MusicReleases from "@/components/custom/MusicReleases.astro";
@@ -134,66 +135,73 @@ const channels = [
 
   <Section id="formatos">
     <ContentWrapper>
-      <SectionHeading
-        eyebrow="Contenido"
-        title="Hecho para leer, mirar y usar en tu proyecto."
-      />
-      <CardGrid>
-        {
-          channels.map((channel) => (
-            <ContentCard title={channel.title} href={channel.href}>
-              {channel.description}
-            </ContentCard>
-          ))
-        }
-      </CardGrid>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Contenido"
+          title="Hecho para leer, mirar y usar en tu proyecto."
+        />
+        <CardGrid>
+          {
+            channels.map((channel) => (
+              <ContentCard title={channel.title} href={channel.href}>
+                {channel.description}
+              </ContentCard>
+            ))
+          }
+        </CardGrid>
+      </ContentStack>
     </ContentWrapper>
   </Section>
 
   <Section id="oss">
     <ContentWrapper>
-      <SectionHeading
-        eyebrow="Open Source"
-        title="Código abierto, con el proceso a la vista."
-      />
-      <div class="prose-stack_wrap">
-        <Paragraph>
-          Los proyectos de la comunidad viven en la organización{" "}
-          <a href="https://github.com/refactor-ia" rel="noopener">
-            github.com/refactor-ia
-          </a>: herramientas, experimentos y el código que sale de los streams.
-          Sin métricas infladas: entrá, mirá el código y sacá tus propias
-          conclusiones.
-        </Paragraph>
-      </div>
-      <RepoChips />
-      <ButtonWrapper>
-        <Button
-          element="link"
-          emphasis="secondary"
-          href="https://github.com/refactor-ia"
-          rel="noopener"
-        >
-          Ver la organización en GitHub
-        </Button>
-      </ButtonWrapper>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Open Source"
+          title="Código abierto, con el proceso a la vista."
+        />
+        <div class="prose-stack_wrap">
+          <Paragraph>
+            Los proyectos de la comunidad viven en la organización{" "}
+            <a href="https://github.com/refactor-ia" rel="noopener">
+              github.com/refactor-ia
+            </a>: herramientas, experimentos y el código que sale de los
+            streams. Sin métricas infladas: entrá, mirá el código y sacá tus
+            propias conclusiones.
+          </Paragraph>
+        </div>
+        <RepoChips />
+        <ButtonWrapper>
+          <Button
+            element="link"
+            emphasis="secondary"
+            href="https://github.com/refactor-ia"
+            rel="noopener"
+          >
+            Ver la organización en GitHub
+          </Button>
+        </ButtonWrapper>
+      </ContentStack>
     </ContentWrapper>
   </Section>
 
-  <Section id="music" theme="brand" paddingTop="large" paddingBottom="large">
+  <Section id="music" paddingTop="large" paddingBottom="large">
     <ContentWrapper centered>
-      <SectionHeading
-        centered
-        eyebrow="RefactorIA Music"
-        title="El software también se canta."
-      />
-      <Paragraph class="text-center">
-        Publicamos música original inspirada en la cultura developer: bugs,
-        deploys, IA y sus contradicciones. La producción usa inteligencia
-        artificial de punta a punta y lo decimos sin vueltas: es otro
-        experimento de la comunidad, distribuido en las plataformas habituales.
-      </Paragraph>
-      <MusicReleases />
+      <ContentStack>
+        <SectionHeading
+          centered
+          eyebrow="RefactorIA Music"
+          title="El software también se canta."
+        />
+        <Paragraph class="text-center">
+          Publicamos música original inspirada en la cultura developer: bugs,
+          deploys, IA y sus contradicciones. La producción usa inteligencia
+          artificial de punta a punta y lo decimos sin vueltas: es otro
+          experimento de la comunidad, distribuido en las plataformas
+          habituales.
+        </Paragraph>
+        <MusicReleases />
+      </ContentStack>
     </ContentWrapper>
   </Section>
 
@@ -219,12 +227,14 @@ const channels = [
 
   <Section id="contacto" paddingTop="large" paddingBottom="large">
     <ContentWrapper centered>
-      <SectionHeading centered eyebrow="Contacto" title="Escribinos." />
-      <Paragraph class="text-center">
-        Propuestas, consultas o verificación de identidad: el email oficial de
-        RefactorIA es:
-      </Paragraph>
-      <EmailCopy email="juan@refactoria.dev" />
+      <ContentStack>
+        <SectionHeading centered eyebrow="Contacto" title="Escribinos." />
+        <Paragraph class="text-center">
+          Propuestas, consultas o verificación de identidad: el email oficial de
+          RefactorIA es:
+        </Paragraph>
+        <EmailCopy email="juan@refactoria.dev" />
+      </ContentStack>
     </ContentWrapper>
   </Section>
 </Layout>
@@ -247,11 +257,6 @@ const channels = [
           color: color-mix(in srgb, var(--brand-500), white 55%);
         }
       }
-    }
-
-    #music .prose-stack_wrap,
-    #music :global(.section-head_wrap) {
-      max-width: none;
     }
   }
 </style>
