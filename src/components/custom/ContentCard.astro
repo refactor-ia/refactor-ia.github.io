@@ -1,0 +1,61 @@
+---
+import Heading from "@/components/Typography/Heading.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import { slotContent } from "@/utils/slots.ts";
+
+interface Props {
+  /** Card title. */
+  title: string;
+  /** Where the whole card links to. Omitted renders a plain card. */
+  href?: string;
+}
+
+const { title, href } = Astro.props;
+const description = await slotContent(Astro.slots);
+const Tag = href ? "a" : "article";
+---
+
+<Tag
+  class:list={["content-card_wrap", href && "linked"]}
+  href={href}
+  rel={href ? "noopener" : undefined}
+>
+  <Heading tag="h3" variant="h3">{title}</Heading>
+  <Paragraph>{description}</Paragraph>
+</Tag>
+
+<style is:global>
+  @layer components {
+    .content-card_wrap {
+      display: grid;
+      align-content: start;
+      gap: var(--space-3);
+      padding: var(--space-5);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      text-decoration: none;
+      transition:
+        transform var(--hover-duration) var(--hover-ease),
+        border-color var(--hover-duration) var(--hover-ease),
+        box-shadow var(--hover-duration) var(--hover-ease);
+    }
+
+    .content-card_wrap.linked {
+      @media (hover: hover) {
+        &:hover {
+          transform: translateY(-0.1875rem);
+          border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+          box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent),
+            0 14px 32px -16px
+              color-mix(in srgb, var(--brand-500) 55%, transparent);
+        }
+      }
+    }
+
+    .content-card_wrap :global(.heading_wrap) {
+      color: var(--text);
+    }
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+/** Thin scroll progress bar. Pure CSS scroll-driven animation; renders as
+ * nothing in browsers without `animation-timeline` support. */
+---
+
+<div class="scroll-progress_wrap" aria-hidden="true"></div>
+
+<style is:global>
+  @layer components {
+    @supports (animation-timeline: scroll()) {
+      .scroll-progress_wrap {
+        position: fixed;
+        inset-block-start: 0;
+        inset-inline: 0;
+        z-index: 200;
+        height: 0.125rem;
+        background: linear-gradient(
+          90deg,
+          var(--brand-500),
+          color-mix(in srgb, var(--brand-500), white 35%)
+        );
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+        animation: scroll-progress-grow linear both;
+        animation-timeline: scroll(root block);
+        pointer-events: none;
+      }
+
+      @keyframes scroll-progress-grow {
+        to {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+</style>

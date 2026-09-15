@@ -1,0 +1,84 @@
+---
+/** The official identity list: every row pairs a label with the canonical
+ * link that platforms can verify. */
+interface Row {
+  label: string;
+  text: string;
+  href: string;
+}
+
+const rows: Row[] = [
+  {
+    label: "GitHub personal",
+    text: "github.com/barbatdev",
+    href: "https://github.com/barbatdev",
+  },
+  {
+    label: "Organización",
+    text: "github.com/refactor-ia",
+    href: "https://github.com/refactor-ia",
+  },
+  {
+    label: "YouTube principal",
+    text: "youtube.com/@RefactorIA",
+    href: "https://www.youtube.com/@RefactorIA",
+  },
+  {
+    label: "YouTube técnico",
+    text: "youtube.com/@RefactorIADevs",
+    href: "https://www.youtube.com/@RefactorIADevs",
+  },
+  {
+    label: "Música",
+    text: "RefactorIA en Spotify",
+    href: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+  },
+];
+---
+
+<ul class="identity-list_wrap">
+  {
+    rows.map((row) => (
+      <li>
+        <span>{row.label}</span>
+        <a class="mono-label" href={row.href} rel="noopener">
+          {row.text}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style is:global>
+  @layer components {
+    .identity-list_wrap {
+      display: grid;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .identity-list_wrap li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-2) var(--space-4);
+      padding-block: var(--space-3);
+      border-bottom: var(--border-width) solid var(--border);
+      color: var(--text-2);
+      font-size: var(--text-small, 0.95rem);
+    }
+
+    .identity-list_wrap a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: color-mix(in srgb, var(--brand-500), white 30%);
+        }
+      }
+    }
+  }
+</style>

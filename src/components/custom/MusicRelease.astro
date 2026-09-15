@@ -1,0 +1,76 @@
+---
+import Button from "@/components/Button.astro";
+
+interface Props {
+  /** Release name, shown large. */
+  title: string;
+  /** Platform link used for the primary action. */
+  spotifyUrl: string;
+}
+
+const { title, spotifyUrl } = Astro.props;
+---
+
+<div class="release_wrap">
+  <p class="release_label mono-label">Primer single</p>
+  <p class="release_title">{title}</p>
+  <div class="release_actions">
+    <Button element="link" href={spotifyUrl} rel="noopener">
+      Escuchar en Spotify
+    </Button>
+    <Button element="button" type="button" emphasis="secondary" disabled>
+      Apple Music · próximamente
+    </Button>
+    <Button element="button" type="button" emphasis="secondary" disabled>
+      YouTube Music · próximamente
+    </Button>
+  </div>
+  <p class="release_note">
+    Los próximos lanzamientos se anuncian primero en el Discord.
+  </p>
+</div>
+
+<style is:global>
+  @layer components {
+    .release_wrap {
+      display: grid;
+      justify-items: start;
+      gap: var(--space-3);
+      max-width: 38rem;
+      padding: var(--space-6);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+    }
+
+    .release_label {
+      margin: 0;
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      font-size: var(--text-small, 0.875rem);
+      font-weight: var(--primary-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .release_title {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: var(--primary-bold);
+      letter-spacing: var(--letter-spacing-tight);
+      line-height: var(--line-height-small);
+    }
+
+    .release_actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-block: var(--space-2);
+    }
+
+    .release_note {
+      margin: 0;
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+    }
+  }
+</style>

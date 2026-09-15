@@ -1,0 +1,261 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import ButtonWrapper from "@/components/Wrapper/ButtonWrapper.astro";
+import SectionHeroMain from "@/components/custom/SectionHeroMain.astro";
+import SectionHeading from "@/components/custom/SectionHeading.astro";
+import CardGrid from "@/components/custom/CardGrid.astro";
+import ContentCard from "@/components/custom/ContentCard.astro";
+import MusicRelease from "@/components/custom/MusicRelease.astro";
+import EmailCopy from "@/components/custom/EmailCopy.astro";
+import IdentityList from "@/components/custom/IdentityList.astro";
+import RepoChips from "@/components/custom/RepoChips.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://refactoria.dev/#organization",
+      name: "RefactorIA",
+      url: "https://refactoria.dev/",
+      email: "juan@refactoria.dev",
+      logo: "https://refactoria.dev/og-image.png",
+      description:
+        "Comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo.",
+      founder: { "@id": "https://refactoria.dev/#juan-barbat" },
+      sameAs: [
+        "https://github.com/refactor-ia",
+        "https://github.com/barbatdev",
+        "https://www.youtube.com/@RefactorIA",
+        "https://www.youtube.com/@RefactorIADevs",
+        "https://discord.gg/D3PhJ477Bj",
+        "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://refactoria.dev/#juan-barbat",
+      name: "Juan Barbat",
+      url: "https://github.com/barbatdev",
+      jobTitle: "Creador y responsable de RefactorIA",
+      worksFor: { "@id": "https://refactoria.dev/#organization" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://refactoria.dev/#website",
+      url: "https://refactoria.dev/",
+      name: "RefactorIA",
+      inLanguage: "es",
+      publisher: { "@id": "https://refactoria.dev/#organization" },
+    },
+  ],
+};
+
+const channels = [
+  {
+    title: "RefactorIA Devs",
+    href: "https://www.youtube.com/@RefactorIADevs",
+    description:
+      "Tutoriales y contenido curado para aprender con criterio, no con copy/paste.",
+  },
+  {
+    title: "RefactorIA Labs",
+    href: "https://www.youtube.com/@RefactorIA",
+    description:
+      "Streams, experimentos y sesiones largas construyendo en vivo, con lo que sale mal incluido.",
+  },
+  {
+    title: "TurboTips",
+    description:
+      "Consejos cortos para destrabar el trabajo real del día a día.",
+  },
+  {
+    title: "Snippetazos",
+    description:
+      "Fragmentos de código listos para usar, con el criterio detrás de cada línea.",
+  },
+  {
+    title: "DevLore",
+    description:
+      "Decisiones de arquitectura, trade-offs y lecciones que deja el software que sobrevive.",
+  },
+  {
+    title: "Migraciones",
+    description:
+      "Casos reales de modernización: cambiar de stack sin tirar lo que funciona.",
+  },
+];
+---
+
+<Layout
+  theme="dark"
+  title="RefactorIA | Modernize with engineering judgment. No hype."
+  description="RefactorIA es una comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo. Experiencia real, sistemas en producción y open source. Creada y dirigida por Juan Barbat."
+  jsonLd={jsonLd}
+>
+  <SectionHeroMain />
+
+  <Section id="que-es">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Qué es RefactorIA"
+        title="Criterio de ingeniería, no ruido."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          RefactorIA es una comunidad en español para developers que modernizan
+          sistemas de verdad: los que tienen usuarios, datos y una historia que
+          no se borra con un deploy.
+        </Paragraph>
+        <Paragraph>
+          El punto de partida es el mundo PCSoft, y el techo no existe:
+          cualquier developer en transición hacia arquitecturas modernas o
+          integrando IA en su flujo tiene lugar acá.
+        </Paragraph>
+        <Paragraph>
+          Hablamos de software engineering, arquitectura, migraciones, open
+          source e IA aplicada al desarrollo. Siempre desde la experiencia de
+          construir y sostener software en producción.
+        </Paragraph>
+        <Paragraph>
+          Nada de frases de marketing. Lo que compartimos es lo que probamos:
+          qué funcionó, qué falló, cuánto costó y qué haríamos distinto la
+          próxima vez.
+        </Paragraph>
+      </div>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="formatos">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Contenido"
+        title="Hecho para leer, mirar y usar en tu proyecto."
+      />
+      <CardGrid>
+        {
+          channels.map((channel) => (
+            <ContentCard title={channel.title} href={channel.href}>
+              {channel.description}
+            </ContentCard>
+          ))
+        }
+      </CardGrid>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="oss">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Open Source"
+        title="Código abierto, con el proceso a la vista."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Los proyectos de la comunidad viven en la organización{" "}
+          <a href="https://github.com/refactor-ia" rel="noopener">
+            github.com/refactor-ia
+          </a>: herramientas, experimentos y el código que sale de los streams.
+          Sin métricas infladas: entrá, mirá el código y sacá tus propias
+          conclusiones.
+        </Paragraph>
+      </div>
+      <RepoChips />
+      <ButtonWrapper>
+        <Button
+          element="link"
+          emphasis="secondary"
+          href="https://github.com/refactor-ia"
+          rel="noopener"
+        >
+          Ver la organización en GitHub
+        </Button>
+      </ButtonWrapper>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="music">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="RefactorIA Music"
+        title="El software también se canta."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Publicamos música original inspirada en la cultura developer: bugs,
+          deploys, IA y sus contradicciones. La producción usa inteligencia
+          artificial de punta a punta y lo decimos sin vueltas: es otro
+          experimento de la comunidad, distribuido en las plataformas
+          habituales.
+        </Paragraph>
+      </div>
+      <MusicRelease
+        title="P(DOOM)"
+        spotifyUrl="https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w"
+      />
+    </ContentWrapper>
+  </Section>
+
+  <Section id="about">
+    <ContentWrapper>
+      <SectionHeading
+        eyebrow="Quién está detrás"
+        title="Creada y dirigida por Juan Barbat."
+      />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          RefactorIA es un proyecto independiente creado y dirigido por{" "}
+          <a href="https://github.com/barbatdev" rel="noopener">
+            Juan Barbat
+          </a>, que responde por el proyecto en todas sus plataformas: este
+          sitio, la organización de GitHub, los dos canales de YouTube y
+          RefactorIA Music.
+        </Paragraph>
+      </div>
+      <IdentityList />
+    </ContentWrapper>
+  </Section>
+
+  <Section id="contacto">
+    <ContentWrapper>
+      <SectionHeading eyebrow="Contacto" title="Escribinos." />
+      <div class="prose-stack_wrap">
+        <Paragraph>
+          Propuestas, consultas o verificación de identidad: el email oficial de
+          RefactorIA es:
+        </Paragraph>
+      </div>
+      <EmailCopy email="juan@refactoria.dev" />
+    </ContentWrapper>
+  </Section>
+</Layout>
+
+<style is:global>
+  @layer components {
+    .prose-stack_wrap {
+      display: grid;
+      gap: var(--space-4);
+      max-width: 62rem;
+    }
+
+    .prose-stack_wrap :global(a) {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      text-decoration-thickness: var(--border-width);
+      text-underline-offset: 0.2em;
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: color-mix(in srgb, var(--brand-500), white 55%);
+        }
+      }
+    }
+
+    #contacto .prose-stack_wrap {
+      margin-bottom: var(--space-4);
+    }
+  }
+</style>

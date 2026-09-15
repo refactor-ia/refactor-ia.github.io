@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import Eyebrow from "@/components/Typography/Eyebrow.astro";
+import Heading from "@/components/Typography/Heading.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+---
+
+<Layout
+  theme="dark"
+  title="Error 404 | RefactorIA"
+  description="La página que buscás no está disponible."
+>
+  <Section paddingTop="even" paddingBottom="even" class="not-found-section">
+    <ContentWrapper>
+      <Eyebrow class="mono-label">Error 404</Eyebrow>
+      <Heading tag="h1" variant="h1"
+        >Error 404: esta ruta no está en el mapa.</Heading
+      >
+      <Paragraph> Volvé al inicio para seguir la conversación. </Paragraph>
+      <Button element="link" href="/">Ir al inicio</Button>
+    </ContentWrapper>
+  </Section>
+</Layout>
+
+<style is:global>
+  @layer components {
+    .not-found-section :global(.section_container),
+    .not-found-section {
+      min-height: 90svh;
+    }
+  }
+</style>

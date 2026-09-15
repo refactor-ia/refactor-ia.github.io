@@ -1,0 +1,4 @@
+ErrorDocument 404 /404.html
+
+# Static site: disable directory listings
+Options -Indexes
