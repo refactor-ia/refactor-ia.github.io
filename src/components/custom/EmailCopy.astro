@@ -11,6 +11,7 @@ const { email } = Astro.props;
 
 <p class="emailcopy_wrap" data-email={email}>
   <a class="emailcopy_link mono-label" href={`mailto:${email}`}>{email}</a>
+  {" "}
   <Button
     element="button"
     type="button"
@@ -54,6 +55,7 @@ const { email } = Astro.props;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: var(--_alignment, flex-start);
       gap: var(--space-3);
       margin: 0;
     }

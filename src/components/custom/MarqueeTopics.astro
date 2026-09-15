@@ -1,0 +1,33 @@
+---
+import Marquee from "@/components/Interactive/Marquee.astro";
+
+const topics = [
+  "software engineering",
+  "arquitectura",
+  "modernización",
+  "IA aplicada al desarrollo",
+  "sistemas en producción",
+  "open source",
+  "migraciones",
+  "criterio, no hype",
+];
+---
+
+<Marquee label="Temas que tratamos en la comunidad">
+  {
+    topics.map((topic) => (
+      <span class="marquee-topics_item mono-label">{topic} ·</span>
+    ))
+  }
+</Marquee>
+
+<style is:global>
+  @layer components {
+    .marquee-topics_item {
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  }
+</style>

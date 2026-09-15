@@ -1,0 +1,97 @@
+---
+import Button from "@/components/Button.astro";
+
+interface Release {
+  kind: string;
+  title: string;
+  url: string;
+}
+
+const releases: Release[] = [
+  {
+    kind: "Single",
+    title: "P(DOOM)",
+    url: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+  },
+  {
+    kind: "Álbum",
+    title: "RefactorIA",
+    url: "https://open.spotify.com/album/3RBxTEy92zSYDZNuctzUXh",
+  },
+];
+---
+
+<div class="releases_grid">
+  {
+    releases.map((release) => (
+      <div class="release_wrap theme-invert">
+        <p class="release_label mono-label">{release.kind}</p>
+        <p class="release_title">{release.title}</p>
+        <Button element="link" href={release.url} rel="noopener">
+          Escuchar en Spotify
+        </Button>
+      </div>
+    ))
+  }
+</div>
+<p class="releases_note">
+  Los próximos lanzamientos se anuncian primero en Discord.
+</p>
+
+<style is:global>
+  @layer components {
+    .releases_grid {
+      display: grid;
+      gap: var(--space-4);
+      width: 100%;
+    }
+
+    @media (width >= 44rem) {
+      .releases_grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .release_wrap {
+      display: grid;
+      justify-items: start;
+      gap: var(--space-3);
+      padding: var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      transition:
+        transform var(--hover-duration) var(--hover-ease),
+        box-shadow var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          transform: translateY(-0.1875rem);
+          box-shadow: 0 16px 36px -18px
+            color-mix(in srgb, black 65%, transparent);
+        }
+      }
+    }
+
+    .release_label {
+      margin: 0;
+      font-size: var(--text-small, 0.8rem);
+      font-weight: var(--primary-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .release_title {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: var(--primary-bold);
+      letter-spacing: var(--letter-spacing-tight);
+      line-height: var(--line-height-small);
+    }
+
+    .releases_note {
+      margin: var(--space-4) 0 0;
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+      text-align: var(--_alignment, start);
+    }
+  }
+</style>

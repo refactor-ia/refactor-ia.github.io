@@ -1,0 +1,72 @@
+---
+/** Staggered scroll-reveal for section content. Elements opt in by matching
+ * the target selectors below; everything is visible without JS and with
+ * reduced motion. Render nothing itself. */
+const targets = [
+  ".section-head_wrap",
+  ".prose-stack_wrap > *",
+  ".content-card_wrap",
+  ".release_wrap",
+  ".identity-list_wrap",
+  ".emailcopy_wrap",
+];
+---
+
+<script define:vars={{ targets: targets.join(",") }}>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nodes = document.querySelectorAll(targets);
+
+  if (reduce || !("IntersectionObserver" in window)) {
+    /* Leave everything visible. */
+  } else {
+    const groups = new Map();
+
+    nodes.forEach((node) => {
+      node.classList.add("reveal-init");
+      const parent = node.parentElement;
+      if (!groups.has(parent)) groups.set(parent, 0);
+      node.style.setProperty("--reveal-i", groups.get(parent));
+      groups.set(parent, groups.get(parent) + 1);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .reveal-init {
+      opacity: 0;
+      transform: translateY(0.75rem);
+      transition:
+        opacity 480ms var(--hover-ease),
+        transform 480ms var(--hover-ease);
+      transition-delay: calc(var(--reveal-i, 0) * 70ms);
+    }
+
+    .reveal-init.revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-init {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  }
+</style>

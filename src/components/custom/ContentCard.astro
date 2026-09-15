@@ -27,6 +27,7 @@ const Tag = href ? "a" : "article";
 <style is:global>
   @layer components {
     .content-card_wrap {
+      position: relative;
       display: grid;
       align-content: start;
       gap: var(--space-3);
@@ -35,10 +36,36 @@ const Tag = href ? "a" : "article";
       border: var(--border-width) solid var(--border);
       border-radius: var(--radius-small);
       text-decoration: none;
+      overflow: hidden;
       transition:
         transform var(--hover-duration) var(--hover-ease),
         border-color var(--hover-duration) var(--hover-ease),
         box-shadow var(--hover-duration) var(--hover-ease);
+    }
+
+    .content-card_wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        22rem circle at var(--spot-x, 50%) var(--spot-y, 50%),
+        color-mix(in srgb, var(--brand-500) 14%, transparent),
+        transparent 45%
+      );
+      opacity: 0;
+      transition: opacity var(--hover-duration) var(--hover-ease);
+      pointer-events: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .content-card_wrap:hover::after {
+        opacity: 1;
+      }
+    }
+
+    .content-card_wrap > :global(*) {
+      position: relative;
+      z-index: 1;
     }
 
     .content-card_wrap.linked {
