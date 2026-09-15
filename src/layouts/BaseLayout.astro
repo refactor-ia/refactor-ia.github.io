@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+}
+
+const { title, description, canonicalPath = '/' } = Astro.props;
+const canonicalUrl = new URL(canonicalPath, 'https://refactoria.dev').toString();
+const imageUrl = 'https://refactoria.dev/og-image.png';
+
+const officialLinks = {
+  githubOrg: 'https://github.com/refactor-ia',
+  githubCreator: 'https://github.com/barbatdev',
+  youtubeMain: 'https://www.youtube.com/@RefactorIA',
+  youtubeDevs: 'https://www.youtube.com/@RefactorIADevs',
+  discord: 'https://discord.gg/D3PhJ477Bj',
+  spotify: 'https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w'
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://refactoria.dev/#organization',
+      name: 'RefactorIA',
+      url: 'https://refactoria.dev/',
+      email: 'juan@refactoria.dev',
+      logo: 'https://refactoria.dev/og-image.png',
+      description:
+        'Comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo.',
+      founder: { '@id': 'https://refactoria.dev/#juan-barbat' },
+      sameAs: [
+        officialLinks.githubOrg,
+        officialLinks.githubCreator,
+        officialLinks.youtubeMain,
+        officialLinks.youtubeDevs,
+        officialLinks.discord,
+        officialLinks.spotify
+      ]
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://refactoria.dev/#juan-barbat',
+      name: 'Juan Barbat',
+      url: 'https://github.com/barbatdev',
+      jobTitle: 'Creador y responsable de RefactorIA',
+      worksFor: { '@id': 'https://refactoria.dev/#organization' }
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://refactoria.dev/#website',
+      url: 'https://refactoria.dev/',
+      name: 'RefactorIA',
+      inLanguage: 'es',
+      publisher: { '@id': 'https://refactoria.dev/#organization' }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Juan Barbat" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0b0714" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="RefactorIA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Logo de RefactorIA: una barba blanca sobre fondo violeta oscuro, junto al lema Modernize with engineering judgment. No hype."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta
+      name="twitter:image:alt"
+      content="Logo de RefactorIA: una barba blanca sobre fondo violeta oscuro, junto al lema Modernize with engineering judgment. No hype."
+    />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
