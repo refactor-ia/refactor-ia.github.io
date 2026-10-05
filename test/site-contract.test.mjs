@@ -12,7 +12,7 @@ const readOutput = (path) => {
 };
 
 const links = {
-  discord: "https://discord.gg/D3PhJ477Bj",
+  discord: "https://discord.gg/PT5EHv6nMM",
   githubOrg: "https://github.com/refactor-ia",
   githubCreator: "https://github.com/barbatdev",
   youtubeMain: "https://www.youtube.com/@RefactorIA",
