@@ -6,6 +6,7 @@ import Eyebrow from "@/components/Typography/Eyebrow.astro";
 import Heading from "@/components/Typography/Heading.astro";
 import Paragraph from "@/components/Typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
+import { href } from "@/data/links.ts";
 import logoBraille from "@/assets/generated/logo-braille.txt?raw";
 
 const typedPhrase = "Modernize with engineering judgment.";
@@ -32,17 +33,13 @@ const beardRows = logoBraille.split("\n").filter((line) => line.length > 0);
         qué hacer con eso.
       </Paragraph>
       <ButtonWrapper>
-        <Button
-          element="link"
-          href="https://discord.gg/D3PhJ477Bj"
-          rel="noopener"
-        >
+        <Button element="link" href={href("discord")} rel="noopener">
           Entrar al Discord
         </Button>
         <Button
           element="link"
           emphasis="secondary"
-          href="https://github.com/refactor-ia"
+          href={href("github-org")}
           rel="noopener"
         >
           Ver proyectos
@@ -50,7 +47,7 @@ const beardRows = logoBraille.split("\n").filter((line) => line.length > 0);
         <Button
           element="link"
           emphasis="secondary"
-          href="https://www.youtube.com/@RefactorIA"
+          href={href("youtube-labs")}
           rel="noopener"
         >
           Mirar contenido

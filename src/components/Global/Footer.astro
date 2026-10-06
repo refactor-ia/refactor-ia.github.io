@@ -1,5 +1,6 @@
 ---
 import { SITE_NAME } from "@/consts.ts";
+import { href } from "@/data/links.ts";
 
 interface Props {
   /** Set to `false` to skip rendering this component and its children. */
@@ -9,12 +10,13 @@ interface Props {
 const { render = true } = Astro.props;
 
 const official = {
-  githubCreator: "https://github.com/barbatdev",
-  githubOrg: "https://github.com/refactor-ia",
-  youtubeMain: "https://www.youtube.com/@RefactorIA",
-  youtubeDevs: "https://www.youtube.com/@RefactorIADevs",
-  discord: "https://discord.gg/D3PhJ477Bj",
-  spotify: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+  githubCreator: href("github-personal"),
+  githubOrg: href("github-org"),
+  youtubeMain: href("youtube-labs"),
+  youtubeDevs: href("youtube-devs"),
+  discord: href("discord"),
+  spotify: href("spotify"),
+  links: "/links",
 };
 ---
 
@@ -63,7 +65,8 @@ const official = {
               Spotify
             </a>
             <a href="mailto:juan@refactoria.dev">juan@refactoria.dev</a>
-            <a href="https://refactoria.dev">refactoria.dev</a>
+            <a href={official.links}>Todos los links</a>
+            <a href={href("web")}>refactoria.dev</a>
           </nav>
         </div>
         <div class="footer_bottom">

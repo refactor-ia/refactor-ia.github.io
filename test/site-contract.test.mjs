@@ -12,7 +12,7 @@ const readOutput = (path) => {
 };
 
 const links = {
-  discord: "https://discord.gg/D3PhJ477Bj",
+  discord: "https://discord.gg/PT5EHv6nMM",
   githubOrg: "https://github.com/refactor-ia",
   githubCreator: "https://github.com/barbatdev",
   youtubeMain: "https://www.youtube.com/@RefactorIA",
@@ -20,7 +20,7 @@ const links = {
   spotify: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
   spotifyAlbum: "https://open.spotify.com/album/3RBxTEy92zSYDZNuctzUXh",
   appleMusic: "https://music.apple.com/us/artist/refactoria/6811690240",
-  youtubeMusic: "https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
+  youtubeMusic: "https://music.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
 };
 
 test("renders the Spanish public landing contract", () => {
@@ -212,4 +212,40 @@ test("publishes static fallback, crawl and visual metadata assets", () => {
   ]) {
     assert.ok(existsSync(join(dist, asset)), `includes ${asset}`);
   }
+});
+
+test("renders the /links hub with every public link", () => {
+  const $ = load(readOutput("links/index.html"));
+  const expected = [
+    "https://www.youtube.com/@RefactorIADevs",
+    "https://www.youtube.com/@RefactorIA",
+    "https://discord.gg/PT5EHv6nMM",
+    "https://github.com/refactor-ia",
+    "https://refactoria.dev",
+    "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+    "https://music.apple.com/us/artist/refactoria/6811690240",
+    "https://music.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
+    "https://barbat.dev",
+    "https://x.com/juan_barbat",
+    "https://www.linkedin.com/in/juan-barbat",
+    "https://www.instagram.com/juan.barbat",
+    "https://www.tiktok.com/@juan_barbat",
+    "https://www.facebook.com/juanbarbat.dev",
+  ];
+
+  assert.equal($("h1").length, 1);
+  assert.equal(
+    $('link[rel="canonical"]').attr("href"),
+    "https://refactoria.dev/links/",
+  );
+  for (const url of expected) {
+    assert.equal($(`main a.link-row[href="${url}"]`).length, 1, url);
+  }
+  assert.ok(
+    load(readOutput("sitemap-0.xml"))("loc")
+      .toArray()
+      .some((el) => $(el).text() === "https://refactoria.dev/links/") ||
+      readOutput("sitemap-0.xml").includes("https://refactoria.dev/links/"),
+    "sitemap lists /links",
+  );
 });

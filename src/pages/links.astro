@@ -1,0 +1,198 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import ContentStack from "@/components/custom/ContentStack.astro";
+import SectionHeading from "@/components/custom/SectionHeading.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import { ICON_PATHS, LINKS, LINK_GROUPS } from "@/data/links.ts";
+
+const groups = LINK_GROUPS.map((group) => ({
+  ...group,
+  items: LINKS.filter((l) => l.group === group.id),
+}));
+---
+
+<Layout
+  theme="dark"
+  title="Links"
+  description="Todos los links oficiales de RefactorIA y de Juan Barbat en un solo lugar: YouTube, Discord, GitHub, música, blog y redes."
+>
+  <Section id="links" paddingBottom="large">
+    <ContentWrapper>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Links oficiales"
+          title="Todo RefactorIA, en un solo lugar."
+          level="h1"
+        />
+        <Paragraph>
+          Si un link no está acá, no es nuestro. Estos son los canales de la
+          comunidad y las redes de Juan Barbat, su creador.
+        </Paragraph>
+        {
+          groups.map((group) => (
+            <section class="links-group" aria-labelledby={`g-${group.id}`}>
+              <h2 id={`g-${group.id}`} class="links-group_title mono-label">
+                {group.title}
+              </h2>
+              <p class="links-group_blurb">{group.blurb}</p>
+              <ul class="links-list">
+                {group.items.map((item) => (
+                  <li>
+                    <a class="link-row" href={item.href} rel="noopener">
+                      <span class="link-row_icon" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          set:html={ICON_PATHS[item.icon]}
+                        />
+                      </span>
+                      <span class="link-row_text">
+                        <span class="link-row_title">{item.title}</span>
+                        <span class="link-row_label">{item.label}</span>
+                      </span>
+                      <span class="link-row_arrow" aria-hidden="true">
+                        &rarr;
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </ContentStack>
+    </ContentWrapper>
+  </Section>
+</Layout>
+
+<style is:global>
+  @layer components {
+    .links-group {
+      display: grid;
+      gap: var(--space-3);
+      max-width: 40rem;
+      width: 100%;
+    }
+
+    .links-group_title {
+      margin: 0;
+      color: var(--text-2);
+      font-size: 0.75rem;
+      font-weight: var(--primary-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .links-group_blurb {
+      margin: 0;
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+    }
+
+    .links-list {
+      display: grid;
+      gap: var(--space-3);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      min-height: 4rem;
+      padding: var(--space-3) var(--space-4);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      color: var(--text);
+      text-decoration: none;
+      transition:
+        transform var(--hover-duration) var(--hover-ease),
+        border-color var(--hover-duration) var(--hover-ease),
+        box-shadow var(--hover-duration) var(--hover-ease);
+    }
+
+    .link-row_icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: var(--radius-small);
+      background: color-mix(in srgb, var(--brand-500) 18%, transparent);
+      color: color-mix(in srgb, var(--brand-500), white 45%);
+    }
+
+    .link-row_icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .link-row_text {
+      display: grid;
+      gap: 0.125rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .link-row_title {
+      font-weight: var(--primary-bold);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    .link-row_label {
+      color: var(--text-2);
+      font-size: var(--text-small, 0.9rem);
+      overflow-wrap: anywhere;
+    }
+
+    .link-row_arrow {
+      flex: none;
+      color: var(--text-2);
+      transition:
+        transform var(--hover-duration) var(--hover-ease),
+        color var(--hover-duration) var(--hover-ease);
+    }
+
+    .link-row:focus-visible {
+      outline: 2px solid var(--brand-500);
+      outline-offset: 2px;
+    }
+
+    @media (hover: hover) {
+      .link-row:hover {
+        transform: translateY(-0.1875rem);
+        border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+        box-shadow:
+          0 0 0 1px color-mix(in srgb, var(--brand-500) 30%, transparent),
+          0 14px 32px -16px
+            color-mix(in srgb, var(--brand-500) 55%, transparent);
+      }
+
+      .link-row:hover .link-row_arrow {
+        color: color-mix(in srgb, var(--brand-500), white 30%);
+        transform: translateX(0.25rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-row,
+      .link-row_arrow {
+        transition: none;
+      }
+      .link-row:hover,
+      .link-row:hover .link-row_arrow {
+        transform: none;
+      }
+    }
+  }
+</style>

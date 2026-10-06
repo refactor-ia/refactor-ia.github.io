@@ -9,14 +9,16 @@ interface Props {
   title: string;
   /** Center the heading block. */
   centered?: boolean;
+  /** Heading level; use `h1` on pages without a hero. */
+  level?: "h1" | "h2";
 }
 
-const { eyebrow, title, centered = false } = Astro.props;
+const { eyebrow, title, centered = false, level = "h2" } = Astro.props;
 ---
 
 <div class:list={["section-head_wrap", centered && "centered"]}>
   <Eyebrow class="mono-label">{eyebrow}</Eyebrow>
-  <Heading tag="h2" variant="h2">{title}</Heading>
+  <Heading tag={level} variant="h2">{title}</Heading>
 </div>
 
 <style is:global>
