@@ -15,6 +15,7 @@ import MusicReleases from "@/components/custom/MusicReleases.astro";
 import EmailCopy from "@/components/custom/EmailCopy.astro";
 import IdentityList from "@/components/custom/IdentityList.astro";
 import RepoChips from "@/components/custom/RepoChips.astro";
+import { SAME_AS, href } from "@/data/links.ts";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -29,22 +30,13 @@ const jsonLd = {
       description:
         "Comunidad en español de software, arquitectura, modernización e inteligencia artificial aplicada al desarrollo.",
       founder: { "@id": "https://refactoria.dev/#juan-barbat" },
-      sameAs: [
-        "https://github.com/refactor-ia",
-        "https://github.com/barbatdev",
-        "https://www.youtube.com/@RefactorIA",
-        "https://www.youtube.com/@RefactorIADevs",
-        "https://discord.gg/D3PhJ477Bj",
-        "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
-        "https://music.apple.com/us/artist/refactoria/6811690240",
-        "https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
-      ],
+      sameAs: SAME_AS,
     },
     {
       "@type": "Person",
       "@id": "https://refactoria.dev/#juan-barbat",
       name: "Juan Barbat",
-      url: "https://github.com/barbatdev",
+      url: href("github-personal"),
       jobTitle: "Creador y responsable de RefactorIA",
       worksFor: { "@id": "https://refactoria.dev/#organization" },
     },
@@ -62,13 +54,13 @@ const jsonLd = {
 const channels = [
   {
     title: "RefactorIA Devs",
-    href: "https://www.youtube.com/@RefactorIADevs",
+    href: href("youtube-devs"),
     description:
       "Tutoriales y contenido curado para aprender con criterio, no con copy/paste.",
   },
   {
     title: "RefactorIA Labs",
-    href: "https://www.youtube.com/@RefactorIA",
+    href: href("youtube-labs"),
     description:
       "Streams, experimentos y sesiones largas construyendo en vivo, con lo que sale mal incluido.",
   },
@@ -165,7 +157,7 @@ const channels = [
         <div class="prose-stack_wrap">
           <Paragraph>
             Los proyectos de la comunidad viven en la organización{" "}
-            <a href="https://github.com/refactor-ia" rel="noopener">
+            <a href={href("github-org")} rel="noopener">
               github.com/refactor-ia
             </a>: herramientas, experimentos y el código que sale de los
             streams. Sin métricas infladas: entrá, mirá el código y sacá tus
@@ -177,7 +169,7 @@ const channels = [
           <Button
             element="link"
             emphasis="secondary"
-            href="https://github.com/refactor-ia"
+            href={href("github-org")}
             rel="noopener"
           >
             Ver la organización en GitHub
@@ -216,11 +208,9 @@ const channels = [
         />
         <Paragraph>
           RefactorIA es una comunidad independiente creada y dirigida por{" "}
-          <a href="https://github.com/barbatdev" rel="noopener">
-            Juan Barbat
-          </a>, que responde por el proyecto en todas sus plataformas: este
-          sitio, la organización de GitHub, los dos canales de YouTube y
-          RefactorIA Music.
+          <a href={href("github-personal")} rel="noopener"> Juan Barbat </a>,
+          que responde por el proyecto en todas sus plataformas: este sitio, la
+          organización de GitHub, los dos canales de YouTube y RefactorIA Music.
         </Paragraph>
       </div>
       <IdentityList slot="column2" />

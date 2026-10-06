@@ -2,6 +2,7 @@
 import Button from "@/components/Button.astro";
 import Eyebrow from "@/components/Typography/Eyebrow.astro";
 import Icon from "@/components/Media/Icon.astro";
+import { href } from "@/data/links.ts";
 import play from "@/assets/icons/play.svg";
 
 interface Release {
@@ -16,7 +17,7 @@ const releases: Release[] = [
   {
     kind: "Single",
     title: "P(DOOM)",
-    url: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
+    url: href("spotify"),
     cover: "/favicon-512.png",
     alt: "Logo de RefactorIA: la barba en blanco sobre violeta",
   },
@@ -66,7 +67,7 @@ const releases: Release[] = [
 <div class="releases_platforms">
   <Button
     element="link"
-    href="https://music.apple.com/us/artist/refactoria/6811690240"
+    href={href("apple-music")}
     class="mono-label"
     rel="noopener"
   >
@@ -74,7 +75,7 @@ const releases: Release[] = [
   </Button>
   <Button
     element="link"
-    href="https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw"
+    href={href("youtube-music")}
     class="mono-label"
     rel="noopener"
   >

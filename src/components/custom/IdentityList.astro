@@ -1,6 +1,8 @@
 ---
 /** The official identity list: every row pairs a label with the canonical
  * link that platforms can verify. */
+import { link } from "@/data/links.ts";
+
 interface Row {
   label: string;
   text: string;
@@ -8,42 +10,17 @@ interface Row {
 }
 
 const rows: Row[] = [
-  {
-    label: "GitHub personal",
-    text: "github.com/barbatdev",
-    href: "https://github.com/barbatdev",
-  },
-  {
-    label: "Organización",
-    text: "github.com/refactor-ia",
-    href: "https://github.com/refactor-ia",
-  },
-  {
-    label: "YouTube principal",
-    text: "youtube.com/@RefactorIA",
-    href: "https://www.youtube.com/@RefactorIA",
-  },
-  {
-    label: "YouTube técnico",
-    text: "youtube.com/@RefactorIADevs",
-    href: "https://www.youtube.com/@RefactorIADevs",
-  },
-  {
-    label: "Música",
-    text: "RefactorIA en Spotify",
-    href: "https://open.spotify.com/artist/22Udt5YIZaGRDuGVfSN03w",
-  },
-  {
-    label: "Apple Music",
-    text: "music.apple.com/us/artist/refactoria",
-    href: "https://music.apple.com/us/artist/refactoria/6811690240",
-  },
-  {
-    label: "YouTube Music",
-    text: "youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
-    href: "https://www.youtube.com/channel/UCqDys5rhEVdb2_Of2ZeHMEw",
-  },
-];
+  ["GitHub personal", "github-personal"],
+  ["Organización", "github-org"],
+  ["YouTube principal", "youtube-labs"],
+  ["YouTube técnico", "youtube-devs"],
+  ["Música", "spotify"],
+  ["Apple Music", "apple-music"],
+  ["YouTube Music", "youtube-music"],
+].map(([label, id]) => {
+  const l = link(id);
+  return { label, text: l.display, href: l.href };
+});
 ---
 
 <ul class="identity-list_wrap">
