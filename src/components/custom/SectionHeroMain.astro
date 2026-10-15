@@ -20,7 +20,8 @@ const beardRows = logoBraille.split("\n").filter((line) => line.length > 0);
         >Migraciones. IA. Criterio. En español.</Eyebrow
       >
       <Heading tag="h1" variant="display">RefactorIA</Heading>
-      <p class="hero-motto mono-label" aria-label={`${typedPhrase} No hype.`}>
+      <p class="hero-motto mono-label">
+        <span class="sr-only">{`${typedPhrase} No hype.`}</span>
         <span
           class="hero-motto_typed"
           data-text={typedPhrase}
