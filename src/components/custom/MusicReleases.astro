@@ -90,7 +90,7 @@ const releases: Release[] = [
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (fine && !reduce) {
+  if (fine) {
     document.querySelectorAll<HTMLElement>(".release_wrap").forEach((card) => {
       const cover = card.querySelector<HTMLElement>(".release_cover");
       if (!cover) return;
@@ -100,11 +100,12 @@ const releases: Release[] = [
         const rect = card.getBoundingClientRect();
         card.style.setProperty("--spot-x", `${pointer.clientX - rect.left}px`);
         card.style.setProperty("--spot-y", `${pointer.clientY - rect.top}px`);
+        if (reduce) return;
 
         /* Tilt the cover a few degrees towards the pointer. */
         const dx = (pointer.clientX - rect.left) / rect.width - 0.5;
         const dy = (pointer.clientY - rect.top) / rect.height - 0.5;
-        cover.style.transform = `perspective(40rem) rotateY(${dx * 8}deg) rotateX(${dy * -8}deg) scale(1.04)`;
+        cover.style.transform = `perspective(40rem) rotateY(${dx * 8}deg) rotateX(${dy * -8}deg)`;
       });
 
       card.addEventListener("pointerleave", () => {
@@ -140,9 +141,9 @@ const releases: Release[] = [
       border-radius: var(--radius-small);
       text-decoration: none;
       transition:
-        transform var(--duration-hover) var(--ease-out-expo),
-        border-color var(--duration-hover) var(--ease-out-expo),
-        box-shadow var(--duration-hover) var(--ease-out-expo);
+        transform var(--duration-card) var(--ease-out-expo),
+        border-color var(--duration-card) var(--ease-out-expo),
+        box-shadow var(--duration-card) var(--ease-out-expo);
     }
 
     .release_wrap::after {
@@ -155,7 +156,7 @@ const releases: Release[] = [
         transparent 45%
       );
       opacity: 0;
-      transition: opacity var(--duration-hover) var(--ease-out-expo);
+      transition: opacity var(--duration-card) var(--ease-out-expo);
       pointer-events: none;
     }
 
@@ -173,7 +174,7 @@ const releases: Release[] = [
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 240ms var(--ease-out-expo);
+      transition: transform var(--duration-card) var(--ease-out-expo);
     }
 
     .release_play {
@@ -214,7 +215,9 @@ const releases: Release[] = [
     .release_listen {
       color: var(--text-2);
       font-size: var(--text-small, 0.85rem);
-      transition: color var(--duration-hover) var(--ease-out-expo);
+      transition:
+        color var(--duration-hover) var(--ease-out-expo),
+        text-shadow var(--duration-hover) var(--ease-out-expo);
     }
 
     .releases_platforms {
@@ -234,12 +237,9 @@ const releases: Release[] = [
 
     @media (hover: hover) {
       .release_wrap:hover {
-        transform: translateY(-0.1875rem);
+        transform: translateY(calc(var(--lift-md) * -1));
         border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
-        box-shadow:
-          0 0 0 1px color-mix(in srgb, var(--brand-500) 30%, transparent),
-          0 16px 36px -18px
-            color-mix(in srgb, var(--brand-500) 45%, transparent);
+        box-shadow: var(--glow-md);
       }
 
       .release_wrap:hover::after {
@@ -252,13 +252,24 @@ const releases: Release[] = [
 
       .release_wrap:hover .release_listen {
         color: color-mix(in srgb, var(--brand-500), white 30%);
+        text-shadow: var(--text-glow-strong);
       }
+    }
+
+    .release_wrap:active {
+      transform: scale(var(--press-scale));
+      transition-duration: var(--duration-press);
     }
 
     @media (prefers-reduced-motion: reduce) {
       .release_cover {
         transition: none;
         transform: none !important;
+      }
+
+      .release_wrap:hover,
+      .release_wrap:active {
+        transform: none;
       }
     }
   }
