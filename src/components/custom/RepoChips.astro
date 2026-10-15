@@ -19,7 +19,13 @@ const repos: Repo[] = [
 <div class="repo-chips_wrap">
   {
     repos.map((repo) => (
-      <Button element="link" variant="link" href={repo.href} class="mono-label" rel="noopener">
+      <Button
+        element="link"
+        variant="link"
+        href={repo.href}
+        class="mono-label"
+        rel="noopener"
+      >
         {repo.name}
       </Button>
     ))
