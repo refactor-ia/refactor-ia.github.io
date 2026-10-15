@@ -9,7 +9,7 @@
   --dark-900: #0b0714;
   --brand-500: #7127ff;
   --brand-text: #ffffff;
-  --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+  --font-mono: var(--font-firacode), ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
 
   /* Typography primitives */
   --primary-family: var(--font-inter, system-ui, sans-serif);
@@ -39,9 +39,33 @@
   --hover-duration: 200ms;
   --hover-ease: ease;
 
+  /* Motion (design system: electric with glow) */
+  --duration-press: 120ms;
+  --duration-hover: 240ms;
+  --duration-card: 320ms;
+  --duration-open: 320ms;
+  --duration-reveal: 480ms;
+  --duration-stagger: 70ms;
+  --duration-blink: 1000ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --lift-sm: 2px;
+  --lift-md: 4px;
+  --reveal-offset: 12px;
+  --blur-reveal: 8px;
+  --press-scale: 0.98;
+  --parallax-max: 15%;
+
+  /* Glows */
+  --glow-sm: 0 0 0 1px rgba(113, 39, 255, 0.4), 0 8px 24px -10px rgba(113, 39, 255, 0.6);
+  --glow-press: 0 0 0 1px rgba(113, 39, 255, 0.65), 0 0 18px -2px rgba(113, 39, 255, 0.55);
+  --glow-md: 0 0 24px rgba(113, 39, 255, 0.45);
+  --glow-lg: 0 0 12px rgba(113, 39, 255, 0.5), 0 0 48px rgba(113, 39, 255, 0.35);
+  --text-glow-soft: 0 0 24px rgba(113, 39, 255, 0.35);
+  --text-glow-strong: 0 0 12px rgba(113, 39, 255, 0.7);
+
   /* Opening motion */
-  --open-duration: var(--hover-duration);
-  --open-ease: var(--hover-ease);
+  --open-duration: var(--duration-open);
+  --open-ease: var(--ease-out-expo);
 
   /* Radius */
   --radius-small: 0.5rem;
@@ -331,11 +355,11 @@
   color-scheme: dark;
 
   --background: var(--brand-500);
-  --background-2: color-mix(in lab, var(--background) 90%, var(--text));
-  --background-3: color-mix(in lab, var(--background) 80%, var(--text));
+  --background-2: color-mix(in lab, var(--background) 85%, var(--dark-900));
+  --background-3: color-mix(in lab, var(--background) 70%, var(--dark-900));
   --background-skeleton: color-mix(in lab, currentcolor 10%, transparent);
   --text: var(--brand-text);
-  --text-2: color-mix(in lab, currentcolor 60%, transparent);
+  --text-2: color-mix(in lab, var(--brand-text) 85%, var(--brand-500));
   --border: color-mix(in lab, var(--text) 20%, transparent);
   --heading-accent: color-mix(in srgb, var(--text), white 20%);
 
