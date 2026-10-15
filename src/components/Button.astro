@@ -196,18 +196,16 @@ const named = {
           background-color: var(--button-background-hover);
           color: var(--button-text-hover);
           border-color: var(--button-border-hover);
-          transform: translateY(-0.0625rem);
-          box-shadow:
-            0 0 0 1px color-mix(in srgb, var(--brand-500) 40%, transparent),
-            0 8px 24px -10px
-              color-mix(in srgb, var(--brand-500) 60%, transparent);
+        }
+        &:not(.link):hover:not(:disabled) {
+          transform: translateY(calc(var(--lift-sm) * -1));
+          box-shadow: var(--glow-sm);
         }
       }
-      &:active:not(:disabled) {
-        transform: translateY(0.0625rem) scale(0.98);
-        box-shadow:
-          0 0 0 1px color-mix(in srgb, var(--brand-500) 65%, transparent),
-          0 0 18px -2px color-mix(in srgb, var(--brand-500) 55%, transparent);
+      &:not(.link):active:not(:disabled) {
+        transform: scale(var(--press-scale));
+        box-shadow: var(--glow-press);
+        transition-duration: var(--duration-press);
       }
       &.secondary {
         --button-background: var(--button-2-background);
@@ -240,11 +238,15 @@ const named = {
         transition:
           background-size calc(var(--duration-hover) * 2) var(--ease-out-expo),
           color var(--duration-hover) var(--ease-out-expo),
-          border-color var(--duration-hover) var(--ease-out-expo);
+          border-color var(--duration-hover) var(--ease-out-expo),
+          text-shadow var(--duration-hover) var(--ease-out-expo);
         @media (hover: hover) {
           &:hover:not(:disabled) {
             background-position: 0 100%;
             background-size: 100% var(--border-width);
+          }
+          &.mono-label:hover {
+            text-shadow: var(--text-glow-strong);
           }
         }
       }
@@ -270,6 +272,13 @@ const named = {
       &:disabled {
         cursor: not-allowed;
         opacity: 0.5;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 1ms;
+        &:hover,
+        &:active {
+          transform: none !important;
+        }
       }
     }
   }
