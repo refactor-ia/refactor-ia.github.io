@@ -18,3 +18,6 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 ## Log
 - L1 (2026-10-15, user): "dale ahora me quedan 10 minutos"
 - L2: Open decision from issue body — which event types to show (commits, releases, PRs). Pending maintainer answer.
+- L3 (2026-10-15, user): "yo metería los 3 ... me chupa un huevo si hay mucho. Obviamente que tiene que quedar bien presentado y contenido ... no se eso te lo dejjo a vos" → show commits, releases and PRs; presentation and containment (grouping, limits) are the agent's call.
+- L4: YouTube channel IDs: @RefactorIA = UCKmxvQBWXbN2UOpPVmxAOJQ, @RefactorIADevs = UC7GZzyf9BMjMnXoYxsGWAxQ. Contributions should include the personal account (barbatdev) public events, not only the org.
+- L5: Unauthenticated GitHub API call from the dev machine returned a non-list response (likely rate limit); T1 should use GITHUB_TOKEN in the Action (public scope only) and handle error payloads.
