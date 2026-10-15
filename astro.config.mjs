@@ -26,6 +26,20 @@ export default defineConfig({
         ],
       },
     },
+    {
+      name: "FiraCode Nerd Font Mono Beard",
+      cssVariable: "--font-firacode",
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            src: ["./src/assets/fonts/FiraCodeNerdFontMonoBeard-Regular.woff2"],
+          },
+        ],
+      },
+    },
   ],
   vite: { build: { cssTarget: "safari15.4" } },
 });
