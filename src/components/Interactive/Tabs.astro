@@ -334,8 +334,8 @@ const panels = await slotContent(Astro.slots);
       color: color-mix(in lab, currentcolor 60%, transparent);
       text-align: center;
       transition:
-        color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease);
+        color var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo);
       &.is-active {
         border-bottom-color: var(--text);
         color: var(--text);

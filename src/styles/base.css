@@ -35,10 +35,6 @@
   --focus-offset: 0.1827rem;
   --focus-offset-inner: calc(var(--focus-width) * -1);
 
-  /* Hover motion */
-  --hover-duration: 200ms;
-  --hover-ease: ease;
-
   /* Motion (design system: electric with glow) */
   --duration-press: 120ms;
   --duration-hover: 240ms;

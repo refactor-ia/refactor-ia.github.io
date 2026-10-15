@@ -199,8 +199,8 @@
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-small);
   transition:
-    background-color var(--hover-duration) var(--hover-ease),
-    border-color var(--hover-duration) var(--hover-ease);
+    background-color var(--duration-hover) var(--ease-out-expo),
+    border-color var(--duration-hover) var(--ease-out-expo);
   &::placeholder {
     color: var(--text-2);
   }

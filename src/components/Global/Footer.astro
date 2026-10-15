@@ -134,7 +134,8 @@ const official = {
 
     .footer_cursor {
       color: var(--brand-500);
-      animation: footer-cursor-blink 1.2s steps(2, start) infinite;
+      animation: footer-cursor-blink var(--duration-blink) steps(2, start)
+        infinite;
     }
 
     @keyframes footer-cursor-blink {
@@ -145,7 +146,7 @@ const official = {
 
     .footer_creator a {
       color: var(--text);
-      transition: color var(--hover-duration) var(--hover-ease);
+      transition: color var(--duration-hover) var(--ease-out-expo);
       @media (hover: hover) {
         &:hover {
           color: color-mix(in srgb, var(--brand-500), white 30%);
@@ -173,10 +174,13 @@ const official = {
       color: var(--text-2);
       font-size: var(--text-small, 0.9rem);
       text-decoration: none;
-      transition: color var(--hover-duration) var(--hover-ease);
+      transition:
+        color var(--duration-hover) var(--ease-out-expo),
+        text-shadow var(--duration-hover) var(--ease-out-expo);
       @media (hover: hover) {
         &:hover {
           color: var(--text);
+          text-shadow: var(--text-glow-soft);
         }
       }
     }

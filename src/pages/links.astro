@@ -116,9 +116,9 @@ const groups = LINK_GROUPS.map((group) => ({
       color: var(--text);
       text-decoration: none;
       transition:
-        transform var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow var(--hover-duration) var(--hover-ease);
+        transform var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
     }
 
     .link-row_icon {
@@ -159,8 +159,8 @@ const groups = LINK_GROUPS.map((group) => ({
       flex: none;
       color: var(--text-2);
       transition:
-        transform var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease);
+        transform var(--duration-hover) var(--ease-out-expo),
+        color var(--duration-hover) var(--ease-out-expo);
     }
 
     .link-row:focus-visible {

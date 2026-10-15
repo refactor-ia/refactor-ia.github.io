@@ -24,6 +24,20 @@ const Tag = href ? "a" : "article";
   <Paragraph>{description}</Paragraph>
 </Tag>
 
+<script>
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document
+      .querySelectorAll<HTMLElement>(".content-card_wrap")
+      .forEach((card) => {
+        card.addEventListener("pointermove", (ev) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--spot-x", `${ev.clientX - rect.left}px`);
+          card.style.setProperty("--spot-y", `${ev.clientY - rect.top}px`);
+        });
+      });
+  }
+</script>
+
 <style is:global>
   @layer components {
     .content-card_wrap {
@@ -38,9 +52,9 @@ const Tag = href ? "a" : "article";
       text-decoration: none;
       overflow: hidden;
       transition:
-        transform var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow var(--hover-duration) var(--hover-ease);
+        transform var(--duration-card) var(--ease-out-expo),
+        border-color var(--duration-card) var(--ease-out-expo),
+        box-shadow var(--duration-card) var(--ease-out-expo);
     }
 
     .content-card_wrap::after {
@@ -53,7 +67,7 @@ const Tag = href ? "a" : "article";
         transparent 45%
       );
       opacity: 0;
-      transition: opacity var(--hover-duration) var(--hover-ease);
+      transition: opacity var(--duration-card) var(--ease-out-expo);
       pointer-events: none;
     }
 
@@ -71,12 +85,19 @@ const Tag = href ? "a" : "article";
     .content-card_wrap.linked {
       @media (hover: hover) {
         &:hover {
-          transform: translateY(-0.1875rem);
+          transform: translateY(calc(var(--lift-md) * -1));
           border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
-          box-shadow:
-            0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent),
-            0 14px 32px -16px
-              color-mix(in srgb, var(--brand-500) 55%, transparent);
+          box-shadow: var(--glow-md);
+        }
+      }
+      &:active {
+        transform: scale(var(--press-scale));
+        transition-duration: var(--duration-press);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        &:hover,
+        &:active {
+          transform: none;
         }
       }
     }

@@ -49,21 +49,25 @@ const targets = [
   @layer components {
     .reveal-init {
       opacity: 0;
-      transform: translateY(0.75rem);
+      filter: blur(var(--blur-reveal));
+      transform: translateY(var(--reveal-offset));
       transition:
-        opacity 480ms var(--hover-ease),
-        transform 480ms var(--hover-ease);
-      transition-delay: calc(var(--reveal-i, 0) * 70ms);
+        opacity var(--duration-reveal) var(--ease-out-expo),
+        filter var(--duration-reveal) var(--ease-out-expo),
+        transform var(--duration-reveal) var(--ease-out-expo);
+      transition-delay: calc(var(--reveal-i, 0) * var(--duration-stagger));
     }
 
     .reveal-init.revealed {
       opacity: 1;
+      filter: none;
       transform: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal-init {
         opacity: 1;
+        filter: none;
         transform: none;
         transition: none;
       }
