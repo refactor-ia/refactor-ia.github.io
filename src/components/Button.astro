@@ -186,11 +186,11 @@ const named = {
       text-decoration: none;
       text-align: center;
       transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        transform var(--hover-duration) var(--hover-ease),
-        box-shadow var(--hover-duration) var(--hover-ease);
+        background-color var(--duration-hover) var(--ease-out-expo),
+        color var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo),
+        transform var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
       @media (hover: hover) {
         &:hover:not(:disabled) {
           background-color: var(--button-background-hover);
@@ -238,9 +238,9 @@ const named = {
         background-position: 100% 100%;
         background-size: 0 var(--border-width);
         transition:
-          background-size calc(var(--hover-duration) * 2) var(--hover-ease),
-          color var(--hover-duration) var(--hover-ease),
-          border-color var(--hover-duration) var(--hover-ease);
+          background-size calc(var(--duration-hover) * 2) var(--ease-out-expo),
+          color var(--duration-hover) var(--ease-out-expo),
+          border-color var(--duration-hover) var(--ease-out-expo);
         @media (hover: hover) {
           &:hover:not(:disabled) {
             background-position: 0 100%;

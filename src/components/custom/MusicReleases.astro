@@ -140,9 +140,9 @@ const releases: Release[] = [
       border-radius: var(--radius-small);
       text-decoration: none;
       transition:
-        transform var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow var(--hover-duration) var(--hover-ease);
+        transform var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
     }
 
     .release_wrap::after {
@@ -155,7 +155,7 @@ const releases: Release[] = [
         transparent 45%
       );
       opacity: 0;
-      transition: opacity var(--hover-duration) var(--hover-ease);
+      transition: opacity var(--duration-hover) var(--ease-out-expo);
       pointer-events: none;
     }
 
@@ -173,7 +173,7 @@ const releases: Release[] = [
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 240ms var(--hover-ease);
+      transition: transform 240ms var(--ease-out-expo);
     }
 
     .release_play {
@@ -184,7 +184,7 @@ const releases: Release[] = [
       color: #fff;
       background: color-mix(in srgb, var(--canvas, #0b0714) 55%, transparent);
       opacity: 0;
-      transition: opacity var(--hover-duration) var(--hover-ease);
+      transition: opacity var(--duration-hover) var(--ease-out-expo);
     }
 
     .release_play :global(.icon_wrap) {
@@ -214,7 +214,7 @@ const releases: Release[] = [
     .release_listen {
       color: var(--text-2);
       font-size: var(--text-small, 0.85rem);
-      transition: color var(--hover-duration) var(--hover-ease);
+      transition: color var(--duration-hover) var(--ease-out-expo);
     }
 
     .releases_platforms {

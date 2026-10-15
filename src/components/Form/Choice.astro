@@ -122,8 +122,8 @@ const {
       border: var(--border-width) solid transparent;
       border-radius: var(--radius-small);
       transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease);
+        background-color var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo);
     }
 
     .form-choice_mark:has(.form-choice_dot) {
@@ -133,7 +133,7 @@ const {
     .form-choice_tick {
       color: var(--_ink);
       opacity: 0;
-      transition: opacity var(--hover-duration) var(--hover-ease);
+      transition: opacity var(--duration-hover) var(--ease-out-expo);
     }
 
     .form-choice_dot {
@@ -142,7 +142,7 @@ const {
       background-color: var(--_ink);
       border-radius: var(--radius-round);
       scale: 0;
-      transition: scale var(--hover-duration) var(--hover-ease);
+      transition: scale var(--duration-hover) var(--ease-out-expo);
     }
 
     .form-choice:has(:checked) {
@@ -187,8 +187,8 @@ const {
         border-radius: var(--radius-round);
         background-color: var(--text);
         transition:
-          translate var(--hover-duration) var(--hover-ease),
-          background-color var(--hover-duration) var(--hover-ease);
+          translate var(--duration-hover) var(--ease-out-expo),
+          background-color var(--duration-hover) var(--ease-out-expo);
       }
       &:has(:checked) .form-choice_mark::after {
         translate: 1.2em 0;
@@ -203,9 +203,9 @@ const {
       border: var(--border-width) solid transparent;
       border-radius: var(--radius-round);
       transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease);
+        background-color var(--duration-hover) var(--ease-out-expo),
+        color var(--duration-hover) var(--ease-out-expo),
+        border-color var(--duration-hover) var(--ease-out-expo);
       & .form-choice_mark {
         --_mark: var(--background);
         --_mark-hover: var(--background);

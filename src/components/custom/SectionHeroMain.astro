@@ -158,7 +158,7 @@ const beardRows = logoBraille.split("\n").filter((line) => line.length > 0);
       display: block;
       opacity: 0;
       transform: translateY(0.25em);
-      animation: hero-beard-reveal 480ms var(--hover-ease) forwards;
+      animation: hero-beard-reveal 480ms var(--ease-out-expo) forwards;
       animation-delay: calc(var(--row-index) * 55ms + 250ms);
     }
 
