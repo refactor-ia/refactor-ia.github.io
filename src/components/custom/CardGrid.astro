@@ -1,9 +1,10 @@
 ---
 import Grid from "@/components/Wrapper/Grid.astro";
+/**
+ * Responsive card grid built on the Lumos Grid: one column on small screens,
+ * two from 30rem, three from 64rem. Cards inside get a pointer spotlight.
+ */
 ---
-
-/** Responsive card grid built on the Lumos Grid: one column on small * screens,
-two from 30rem, three from 64rem. Cards inside get a pointer * spotlight. */ ---
 
 <div class="cardgrid_layout">
   <Grid variant="columns" small={2} medium={2} large={3}>

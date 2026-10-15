@@ -44,12 +44,12 @@ export const LINK_GROUPS: { id: LinkGroup; title: string; blurb: string }[] = [
   {
     id: "music",
     title: "RefactorIA Music",
-    blurb: "Música original, hecha con IA y dicho sin vueltas.",
+    blurb: "Música original hecha con IA, y lo decimos sin vueltas.",
   },
   {
     id: "founder",
     title: "Juan Barbat",
-    blurb: "El fundador, en sus redes personales.",
+    blurb: "El creador, en sus redes personales.",
   },
 ];
 
