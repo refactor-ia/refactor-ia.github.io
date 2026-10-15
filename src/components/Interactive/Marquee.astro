@@ -120,7 +120,7 @@ const locals = `--_count: ${count}`;
     const setPlaying = (playing: boolean) => {
       marquee.dataset.state = playing ? "playing" : "paused";
       toggle.setAttribute("aria-pressed", String(playing));
-      toggle.setAttribute("aria-label", playing ? "Pause" : "Play");
+      toggle.setAttribute("aria-label", playing ? "Pausar" : "Reproducir");
     };
 
     /* Anyone who asked for less motion gets it still, and can start it. */
