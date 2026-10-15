@@ -277,7 +277,7 @@ const { render = true, overlap = false } = Astro.props;
 
     .nav_cursor {
       color: var(--brand-500);
-      animation: nav-cursor-blink 1.2s steps(2, start) infinite;
+      animation: nav-cursor-blink var(--duration-blink) steps(2, start) infinite;
     }
 
     @keyframes nav-cursor-blink {
