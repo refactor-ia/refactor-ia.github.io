@@ -1,17 +1,24 @@
 ---
-import { VIDEOS, formatDate } from "@/data/activity.ts";
+import {
+  VIDEOS,
+  formatDate,
+  formatViews,
+  type Video,
+} from "@/data/activity.ts";
 
 interface Props {
-  /** Maximum number of videos, newest first. */
+  /** Videos to show; defaults to the latest uploads. */
+  videos?: Video[];
+  /** Maximum number of videos. */
   limit?: number;
 }
 
-const { limit = VIDEOS.length } = Astro.props;
+const { videos = VIDEOS, limit = videos.length } = Astro.props;
 ---
 
 <ul class="video-list_wrap">
   {
-    VIDEOS.slice(0, limit).map((video) => (
+    videos.slice(0, limit).map((video) => (
       <li class="video-list_item">
         <a href={video.url} rel="noopener">
           <img
@@ -27,6 +34,9 @@ const { limit = VIDEOS.length } = Astro.props;
         <p class="video-list_meta mono-label">
           {video.channel} ·{" "}
           <time datetime={video.published}>{formatDate(video.published)}</time>
+          {video.views !== undefined && (
+            <span class="video-list_views"> · {formatViews(video.views)}</span>
+          )}
         </p>
       </li>
     ))

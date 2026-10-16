@@ -156,8 +156,71 @@ export async function enrichPullRequests(items, getPull) {
   );
 }
 
-export function buildActivity({ github, videos, now = new Date() }) {
-  return { generatedAt: now.toISOString(), github, videos };
+export function buildActivity({ github, videos, popular, now = new Date() }) {
+  const doc = { generatedAt: now.toISOString(), github, videos };
+  // Popular videos need the Data API key; without it the field is left out.
+  if (popular) doc.popular = popular;
+  return doc;
+}
+
+const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
+
+async function getJson(url) {
+  const response = await fetch(url);
+  return response.json();
+}
+
+const checkYoutube = (payload) => {
+  if (payload?.error)
+    throw new Error(`YouTube Data API: ${payload.error.message}`);
+  return payload;
+};
+
+/**
+ * Most viewed uploads of one channel. Reads the uploads playlist page by page
+ * (1 quota unit each) and asks for statistics in batches of 50 (1 unit each).
+ */
+export async function fetchMostViewed(
+  { channel, id },
+  { apiKey, get = getJson, limit = 4 },
+) {
+  const ids = [];
+  let pageToken;
+  do {
+    const url = new URL(`${YOUTUBE_API}/playlistItems`);
+    url.search = new URLSearchParams({
+      part: "contentDetails",
+      playlistId: `UU${id.slice(2)}`,
+      maxResults: "50",
+      key: apiKey,
+      ...(pageToken && { pageToken }),
+    });
+    const page = checkYoutube(await get(url.toString()));
+    ids.push(...page.items.map((item) => item.contentDetails.videoId));
+    pageToken = page.nextPageToken;
+  } while (pageToken && ids.length < 500);
+
+  const videos = [];
+  for (let i = 0; i < ids.length; i += 50) {
+    const url = new URL(`${YOUTUBE_API}/videos`);
+    url.search = new URLSearchParams({
+      part: "snippet,statistics",
+      id: ids.slice(i, i + 50).join(","),
+      key: apiKey,
+    });
+    const batch = checkYoutube(await get(url.toString()));
+    for (const item of batch.items) {
+      videos.push({
+        id: item.id,
+        title: decodeXml(item.snippet.title),
+        url: `https://www.youtube.com/watch?v=${item.id}`,
+        published: new Date(item.snippet.publishedAt).toISOString(),
+        channel,
+        views: Number(item.statistics.viewCount ?? 0),
+      });
+    }
+  }
+  return videos.sort((a, b) => b.views - a.views).slice(0, limit);
 }
 
 const githubHeaders = () => {
@@ -212,11 +275,21 @@ async function main() {
     normalizeGithubEvents(events, { now }),
     fetchPull,
   );
-  const activity = buildActivity({ github, videos, now });
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  const popular = apiKey
+    ? (
+        await Promise.all(
+          YOUTUBE_CHANNELS.map((c) => fetchMostViewed(c, { apiKey })),
+        )
+      )
+        .flat()
+        .sort((a, b) => b.views - a.views)
+    : undefined;
+  const activity = buildActivity({ github, videos, popular, now });
   await mkdir(dirname(OUTPUT), { recursive: true });
   await writeFile(OUTPUT, `${JSON.stringify(activity, null, 2)}\n`);
   console.log(
-    `Wrote ${activity.github.length} GitHub items and ${videos.length} videos to ${OUTPUT}`,
+    `Wrote ${activity.github.length} GitHub items, ${videos.length} videos and ${popular?.length ?? "no"} popular videos to ${OUTPUT}`,
   );
 }
 

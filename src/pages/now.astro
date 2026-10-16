@@ -8,7 +8,7 @@ import Paragraph from "@/components/Typography/Paragraph.astro";
 import RepoChips from "@/components/custom/RepoChips.astro";
 import ActivityFeed from "@/components/custom/ActivityFeed.astro";
 import VideoList from "@/components/custom/VideoList.astro";
-import { GENERATED_AT, formatDate } from "@/data/activity.ts";
+import { GENERATED_AT, POPULAR, formatDate } from "@/data/activity.ts";
 import { href } from "@/data/links.ts";
 
 const stack = [
@@ -68,6 +68,19 @@ const stack = [
       </ContentStack>
     </ContentWrapper>
   </Section>
+
+  {
+    POPULAR.length > 0 && (
+      <Section id="mas-vistos">
+        <ContentWrapper>
+          <ContentStack>
+            <SectionHeading eyebrow="Más vistos" title="Lo que más se miró." />
+            <VideoList videos={POPULAR} />
+          </ContentStack>
+        </ContentWrapper>
+      </Section>
+    )
+  }
 
   <Section id="hecho-con" paddingBottom="large">
     <ContentWrapper>

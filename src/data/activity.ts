@@ -16,11 +16,19 @@ export interface Video {
   url: string;
   published: string;
   channel: string;
+  views?: number;
 }
 
 export const GENERATED_AT: string = data.generatedAt;
 export const GITHUB_ACTIVITY = data.github as ActivityItem[];
 export const VIDEOS = data.videos as Video[];
+/** Most viewed videos; empty when the data was fetched without an API key. */
+export const POPULAR = ((data as { popular?: Video[] }).popular ??
+  []) as Video[];
+
+const viewsFormat = new Intl.NumberFormat("es");
+export const formatViews = (views: number) =>
+  `${viewsFormat.format(views)} ${views === 1 ? "vista" : "vistas"}`;
 
 /** Short, human label for one activity item. */
 export function describe(item: ActivityItem): string {
