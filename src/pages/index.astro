@@ -19,6 +19,26 @@ import ActivityFeed from "@/components/custom/ActivityFeed.astro";
 import VideoList from "@/components/custom/VideoList.astro";
 import { SAME_AS, href } from "@/data/links.ts";
 
+const roles = [
+  {
+    title: "Maintainer de Gentle AI",
+    org: "Gentle AI",
+    href: "https://github.com/Gentleman-Programming/gentle-ai",
+    badge:
+      "https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/docs/assets/brand/built-with-gentle-ai.png",
+    alt: "Built with Gentle-AI",
+    width: 220,
+  },
+  {
+    title: "Embajador de NaN.Builders",
+    org: "NaN.Builders",
+    href: "https://nan.builders",
+    badge: "https://nan.builders/badge/built-with-nan-dark.svg",
+    alt: "Built with NaN",
+    width: 266,
+  },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -41,6 +61,11 @@ const jsonLd = {
       url: href("github-personal"),
       jobTitle: "Creador y responsable de RefactorIA",
       worksFor: { "@id": "https://refactoria.dev/#organization" },
+      affiliation: roles.map((role) => ({
+        "@type": "Organization",
+        name: role.org,
+        url: role.href,
+      })),
     },
     {
       "@type": "WebSite",
@@ -201,7 +226,7 @@ const channels = [
         <div class="prose-stack_wrap">
           <Paragraph>
             Los proyectos de la comunidad viven en la organización{" "}
-            <a href={href("github-org")} rel="noopener">
+            <a class="nowrap" href={href("github-org")} rel="noopener">
               github.com/refactor-ia
             </a>: herramientas, experimentos y el código que sale de los
             streams. Sin métricas infladas: entrá, mirá el código y sacá tus
@@ -254,10 +279,28 @@ const channels = [
         />
         <Paragraph>
           RefactorIA es una comunidad independiente creada y dirigida por{" "}
-          <a href={href("github-personal")} rel="noopener"> Juan Barbat </a>,
+          <a href={href("github-personal")} rel="noopener">Juan Barbat</a>,
           que responde por el proyecto en todas sus plataformas: este sitio, la
           organización de GitHub, los dos canales de YouTube y RefactorIA Music.
         </Paragraph>
+        <ul class="roles_wrap">
+          {
+            roles.map((role) => (
+              <li class="roles_item">
+                <span class="roles_title">{role.title}</span>
+                <a href={role.href} rel="noopener">
+                  <img
+                    src={role.badge}
+                    alt={role.alt}
+                    width={role.width}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
       <IdentityList slot="column2" />
     </ContentWrapper>
@@ -296,6 +339,48 @@ const channels = [
       @media (hover: hover) {
         &:hover {
           text-decoration: underline;
+        }
+      }
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .roles_wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      margin: var(--space-2) 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .roles_item {
+      display: grid;
+      gap: var(--space-2);
+      justify-items: start;
+    }
+
+    .roles_title {
+      color: var(--text-2);
+      font-size: var(--text-small);
+    }
+
+    .roles_item img {
+      display: block;
+      width: auto;
+      height: 4rem;
+      max-width: 100%;
+      object-fit: contain;
+      transition: filter var(--duration-hover) var(--ease-out-expo);
+    }
+
+    .roles_item a {
+      @media (hover: hover) {
+        &:hover img {
+          filter: drop-shadow(0 0 0.75rem
+              color-mix(in srgb, var(--brand-500) 55%, transparent));
         }
       }
     }
