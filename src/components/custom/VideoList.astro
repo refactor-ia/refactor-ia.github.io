@@ -1,0 +1,80 @@
+---
+import { VIDEOS, formatDate } from "@/data/activity.ts";
+
+interface Props {
+  /** Maximum number of videos, newest first. */
+  limit?: number;
+}
+
+const { limit = VIDEOS.length } = Astro.props;
+---
+
+<ul class="video-list_wrap">
+  {
+    VIDEOS.slice(0, limit).map((video) => (
+      <li class="video-list_item">
+        <a href={video.url} rel="noopener">
+          <img
+            src={`https://i.ytimg.com/vi/${video.id}/mqdefault.jpg`}
+            alt=""
+            width="320"
+            height="180"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="video-list_title">{video.title}</span>
+        </a>
+        <p class="video-list_meta mono-label">
+          {video.channel} ·{" "}
+          <time datetime={video.published}>{formatDate(video.published)}</time>
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style is:global>
+  @layer components {
+    .video-list_wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+      gap: var(--space-5);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .video-list_item {
+      display: grid;
+      gap: var(--space-2);
+      align-content: start;
+    }
+
+    .video-list_item a {
+      display: grid;
+      gap: var(--space-3);
+      color: var(--text);
+      text-decoration: none;
+      @media (hover: hover) {
+        &:hover .video-list_title {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .video-list_item img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+    }
+
+    .video-list_meta {
+      margin: 0;
+      color: var(--text-2);
+      font-size: var(--text-small);
+    }
+  }
+</style>

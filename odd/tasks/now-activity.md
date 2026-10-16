@@ -11,7 +11,7 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 
 ## Tasks
 - T1 [S1,S4,S6] fetch script → src/data/generated/activity.json (GitHub public events + YouTube RSS). Route: inline. Status: done (7 tests; real fetch OK).
-- T2 [S2] /now page + home summary components on DS. Route: inline. Status: pending.
+- T2 [S2] /now page + home summary components on DS. Route: inline. Status: done (/now + home summary; 13 tests).
 - T3 [S3] daily GitHub Action: run fetch, commit data, rebuild/deploy; render org profile README. Route: inline. Status: pending. Risk item 5 (CI).
 - T4 [S5] YouTube Data API most viewed (needs secret). Status: blocked on API key.
 
@@ -22,3 +22,4 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 - L4: YouTube channel IDs: @RefactorIA = UCKmxvQBWXbN2UOpPVmxAOJQ, @RefactorIADevs = UC7GZzyf9BMjMnXoYxsGWAxQ. Contributions should include the personal account (barbatdev) public events, not only the org.
 - L5: Unauthenticated GitHub API call from the dev machine returned a non-list response (likely rate limit); T1 should use GITHUB_TOKEN in the Action (public scope only) and handle error payloads.
 - L6 (2026-10-16): T1 done. The Events API trims PullRequestEvent to ids (no title, merged or html_url); fallbacks are "#<number>" and the repo pull URL. Fetch failures exit 1 without touching the existing file.
+- L7 (2026-10-16): T2 done. /now has sections #ahora (repos with the most activity, derived from the feed), #actividad, #videos and #hecho-con. The home shows 3 videos, 5 activity items and a button to /now, and the footer links "Ahora". RepoChips is now derived from activity (S6). "Now" is derived from the data, not hand-written.

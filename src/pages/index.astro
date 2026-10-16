@@ -15,6 +15,8 @@ import MusicReleases from "@/components/custom/MusicReleases.astro";
 import EmailCopy from "@/components/custom/EmailCopy.astro";
 import IdentityList from "@/components/custom/IdentityList.astro";
 import RepoChips from "@/components/custom/RepoChips.astro";
+import ActivityFeed from "@/components/custom/ActivityFeed.astro";
+import VideoList from "@/components/custom/VideoList.astro";
 import { SAME_AS, href } from "@/data/links.ts";
 
 const jsonLd = {
@@ -143,6 +145,7 @@ const channels = [
             ))
           }
         </CardGrid>
+        <VideoList limit={3} />
       </ContentStack>
     </ContentWrapper>
   </Section>
@@ -165,7 +168,9 @@ const channels = [
           </Paragraph>
         </div>
         <RepoChips />
+        <ActivityFeed limit={5} />
         <ButtonWrapper>
+          <Button element="link" href="/now">Ver toda la actividad</Button>
           <Button
             element="link"
             emphasis="secondary"

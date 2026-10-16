@@ -1,18 +1,14 @@
 ---
 import Button from "@/components/Button.astro";
+import { GITHUB_ACTIVITY, activeRepos } from "@/data/activity.ts";
 
-interface Repo {
-  name: string;
-  href: string;
+interface Props {
+  /** Maximum number of repos, busiest first. */
+  limit?: number;
 }
 
-const repos: Repo[] = [
-  { name: "presupuestos", href: "https://github.com/refactor-ia/presupuestos" },
-  {
-    name: "streamdeck-nan",
-    href: "https://github.com/refactor-ia/streamdeck-nan",
-  },
-];
+const { limit = 6 } = Astro.props;
+const repos = activeRepos(GITHUB_ACTIVITY, limit);
 ---
 
 <div class="repo-chips_wrap">
@@ -25,7 +21,7 @@ const repos: Repo[] = [
         class="mono-label"
         rel="noopener"
       >
-        {repo.name}
+        {repo.repo}
       </Button>
     ))
   }

@@ -1,0 +1,78 @@
+---
+import {
+  GITHUB_ACTIVITY,
+  describe,
+  formatDate,
+  type ActivityItem,
+} from "@/data/activity.ts";
+
+interface Props {
+  /** Items to show; defaults to the whole generated feed. */
+  items?: ActivityItem[];
+  /** Maximum number of items. */
+  limit?: number;
+}
+
+const { items = GITHUB_ACTIVITY, limit = items.length } = Astro.props;
+---
+
+<ol class="activity-feed_wrap">
+  {
+    items.slice(0, limit).map((item) => (
+      <li class:list={["activity-feed_item", item.type]}>
+        <time class="mono-label" datetime={item.date}>
+          {formatDate(item.date)}
+        </time>
+        <a href={item.url} rel="noopener">
+          <span class="activity-feed_repo mono-label">{item.repo}</span>
+          <span>{describe(item)}</span>
+        </a>
+      </li>
+    ))
+  }
+</ol>
+
+<style is:global>
+  @layer components {
+    .activity-feed_wrap {
+      display: grid;
+      gap: var(--space-2);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .activity-feed_item {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: var(--space-3);
+      align-items: baseline;
+      padding-block: var(--space-2);
+      border-bottom: var(--border-width) solid var(--border);
+      font-size: var(--text-small);
+    }
+
+    .activity-feed_item time {
+      color: var(--text-2);
+    }
+
+    .activity-feed_item a {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 var(--space-3);
+      color: var(--text);
+      text-decoration: none;
+      min-width: 0;
+      @media (hover: hover) {
+        &:hover .activity-feed_repo {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .activity-feed_repo {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      overflow-wrap: anywhere;
+    }
+  }
+</style>
