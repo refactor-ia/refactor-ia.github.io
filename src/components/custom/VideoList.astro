@@ -36,8 +36,9 @@ const { limit = VIDEOS.length } = Astro.props;
 <style is:global>
   @layer components {
     .video-list_wrap {
+      justify-self: stretch;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
       gap: var(--space-5);
       padding: 0;
       margin: 0;
@@ -59,10 +60,24 @@ const { limit = VIDEOS.length } = Astro.props;
         &:hover .video-list_title {
           text-decoration: underline;
         }
+        &:hover img {
+          border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+          box-shadow: var(--glow-md);
+        }
       }
     }
 
+    .video-list_title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     .video-list_item img {
+      transition:
+        border-color var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
       width: 100%;
       height: auto;
       aspect-ratio: 16 / 9;

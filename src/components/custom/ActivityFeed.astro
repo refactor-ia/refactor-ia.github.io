@@ -14,18 +14,25 @@ interface Props {
 }
 
 const { items = GITHUB_ACTIVITY, limit = items.length } = Astro.props;
+
+const LABELS: Record<ActivityItem["type"], string> = {
+  commits: "Commits",
+  release: "Release",
+  pr: "PR",
+};
 ---
 
 <ol class="activity-feed_wrap">
   {
     items.slice(0, limit).map((item) => (
       <li class:list={["activity-feed_item", item.type]}>
-        <time class="mono-label" datetime={item.date}>
+        <time class="activity-feed_date mono-label" datetime={item.date}>
           {formatDate(item.date)}
         </time>
-        <a href={item.url} rel="noopener">
+        <span class="activity-feed_badge mono-label">{LABELS[item.type]}</span>
+        <a class="activity-feed_link" href={item.url} rel="noopener">
           <span class="activity-feed_repo mono-label">{item.repo}</span>
-          <span>{describe(item)}</span>
+          <span class="activity-feed_text">{describe(item)}</span>
         </a>
       </li>
     ))
@@ -35,44 +42,77 @@ const { items = GITHUB_ACTIVITY, limit = items.length } = Astro.props;
 <style is:global>
   @layer components {
     .activity-feed_wrap {
+      justify-self: stretch;
       display: grid;
-      gap: var(--space-2);
       padding: 0;
       margin: 0;
       list-style: none;
+      border-top: var(--border-width) solid var(--border);
     }
 
     .activity-feed_item {
+      position: relative;
       display: grid;
-      grid-template-columns: 4.5rem 1fr;
-      gap: var(--space-3);
+      grid-template-columns: 4.5rem 6rem minmax(0, 1fr);
+      gap: var(--space-2) var(--space-4);
       align-items: baseline;
-      padding-block: var(--space-2);
+      padding: var(--space-3) var(--space-2);
       border-bottom: var(--border-width) solid var(--border);
       font-size: var(--text-small);
+      transition: background-color var(--duration-hover) var(--ease-out-expo);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--background-2);
+        }
+      }
+      @media (width < 40rem) {
+        grid-template-columns: auto 1fr;
+      }
     }
 
-    .activity-feed_item time {
+    .activity-feed_date {
       color: var(--text-2);
     }
 
-    .activity-feed_item a {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 var(--space-3);
+    .activity-feed_badge {
+      justify-self: start;
+      padding: 0 var(--space-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      color: var(--text-2);
+      font-size: 0.8em;
+    }
+
+    .activity-feed_item.release .activity-feed_badge {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+    }
+
+    .activity-feed_link {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-1) var(--space-4);
       color: var(--text);
       text-decoration: none;
-      min-width: 0;
-      @media (hover: hover) {
-        &:hover .activity-feed_repo {
-          text-decoration: underline;
-        }
+      /* The whole row is the click target. */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+      @media (width < 40rem) {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr;
       }
     }
 
     .activity-feed_repo {
       color: color-mix(in srgb, var(--brand-500), white 30%);
       overflow-wrap: anywhere;
+    }
+
+    .activity-feed_text {
+      color: var(--text-2);
     }
   }
 </style>

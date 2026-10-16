@@ -27,8 +27,8 @@ export function describe(item: ActivityItem): string {
   if (item.type === "commits") {
     return item.count === 1 ? "1 commit" : `${item.count} commits`;
   }
-  if (item.type === "release") return `Release ${item.title}`;
-  return `PR ${item.title} ${item.action === "merged" ? "mergeado" : "abierto"}`;
+  if (item.type === "release") return item.title ?? "";
+  return `${item.title} ${item.action === "merged" ? "mergeado" : "abierto"}`;
 }
 
 /** Repos with the most activity in the feed, busiest first. */
