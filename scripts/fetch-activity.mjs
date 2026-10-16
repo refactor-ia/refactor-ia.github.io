@@ -93,6 +93,11 @@ export function normalizeGithubEvents(
 
     const item = toItem(event);
     if (!item) continue;
+    // Events are newest first, so a merged PR hides its earlier "opened" event.
+    if (item.type === "pr") {
+      if (seen.has(item.url)) continue;
+      seen.add(item.url);
+    }
     if (item.type === "commits") {
       const key = `${item.repo}@${item.date}`;
       const group = commitGroups.get(key);
@@ -132,20 +137,53 @@ export function parseYoutubeFeed(xml, { channel, limit = 5 }) {
   });
 }
 
+/**
+ * Fills in the real titles of pull requests, since the Events API trims them.
+ * A failed lookup keeps the "#<number>" fallback.
+ */
+export async function enrichPullRequests(items, getPull) {
+  return Promise.all(
+    items.map(async (item) => {
+      if (item.type !== "pr") return item;
+      const number = Number(item.url.split("/").pop());
+      try {
+        const pull = await getPull(item.repo, number);
+        return { ...item, title: `#${number} ${pull.title}` };
+      } catch {
+        return item;
+      }
+    }),
+  );
+}
+
 export function buildActivity({ github, videos, now = new Date() }) {
   return { generatedAt: now.toISOString(), github, videos };
 }
 
-async function fetchGithub(path) {
+const githubHeaders = () => {
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "refactoria.dev",
   };
   if (process.env.GITHUB_TOKEN)
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  return headers;
+};
+
+async function fetchGithub(path) {
   const response = await fetch(`https://api.github.com/${path}?per_page=100`, {
-    headers,
+    headers: githubHeaders(),
   });
+  return response.json();
+}
+
+async function fetchPull(repo, number) {
+  const response = await fetch(
+    `https://api.github.com/repos/${repo}/pulls/${number}`,
+    { headers: githubHeaders() },
+  );
+  if (!response.ok)
+    throw new Error(`Pull ${repo}#${number} returned ${response.status}`);
   return response.json();
 }
 
@@ -170,11 +208,11 @@ async function main() {
     .flat()
     .sort((a, b) => b.published.localeCompare(a.published));
 
-  const activity = buildActivity({
-    github: normalizeGithubEvents(events, { now }),
-    videos,
-    now,
-  });
+  const github = await enrichPullRequests(
+    normalizeGithubEvents(events, { now }),
+    fetchPull,
+  );
+  const activity = buildActivity({ github, videos, now });
   await mkdir(dirname(OUTPUT), { recursive: true });
   await writeFile(OUTPUT, `${JSON.stringify(activity, null, 2)}\n`);
   console.log(

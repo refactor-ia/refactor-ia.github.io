@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   buildActivity,
+  enrichPullRequests,
   normalizeGithubEvents,
   parseYoutubeFeed,
 } from "../scripts/fetch-activity.mjs";
@@ -169,4 +170,73 @@ test("builds the activity document with a timestamp", () => {
     github: [],
     videos: [],
   });
+});
+
+test("enriches trimmed pull requests with their real title", async () => {
+  const items = [
+    {
+      type: "pr",
+      repo: "refactor-ia/site",
+      date: "2026-10-15",
+      action: "opened",
+      title: "#55",
+      url: "https://github.com/refactor-ia/site/pull/55",
+    },
+    {
+      type: "release",
+      repo: "refactor-ia/site",
+      date: "2026-10-14",
+      title: "v1",
+      url: "u",
+    },
+    {
+      type: "pr",
+      repo: "refactor-ia/site",
+      date: "2026-10-13",
+      action: "merged",
+      title: "#56",
+      url: "https://github.com/refactor-ia/site/pull/56",
+    },
+  ];
+  const calls = [];
+  const getPull = async (repo, number) => {
+    calls.push(`${repo}#${number}`);
+    if (number === 56) throw new Error("boom");
+    return { title: "feat: now page" };
+  };
+  const enriched = await enrichPullRequests(items, getPull);
+  assert.deepEqual(calls, ["refactor-ia/site#55", "refactor-ia/site#56"]);
+  assert.equal(enriched[0].title, "#55 feat: now page");
+  assert.equal(enriched[1].title, "v1");
+  assert.equal(
+    enriched[2].title,
+    "#56",
+    "keeps the fallback when the lookup fails",
+  );
+});
+
+test("keeps only the latest event of each pull request", () => {
+  const pr = (id, action, createdAt) => ({
+    id,
+    type: "PullRequestEvent",
+    public: true,
+    repo: { name: "refactor-ia/site" },
+    created_at: createdAt,
+    payload: {
+      action,
+      number: 57,
+      pull_request: { number: 57, merged: action === "closed" },
+    },
+  });
+  const items = normalizeGithubEvents(
+    [
+      pr("1", "opened", "2026-10-16T09:00:00Z"),
+      pr("2", "closed", "2026-10-16T10:00:00Z"),
+    ],
+    { now },
+  );
+  assert.deepEqual(
+    items.map((i) => i.action),
+    ["merged"],
+  );
 });

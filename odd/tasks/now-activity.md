@@ -1,7 +1,9 @@
 # Now, projects and activity (#31)
+
 Objective: one data source in this repo feeds refactoria.dev and the refactor-ia org profile README. Branch: feat/now-activity. Delivery: ask-on-risk. Test runner: node:test (npm test).
 
 ## Specs
+
 - S1 (issue #31): "Show a log of recent public activity in the refactor-ia GitHub org." Only public repositories; fetched at build time; "no token in the client".
 - S2 (decision, prior session): sections Now, Projects, Activity (90-day public events), Built with. The home shows a summary and /now shows everything.
 - S3 (decision): a daily Action refreshes both the site and the org profile README.
@@ -10,12 +12,14 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 - S6 (user, 2026-10-15): "Tiene mucho mas valor meter/mostrar lo de mis contribuciones en github" — GitHub contributions replace hand-picked repo chips.
 
 ## Tasks
+
 - T1 [S1,S4,S6] fetch script → src/data/generated/activity.json (GitHub public events + YouTube RSS). Route: inline. Status: done (7 tests; real fetch OK).
 - T2 [S2] /now page + home summary components on DS. Route: inline. Status: done (/now + home summary; 13 tests).
-- T3 [S3] daily GitHub Action: run fetch, commit data, rebuild/deploy; render org profile README. Route: inline. Status: pending. Risk item 5 (CI).
+- T3 [S3] daily GitHub Action: run fetch, commit data, rebuild/deploy; render org profile README. Route: inline. Status: done (workflow written; needs ORG_PROFILE_TOKEN secret for README push). Risk item 5 (CI).
 - T4 [S5] YouTube Data API most viewed (needs secret). Status: blocked on API key.
 
 ## Log
+
 - L1 (2026-10-15, user): "dale ahora me quedan 10 minutos"
 - L2: Open decision from issue body — which event types to show (commits, releases, PRs). Pending maintainer answer.
 - L3 (2026-10-15, user): "yo metería los 3 ... me chupa un huevo si hay mucho. Obviamente que tiene que quedar bien presentado y contenido ... no se eso te lo dejjo a vos" → show commits, releases and PRs; presentation and containment (grouping, limits) are the agent's call.
@@ -26,3 +30,4 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 - L8 (2026-10-16, user feedback): fixed missing space in hero motto (compressHTML drops inter-span whitespace); feed/videos/repos were shrunk by ContentStack justify-items:start → justify-self: stretch; repos as card grid, feed as full-width table with type badge and row hover, videos clamp titles.
 - L9 (2026-10-16, user feedback): nav rebuilt (real routes /#formatos /#oss /now /#music /links + Discord CTA, animated underline, active state); hero eyebrow "Software. IA. Criterio. En español."; "Ahora" link renamed "Actividad".
 - L10 (2026-10-16, user): content cards now list the real public YouTube playlists (7 Devs, 3 Labs) grouped by channel; TurboTips/Snippetazos/DevLore/Migraciones removed (no playlists). Devs playlists use short course IDs (e.g. PLFbfYOblJt3U), which are valid.
+- L11 (2026-10-16): T3 done. deploy.yml runs daily at 06:00 UTC and refreshes activity before the build; a failed fetch keeps the committed JSON. The profile job renders into refactor-ia/.github profile/README.md between <!-- activity:start/end --> markers and is skipped without the ORG_PROFILE_TOKEN secret. PR titles are filled through the pulls API, and only the latest event of each PR is kept.

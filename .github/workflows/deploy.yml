@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Daily refresh of the activity data (06:00 UTC).
+    - cron: "0 6 * * *"
 
 permissions:
   contents: read
@@ -28,6 +31,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # A failed fetch keeps the committed activity.json, so the site still deploys.
+      - name: Refresh activity data
+        run: npm run fetch:activity
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
@@ -35,3 +44,45 @@ jobs:
           path: ./dist
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  profile:
+    # Renders the same data into the refactor-ia org profile README.
+    # Needs ORG_PROFILE_TOKEN: a fine-grained token with contents:write on refactor-ia/.github only.
+    runs-on: ubuntu-latest
+    env:
+      HAS_PROFILE_TOKEN: ${{ secrets.ORG_PROFILE_TOKEN != '' }}
+    steps:
+      - if: env.HAS_PROFILE_TOKEN != 'true'
+        run: echo "ORG_PROFILE_TOKEN is not set; skipping the org profile README."
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        uses: actions/checkout@v4
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: refactor-ia/.github
+          token: ${{ secrets.ORG_PROFILE_TOKEN }}
+          path: org-profile
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        name: Refresh activity data
+        run: node scripts/fetch-activity.mjs
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        run: node scripts/render-profile.mjs org-profile/profile/README.md
+      - if: env.HAS_PROFILE_TOKEN == 'true'
+        name: Commit when the README changed
+        working-directory: org-profile
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "docs: refresh recent activity"
+          git push

@@ -1,12 +1,44 @@
 {
-  "generatedAt": "2026-10-16T12:21:54.846Z",
+  "generatedAt": "2026-10-16T14:08:39.349Z",
   "github": [
     {
       "type": "pr",
       "repo": "refactor-ia/streamdeck-nan",
       "date": "2026-10-16",
+      "action": "merged",
+      "title": "#57 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/57"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-16",
       "action": "opened",
-      "title": "#55",
+      "title": "#39 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/39"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/.github",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#23 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/.github/pull/23"
+    },
+    {
+      "type": "pr",
+      "repo": "barbatdev/pi-packages",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#11 docs: add Built with NaN badge",
+      "url": "https://github.com/barbatdev/pi-packages/pull/11"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#55 chore(claude): remove temporary keychain diagnostics",
       "url": "https://github.com/refactor-ia/streamdeck-nan/pull/55"
     },
     {
@@ -14,15 +46,7 @@
       "repo": "Gentleman-Programming/gentle-shell",
       "date": "2026-10-16",
       "action": "merged",
-      "title": "#2309",
-      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2309"
-    },
-    {
-      "type": "pr",
-      "repo": "Gentleman-Programming/gentle-shell",
-      "date": "2026-10-16",
-      "action": "opened",
-      "title": "#2309",
+      "title": "#2309 fix(agents): label live peers that predate discovery publication",
       "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2309"
     },
     {
@@ -30,7 +54,7 @@
       "repo": "Gentleman-Programming/gentle-shell",
       "date": "2026-10-16",
       "action": "merged",
-      "title": "#2307",
+      "title": "#2307 feat(shell): theme roles dedicated to the usage gauges",
       "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2307"
     },
     {
@@ -41,11 +65,18 @@
       "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.16"
     },
     {
+      "type": "commits",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "count": 1,
+      "url": "https://github.com/refactor-ia/streamdeck-nan/commits"
+    },
+    {
       "type": "pr",
       "repo": "refactor-ia/streamdeck-nan",
       "date": "2026-10-16",
       "action": "merged",
-      "title": "#54",
+      "title": "#54 feat(external): Claude usage via stored OAuth session; Codex session+weekly parity",
       "url": "https://github.com/refactor-ia/streamdeck-nan/pull/54"
     },
     {
@@ -53,31 +84,15 @@
       "repo": "refactor-ia/cortex",
       "date": "2026-10-16",
       "action": "merged",
-      "title": "#313",
+      "title": "#313 fix(qa): consume user-owned route profiles in the production run path",
       "url": "https://github.com/refactor-ia/cortex/pull/313"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/streamdeck-nan",
-      "date": "2026-10-16",
-      "action": "opened",
-      "title": "#54",
-      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/54"
     },
     {
       "type": "pr",
       "repo": "refactor-ia/refactor-ia.github.io",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#37",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/37"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#37",
+      "title": "#37 fix: SEO and metadata",
       "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/37"
     },
     {
@@ -85,15 +100,7 @@
       "repo": "refactor-ia/refactor-ia.github.io",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#36",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/36"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#36",
+      "title": "#36 fix: accessibility pass",
       "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/36"
     },
     {
@@ -101,23 +108,7 @@
       "repo": "refactor-ia/refactor-ia.github.io",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#35",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/35"
-    },
-    {
-      "type": "pr",
-      "repo": "Gentleman-Programming/gentle-shell",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#2307",
-      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2307"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#35",
+      "title": "#35 fix: copy review against voice and tone rules",
       "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/35"
     },
     {
@@ -125,15 +116,7 @@
       "repo": "refactor-ia/refactor-ia.github.io",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#34",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/34"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#34",
+      "title": "#34 feat: make components conform to the design system",
       "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/34"
     },
     {
@@ -141,24 +124,8 @@
       "repo": "refactor-ia/refactor-ia.github.io",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#33",
+      "title": "#33 feat: swap brand assets for the design system set",
       "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/33"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#33",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/33"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/cortex",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#313",
-      "url": "https://github.com/refactor-ia/cortex/pull/313"
     },
     {
       "type": "commits",
@@ -179,15 +146,7 @@
       "repo": "refactor-ia/cortex",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#310",
-      "url": "https://github.com/refactor-ia/cortex/pull/310"
-    },
-    {
-      "type": "pr",
-      "repo": "refactor-ia/cortex",
-      "date": "2026-10-15",
-      "action": "opened",
-      "title": "#310",
+      "title": "#310 feat(qa): open the route policy to profile-defined providers and models",
       "url": "https://github.com/refactor-ia/cortex/pull/310"
     },
     {
@@ -199,42 +158,70 @@
     },
     {
       "type": "pr",
-      "repo": "refactor-ia/refactor-ia.github.io",
+      "repo": "refactor-ia/streamdeck-nan",
       "date": "2026-10-15",
-      "action": "opened",
-      "title": "#32",
-      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/32"
-    },
-    {
-      "type": "release",
-      "repo": "refactor-ia/cortex",
-      "date": "2026-10-15",
-      "title": "v0.1.0-alpha.14",
-      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.14"
+      "action": "merged",
+      "title": "#53 feat(nan): <1% pace label; pin dial timer and resetAt edge cases",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
     },
     {
       "type": "pr",
       "repo": "refactor-ia/cortex",
       "date": "2026-10-15",
-      "action": "opened",
-      "title": "#309",
-      "url": "https://github.com/refactor-ia/cortex/pull/309"
+      "action": "merged",
+      "title": "#307 feat(qa): user-owned route profiles configure the QA fleet",
+      "url": "https://github.com/refactor-ia/cortex/pull/307"
     },
     {
       "type": "pr",
       "repo": "refactor-ia/streamdeck-nan",
       "date": "2026-10-15",
       "action": "merged",
-      "title": "#53",
-      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
+      "title": "#52 fix(nan): fix NanUsageHistory layout geometry rejected by the app",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/52"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "count": 3,
+      "url": "https://github.com/refactor-ia/streamdeck-nan/commits"
     },
     {
       "type": "pr",
       "repo": "refactor-ia/streamdeck-nan",
       "date": "2026-10-15",
-      "action": "opened",
-      "title": "#53",
-      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
+      "action": "merged",
+      "title": "#50 fix(nan): toggle dial history on dial press, not just touchscreen tap",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/50"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "count": 2,
+      "url": "https://github.com/refactor-ia/cortex/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-14",
+      "count": 2,
+      "url": "https://github.com/refactor-ia/cortex/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/quorb",
+      "date": "2026-10-14",
+      "count": 2,
+      "url": "https://github.com/barbatdev/quorb/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/cortex-dotfiles",
+      "date": "2026-10-14",
+      "count": 1,
+      "url": "https://github.com/barbatdev/cortex-dotfiles/commits"
     }
   ],
   "videos": [
