@@ -16,7 +16,7 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 - T1 [S1,S4,S6] fetch script → src/data/generated/activity.json (GitHub public events + YouTube RSS). Route: inline. Status: done (7 tests; real fetch OK).
 - T2 [S2] /now page + home summary components on DS. Route: inline. Status: done (/now + home summary; 13 tests).
 - T3 [S3] daily GitHub Action: run fetch, commit data, rebuild/deploy; render org profile README. Route: inline. Status: done (workflow written; needs ORG_PROFILE_TOKEN secret for README push). Risk item 5 (CI).
-- T4 [S5] YouTube Data API most viewed (needs secret). Status: blocked on API key.
+- T4 [S5] YouTube Data API most viewed (needs secret). Route: inline. Status: done (YOUTUBE_API_KEY secret; uploads playlist + videos.list, ~10 units/day).
 
 ## Log
 
@@ -32,3 +32,4 @@ Objective: one data source in this repo feeds refactoria.dev and the refactor-ia
 - L10 (2026-10-16, user): content cards now list the real public YouTube playlists (7 Devs, 3 Labs) grouped by channel; TurboTips/Snippetazos/DevLore/Migraciones removed (no playlists). Devs playlists use short course IDs (e.g. PLFbfYOblJt3U), which are valid.
 - L11 (2026-10-16): T3 done. deploy.yml runs daily at 06:00 UTC and refreshes activity before the build; a failed fetch keeps the committed JSON. The profile job renders into refactor-ia/.github profile/README.md between <!-- activity:start/end --> markers and is skipped without the ORG_PROFILE_TOKEN secret. PR titles are filled through the pulls API, and only the latest event of each PR is kept.
 - L12 (2026-10-16, user): "la de archivo pcsoft/windev la sacaría" and "En los videos pondría 4 así ocupa el ancho completo". Removed the archive playlist; home shows 4 videos.
+- L13 (2026-10-16): T4. User created YOUTUBE_API_KEY (new key in the Tubemaster GCP project, restricted to YouTube Data API v3). Most viewed reads all uploads (UU playlist) + videos.list stats; the "popular" field is omitted without a key and /now hides #mas-vistos.

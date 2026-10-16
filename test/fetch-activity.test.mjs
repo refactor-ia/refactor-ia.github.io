@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   buildActivity,
   enrichPullRequests,
+  fetchMostViewed,
   normalizeGithubEvents,
   parseYoutubeFeed,
 } from "../scripts/fetch-activity.mjs";
@@ -239,4 +240,90 @@ test("keeps only the latest event of each pull request", () => {
     items.map((i) => i.action),
     ["merged"],
   );
+});
+
+test("ranks a channel's uploads by views through the Data API", async () => {
+  const requests = [];
+  const pages = {
+    first: {
+      items: [1, 2].map((n) => ({ contentDetails: { videoId: `v${n}` } })),
+      nextPageToken: "p2",
+    },
+    p2: { items: [{ contentDetails: { videoId: "v3" } }] },
+  };
+  const get = async (url) => {
+    const u = new URL(url);
+    requests.push(u.pathname.split("/").pop());
+    assert.equal(u.searchParams.get("key"), "secret");
+    if (u.pathname.endsWith("playlistItems")) {
+      assert.equal(u.searchParams.get("playlistId"), "UUabc");
+      return pages[u.searchParams.get("pageToken") ?? "first"];
+    }
+    assert.equal(u.searchParams.get("id"), "v1,v2,v3");
+    return {
+      items: [
+        {
+          id: "v1",
+          snippet: { title: "Uno", publishedAt: "2026-10-01T10:00:00Z" },
+          statistics: { viewCount: "10" },
+        },
+        {
+          id: "v2",
+          snippet: {
+            title: "Dos &amp; tres",
+            publishedAt: "2026-09-01T10:00:00Z",
+          },
+          statistics: { viewCount: "300" },
+        },
+        {
+          id: "v3",
+          snippet: { title: "Tres", publishedAt: "2026-08-01T10:00:00Z" },
+          statistics: {},
+        },
+      ],
+    };
+  };
+
+  const videos = await fetchMostViewed(
+    { channel: "@Test", id: "UCabc" },
+    { apiKey: "secret", get, limit: 2 },
+  );
+
+  assert.deepEqual(requests, ["playlistItems", "playlistItems", "videos"]);
+  assert.deepEqual(videos, [
+    {
+      id: "v2",
+      title: "Dos & tres",
+      url: "https://www.youtube.com/watch?v=v2",
+      published: "2026-09-01T10:00:00.000Z",
+      channel: "@Test",
+      views: 300,
+    },
+    {
+      id: "v1",
+      title: "Uno",
+      url: "https://www.youtube.com/watch?v=v1",
+      published: "2026-10-01T10:00:00.000Z",
+      channel: "@Test",
+      views: 10,
+    },
+  ]);
+});
+
+test("rejects a Data API error payload", async () => {
+  const get = async () => ({ error: { message: "API key not valid" } });
+  await assert.rejects(
+    fetchMostViewed({ channel: "@Test", id: "UCabc" }, { apiKey: "bad", get }),
+    /API key not valid/,
+  );
+});
+
+test("adds the popular list to the activity document", () => {
+  const doc = buildActivity({
+    github: [],
+    videos: [],
+    popular: [{ id: "a" }],
+    now,
+  });
+  assert.deepEqual(doc.popular, [{ id: "a" }]);
 });

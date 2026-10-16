@@ -305,3 +305,24 @@ test("home summarizes activity and links to /now", () => {
     $(".video-list_item").length >= 1 && $(".video-list_item").length <= 4,
   );
 });
+
+test("/now shows the most viewed videos only when the data has them", () => {
+  const $ = load(readOutput("now/index.html"));
+  const popular = activity.popular ?? [];
+
+  if (popular.length === 0) {
+    assert.equal($("section#mas-vistos").length, 0, "hides the empty section");
+    return;
+  }
+  assert.equal($("#mas-vistos .video-list_item").length, popular.length);
+  for (const video of popular) {
+    assert.ok(
+      $(`#mas-vistos a[href="${video.url}"]`).length === 1,
+      `links ${video.url}`,
+    );
+  }
+  assert.ok(
+    $("#mas-vistos .video-list_views").first().text().includes("vistas"),
+    "shows the view count",
+  );
+});
