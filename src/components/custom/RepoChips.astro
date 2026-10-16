@@ -31,7 +31,14 @@ const repos = activeRepos(GITHUB_ACTIVITY, limit).map(({ repo, href }) => {
     .repo-chips_wrap {
       justify-self: stretch;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+      /* Six repos: three per row on wide screens, so no row is left with one card. */
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      @media (width < 56rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (width < 32rem) {
+        grid-template-columns: 1fr;
+      }
       gap: var(--space-3);
       padding: 0;
       margin: 0;
@@ -65,7 +72,9 @@ const repos = activeRepos(GITHUB_ACTIVITY, limit).map(({ repo, href }) => {
 
     .repo-chips_name {
       color: var(--text);
-      overflow-wrap: anywhere;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 </style>

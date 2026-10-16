@@ -3,7 +3,7 @@
  * Pages, the footer, the JSON-LD graph and the /links hub all read from here.
  */
 
-export type LinkGroup = "community" | "music" | "founder";
+export type LinkGroup = "community" | "ecosystem" | "music" | "founder";
 
 export type LinkIcon =
   | "youtube"
@@ -40,6 +40,11 @@ export const LINK_GROUPS: { id: LinkGroup; title: string; blurb: string }[] = [
     id: "community",
     title: "Comunidad y contenido",
     blurb: "Dónde pasa todo: videos, streams, código y charla.",
+  },
+  {
+    id: "ecosystem",
+    title: "Ecosistema",
+    blurb: "Proyectos y comunidades donde Juan participa activamente.",
   },
   {
     id: "music",
@@ -101,6 +106,24 @@ export const LINKS: SiteLink[] = [
     label: "El sitio oficial",
     display: "refactoria.dev",
     href: "https://refactoria.dev",
+    icon: "web",
+  },
+  {
+    id: "gentle-ai",
+    group: "ecosystem",
+    title: "Gentle AI",
+    label: "Maintainer",
+    display: "github.com/Gentleman-Programming/gentle-ai",
+    href: "https://github.com/Gentleman-Programming/gentle-ai",
+    icon: "github",
+  },
+  {
+    id: "nan-builders",
+    group: "ecosystem",
+    title: "NaN.Builders",
+    label: "Embajador",
+    display: "nan.builders",
+    href: "https://nan.builders",
     icon: "web",
   },
   {

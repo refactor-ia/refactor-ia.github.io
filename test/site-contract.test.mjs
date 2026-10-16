@@ -326,3 +326,30 @@ test("/now shows the most viewed videos only when the data has them", () => {
     "shows the view count",
   );
 });
+
+test("highlights the Gentle AI maintainer and NaN.Builders ambassador roles", () => {
+  const $ = load(readOutput("index.html"));
+  const about = $("#about");
+  assert.ok(about.text().includes("Maintainer de Gentle AI"), "names the Gentle AI role");
+  assert.ok(about.text().includes("Embajador de NaN.Builders"), "names the NaN.Builders role");
+  assert.equal(about.find('a[href="https://github.com/Gentleman-Programming/gentle-ai"]').length, 1);
+  assert.equal(about.find('a[href="https://nan.builders"]').length, 1);
+
+  const graph = JSON.parse($('script[type="application/ld+json"]').html())["@graph"];
+  const person = graph.find((node) => node["@type"] === "Person");
+  const urls = person.affiliation.map((org) => org.url);
+  assert.deepEqual(urls, [
+    "https://github.com/Gentleman-Programming/gentle-ai",
+    "https://nan.builders",
+  ]);
+});
+
+test("links hub lists Gentle AI and NaN.Builders", () => {
+  const $ = load(readOutput("links/index.html"));
+  for (const href of [
+    "https://github.com/Gentleman-Programming/gentle-ai",
+    "https://nan.builders",
+  ]) {
+    assert.equal($(`a[href="${href}"]`).length, 1, `links hub links ${href}`);
+  }
+});
