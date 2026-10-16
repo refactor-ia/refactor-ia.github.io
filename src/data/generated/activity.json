@@ -1,0 +1,312 @@
+{
+  "generatedAt": "2026-10-16T12:21:54.846Z",
+  "github": [
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#55",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/55"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#2309",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2309"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#2309",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2309"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#2307",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2307"
+    },
+    {
+      "type": "release",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-16",
+      "title": "v0.1.0-alpha.16",
+      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.16"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#54",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/54"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#313",
+      "url": "https://github.com/refactor-ia/cortex/pull/313"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#54",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/54"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#37",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/37"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#37",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/37"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#36",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/36"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#36",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/36"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#35",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/35"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#2307",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2307"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#35",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/35"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#34",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/34"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#34",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/34"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#33",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/33"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#33",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/33"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#313",
+      "url": "https://github.com/refactor-ia/cortex/pull/313"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/quorb",
+      "date": "2026-10-15",
+      "count": 1,
+      "url": "https://github.com/barbatdev/quorb/commits"
+    },
+    {
+      "type": "release",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "title": "v0.1.0-alpha.15",
+      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.15"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#310",
+      "url": "https://github.com/refactor-ia/cortex/pull/310"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#310",
+      "url": "https://github.com/refactor-ia/cortex/pull/310"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "count": 1,
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/commits"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#32",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/32"
+    },
+    {
+      "type": "release",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "title": "v0.1.0-alpha.14",
+      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.14"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#309",
+      "url": "https://github.com/refactor-ia/cortex/pull/309"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#53",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "action": "opened",
+      "title": "#53",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
+    }
+  ],
+  "videos": [
+    {
+      "id": "pBUprzpQWCo",
+      "title": "Le pedí Postmark y el agente agregó seguridad solo",
+      "url": "https://www.youtube.com/watch?v=pBUprzpQWCo",
+      "published": "2026-10-15T18:00:13.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "kBwcojVa7Ug",
+      "title": "Rediseñar una app fea con Claude Design (y la regresión que apareció)",
+      "url": "https://www.youtube.com/watch?v=kBwcojVa7Ug",
+      "published": "2026-10-15T16:00:14.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "z8eZgdQrhJE",
+      "title": "NaN.Builders Workspaces: cuánto cuestan y qué traen",
+      "url": "https://www.youtube.com/watch?v=z8eZgdQrhJE",
+      "published": "2026-10-14T18:00:15.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "CIg85x1cJgs",
+      "title": "Le pedí mail con Postmark y el agente agregó seguridad solo",
+      "url": "https://www.youtube.com/watch?v=CIg85x1cJgs",
+      "published": "2026-10-14T16:00:19.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "9Ad2eeKscjI",
+      "title": "Renuncié en serio como distribuidor",
+      "url": "https://www.youtube.com/watch?v=9Ad2eeKscjI",
+      "published": "2026-10-13T18:00:17.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "qVi7YScCyx0",
+      "title": "Devlog #010",
+      "url": "https://www.youtube.com/watch?v=qVi7YScCyx0",
+      "published": "2026-10-10T04:38:30.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "Sgw2ZHGrkk4",
+      "title": "Devlog #010",
+      "url": "https://www.youtube.com/watch?v=Sgw2ZHGrkk4",
+      "published": "2026-10-10T04:28:45.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "XQgPNLJ1s1M",
+      "title": "No todos tus agentes tienen que ser inteligentes",
+      "url": "https://www.youtube.com/watch?v=XQgPNLJ1s1M",
+      "published": "2026-09-22T13:08:28.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "OjYDWIgWEhQ",
+      "title": "Dejaste WINDEV para cambiar de amo?",
+      "url": "https://www.youtube.com/watch?v=OjYDWIgWEhQ",
+      "published": "2026-09-22T13:00:21.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "zML_VcZ1O7s",
+      "title": "Separar agentes no alcanza. Cruzá modelos.",
+      "url": "https://www.youtube.com/watch?v=zML_VcZ1O7s",
+      "published": "2026-09-22T11:52:32.000Z",
+      "channel": "@RefactorIA"
+    }
+  ]
+}
