@@ -1,6 +1,7 @@
 ---
 import NavLink from "@/components/Global/NavLink.astro";
 import { SITE_NAME } from "@/consts.ts";
+import { href } from "@/data/links.ts";
 
 interface Props {
   /** Set to `false` to skip rendering this component and its children. */
@@ -40,12 +41,16 @@ const { render = true, overlap = false } = Astro.props;
         <nav class="nav_menu" id="nav-menu" aria-label="Navegación principal">
           <div class="nav_menu_inner">
             <ul class="nav_links">
-              <NavLink href="#que-es">Qu&eacute; es</NavLink>
-              <NavLink href="#formatos">Contenido</NavLink>
-              <NavLink href="#oss">Open Source</NavLink>
-              <NavLink href="#music">Música</NavLink>
-              <NavLink href="#about">Creador</NavLink>
-              <NavLink href="#contacto">Contacto</NavLink>
+              <NavLink href="/#formatos">Contenido</NavLink>
+              <NavLink href="/#oss">Open Source</NavLink>
+              <NavLink href="/now">Actividad</NavLink>
+              <NavLink href="/#music">Música</NavLink>
+              <NavLink href="/links">Links</NavLink>
+              <li class="nav_cta_item">
+                <a class="nav_cta" href={href("discord")} rel="noopener">
+                  Entrar al Discord
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -267,6 +272,28 @@ const { render = true, overlap = false } = Astro.props;
       }
     }
 
+    .nav_cta {
+      display: inline-flex;
+      align-items: center;
+      margin-block: var(--space-3);
+      padding: var(--space-2) var(--space-4);
+      color: var(--text);
+      background-color: var(--brand-500);
+      border-radius: var(--radius-small);
+      font-size: var(--text-small);
+      text-decoration: none;
+      transition: box-shadow var(--duration-hover) var(--ease-out-expo);
+      @media (hover: hover) {
+        &:hover {
+          box-shadow: var(--glow-md);
+        }
+      }
+    }
+
+    .nav_links > .nav_cta_item {
+      border-top: 0;
+    }
+
     .nav_wordmark {
       width: auto;
       color: var(--text);
@@ -322,11 +349,45 @@ const { render = true, overlap = false } = Astro.props;
         }
       }
 
+      .nav_links {
+        gap: var(--space-6);
+      }
+
       .nav_link {
-        padding-block: 0;
-        &[aria-current="page"] {
-          text-decoration: underline;
+        position: relative;
+        padding-block: var(--space-2);
+        &::after {
+          content: "";
+          position: absolute;
+          inset-inline: 0;
+          bottom: 0;
+          height: var(--border-width);
+          background-color: var(--brand-500);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform var(--duration-hover) var(--ease-out-expo);
         }
+        @media (hover: hover) {
+          &:hover::after {
+            transform: scaleX(1);
+          }
+        }
+        &[aria-current="page"]::after {
+          transform: scaleX(1);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          &::after {
+            transition: none;
+          }
+        }
+      }
+
+      .nav_cta_item {
+        margin-left: var(--space-2);
+      }
+
+      .nav_cta {
+        margin-block: 0;
       }
     }
   }
