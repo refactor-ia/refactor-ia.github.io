@@ -343,3 +343,13 @@ test("highlights the Gentle AI maintainer and NaN.Builders ambassador roles", ()
     "https://nan.builders",
   ]);
 });
+
+test("links hub lists Gentle AI and NaN.Builders", () => {
+  const $ = load(readOutput("links/index.html"));
+  for (const href of [
+    "https://github.com/Gentleman-Programming/gentle-ai",
+    "https://nan.builders",
+  ]) {
+    assert.equal($(`a[href="${href}"]`).length, 1, `links hub links ${href}`);
+  }
+});
