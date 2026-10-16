@@ -14,7 +14,8 @@
     "check": "astro check",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "test": "npm run build && node --test test/site-contract.test.mjs"
+    "fetch:activity": "node scripts/fetch-activity.mjs",
+    "test": "npm run build && node --test test/site-contract.test.mjs test/fetch-activity.test.mjs test/render-profile.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

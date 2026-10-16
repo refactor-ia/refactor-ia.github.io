@@ -1,0 +1,299 @@
+{
+  "generatedAt": "2026-10-16T14:08:39.349Z",
+  "github": [
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#57 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/57"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#39 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/39"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/.github",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#23 docs: add Built with NaN badge",
+      "url": "https://github.com/refactor-ia/.github/pull/23"
+    },
+    {
+      "type": "pr",
+      "repo": "barbatdev/pi-packages",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#11 docs: add Built with NaN badge",
+      "url": "https://github.com/barbatdev/pi-packages/pull/11"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "opened",
+      "title": "#55 chore(claude): remove temporary keychain diagnostics",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/55"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#2309 fix(agents): label live peers that predate discovery publication",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2309"
+    },
+    {
+      "type": "pr",
+      "repo": "Gentleman-Programming/gentle-shell",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#2307 feat(shell): theme roles dedicated to the usage gauges",
+      "url": "https://github.com/Gentleman-Programming/gentle-shell/pull/2307"
+    },
+    {
+      "type": "release",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-16",
+      "title": "v0.1.0-alpha.16",
+      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.16"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "count": 1,
+      "url": "https://github.com/refactor-ia/streamdeck-nan/commits"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#54 feat(external): Claude usage via stored OAuth session; Codex session+weekly parity",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/54"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-16",
+      "action": "merged",
+      "title": "#313 fix(qa): consume user-owned route profiles in the production run path",
+      "url": "https://github.com/refactor-ia/cortex/pull/313"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#37 fix: SEO and metadata",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/37"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#36 fix: accessibility pass",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/36"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#35 fix: copy review against voice and tone rules",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/35"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#34 feat: make components conform to the design system",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/34"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#33 feat: swap brand assets for the design system set",
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/pull/33"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/quorb",
+      "date": "2026-10-15",
+      "count": 1,
+      "url": "https://github.com/barbatdev/quorb/commits"
+    },
+    {
+      "type": "release",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "title": "v0.1.0-alpha.15",
+      "url": "https://github.com/refactor-ia/cortex/releases/tag/v0.1.0-alpha.15"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#310 feat(qa): open the route policy to profile-defined providers and models",
+      "url": "https://github.com/refactor-ia/cortex/pull/310"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/refactor-ia.github.io",
+      "date": "2026-10-15",
+      "count": 1,
+      "url": "https://github.com/refactor-ia/refactor-ia.github.io/commits"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#53 feat(nan): <1% pace label; pin dial timer and resetAt edge cases",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/53"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#307 feat(qa): user-owned route profiles configure the QA fleet",
+      "url": "https://github.com/refactor-ia/cortex/pull/307"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#52 fix(nan): fix NanUsageHistory layout geometry rejected by the app",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/52"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "count": 3,
+      "url": "https://github.com/refactor-ia/streamdeck-nan/commits"
+    },
+    {
+      "type": "pr",
+      "repo": "refactor-ia/streamdeck-nan",
+      "date": "2026-10-15",
+      "action": "merged",
+      "title": "#50 fix(nan): toggle dial history on dial press, not just touchscreen tap",
+      "url": "https://github.com/refactor-ia/streamdeck-nan/pull/50"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-15",
+      "count": 2,
+      "url": "https://github.com/refactor-ia/cortex/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "refactor-ia/cortex",
+      "date": "2026-10-14",
+      "count": 2,
+      "url": "https://github.com/refactor-ia/cortex/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/quorb",
+      "date": "2026-10-14",
+      "count": 2,
+      "url": "https://github.com/barbatdev/quorb/commits"
+    },
+    {
+      "type": "commits",
+      "repo": "barbatdev/cortex-dotfiles",
+      "date": "2026-10-14",
+      "count": 1,
+      "url": "https://github.com/barbatdev/cortex-dotfiles/commits"
+    }
+  ],
+  "videos": [
+    {
+      "id": "pBUprzpQWCo",
+      "title": "Le pedí Postmark y el agente agregó seguridad solo",
+      "url": "https://www.youtube.com/watch?v=pBUprzpQWCo",
+      "published": "2026-10-15T18:00:13.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "kBwcojVa7Ug",
+      "title": "Rediseñar una app fea con Claude Design (y la regresión que apareció)",
+      "url": "https://www.youtube.com/watch?v=kBwcojVa7Ug",
+      "published": "2026-10-15T16:00:14.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "z8eZgdQrhJE",
+      "title": "NaN.Builders Workspaces: cuánto cuestan y qué traen",
+      "url": "https://www.youtube.com/watch?v=z8eZgdQrhJE",
+      "published": "2026-10-14T18:00:15.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "CIg85x1cJgs",
+      "title": "Le pedí mail con Postmark y el agente agregó seguridad solo",
+      "url": "https://www.youtube.com/watch?v=CIg85x1cJgs",
+      "published": "2026-10-14T16:00:19.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "9Ad2eeKscjI",
+      "title": "Renuncié en serio como distribuidor",
+      "url": "https://www.youtube.com/watch?v=9Ad2eeKscjI",
+      "published": "2026-10-13T18:00:17.000Z",
+      "channel": "@RefactorIADevs"
+    },
+    {
+      "id": "qVi7YScCyx0",
+      "title": "Devlog #010",
+      "url": "https://www.youtube.com/watch?v=qVi7YScCyx0",
+      "published": "2026-10-10T04:38:30.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "Sgw2ZHGrkk4",
+      "title": "Devlog #010",
+      "url": "https://www.youtube.com/watch?v=Sgw2ZHGrkk4",
+      "published": "2026-10-10T04:28:45.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "XQgPNLJ1s1M",
+      "title": "No todos tus agentes tienen que ser inteligentes",
+      "url": "https://www.youtube.com/watch?v=XQgPNLJ1s1M",
+      "published": "2026-09-22T13:08:28.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "OjYDWIgWEhQ",
+      "title": "Dejaste WINDEV para cambiar de amo?",
+      "url": "https://www.youtube.com/watch?v=OjYDWIgWEhQ",
+      "published": "2026-09-22T13:00:21.000Z",
+      "channel": "@RefactorIA"
+    },
+    {
+      "id": "zML_VcZ1O7s",
+      "title": "Separar agentes no alcanza. Cruzá modelos.",
+      "url": "https://www.youtube.com/watch?v=zML_VcZ1O7s",
+      "published": "2026-09-22T11:52:32.000Z",
+      "channel": "@RefactorIA"
+    }
+  ]
+}

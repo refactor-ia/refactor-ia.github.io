@@ -1,0 +1,34 @@
+# Now, projects and activity (#31)
+
+Objective: one data source in this repo feeds refactoria.dev and the refactor-ia org profile README. Branch: feat/now-activity. Delivery: ask-on-risk. Test runner: node:test (npm test).
+
+## Specs
+
+- S1 (issue #31): "Show a log of recent public activity in the refactor-ia GitHub org." Only public repositories; fetched at build time; "no token in the client".
+- S2 (decision, prior session): sections Now, Projects, Activity (90-day public events), Built with. The home shows a summary and /now shows everything.
+- S3 (decision): a daily Action refreshes both the site and the org profile README.
+- S4 (issue #31 comment): "latest videos from both channels (@RefactorIA, @RefactorIADevs) via the public RSS feed". No API key.
+- S5 (issue #31 comment): "most viewed / view counts via YouTube Data API v3, once an API key is stored as a repo secret." (later step)
+- S6 (user, 2026-10-15): "Tiene mucho mas valor meter/mostrar lo de mis contribuciones en github" — GitHub contributions replace hand-picked repo chips.
+
+## Tasks
+
+- T1 [S1,S4,S6] fetch script → src/data/generated/activity.json (GitHub public events + YouTube RSS). Route: inline. Status: done (7 tests; real fetch OK).
+- T2 [S2] /now page + home summary components on DS. Route: inline. Status: done (/now + home summary; 13 tests).
+- T3 [S3] daily GitHub Action: run fetch, commit data, rebuild/deploy; render org profile README. Route: inline. Status: done (workflow written; needs ORG_PROFILE_TOKEN secret for README push). Risk item 5 (CI).
+- T4 [S5] YouTube Data API most viewed (needs secret). Status: blocked on API key.
+
+## Log
+
+- L1 (2026-10-15, user): "dale ahora me quedan 10 minutos"
+- L2: Open decision from issue body — which event types to show (commits, releases, PRs). Pending maintainer answer.
+- L3 (2026-10-15, user): "yo metería los 3 ... me chupa un huevo si hay mucho. Obviamente que tiene que quedar bien presentado y contenido ... no se eso te lo dejjo a vos" → show commits, releases and PRs; presentation and containment (grouping, limits) are the agent's call.
+- L4: YouTube channel IDs: @RefactorIA = UCKmxvQBWXbN2UOpPVmxAOJQ, @RefactorIADevs = UC7GZzyf9BMjMnXoYxsGWAxQ. Contributions should include the personal account (barbatdev) public events, not only the org.
+- L5: Unauthenticated GitHub API call from the dev machine returned a non-list response (likely rate limit); T1 should use GITHUB_TOKEN in the Action (public scope only) and handle error payloads.
+- L6 (2026-10-16): T1 done. The Events API trims PullRequestEvent to ids (no title, merged or html_url); fallbacks are "#<number>" and the repo pull URL. Fetch failures exit 1 without touching the existing file.
+- L7 (2026-10-16): T2 done. /now has sections #ahora (repos with the most activity, derived from the feed), #actividad, #videos and #hecho-con. The home shows 3 videos, 5 activity items and a button to /now, and the footer links "Ahora". RepoChips is now derived from activity (S6). "Now" is derived from the data, not hand-written.
+- L8 (2026-10-16, user feedback): fixed missing space in hero motto (compressHTML drops inter-span whitespace); feed/videos/repos were shrunk by ContentStack justify-items:start → justify-self: stretch; repos as card grid, feed as full-width table with type badge and row hover, videos clamp titles.
+- L9 (2026-10-16, user feedback): nav rebuilt (real routes /#formatos /#oss /now /#music /links + Discord CTA, animated underline, active state); hero eyebrow "Software. IA. Criterio. En español."; "Ahora" link renamed "Actividad".
+- L10 (2026-10-16, user): content cards now list the real public YouTube playlists (7 Devs, 3 Labs) grouped by channel; TurboTips/Snippetazos/DevLore/Migraciones removed (no playlists). Devs playlists use short course IDs (e.g. PLFbfYOblJt3U), which are valid.
+- L11 (2026-10-16): T3 done. deploy.yml runs daily at 06:00 UTC and refreshes activity before the build; a failed fetch keeps the committed JSON. The profile job renders into refactor-ia/.github profile/README.md between <!-- activity:start/end --> markers and is skipped without the ORG_PROFILE_TOKEN secret. PR titles are filled through the pulls API, and only the latest event of each PR is kept.
+- L12 (2026-10-16, user): "la de archivo pcsoft/windev la sacaría" and "En los videos pondría 4 así ocupa el ancho completo". Removed the archive playlist; home shows 4 videos.

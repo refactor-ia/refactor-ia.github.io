@@ -1,0 +1,118 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Wrapper/Section.astro";
+import ContentWrapper from "@/components/Wrapper/ContentWrapper.astro";
+import ContentStack from "@/components/custom/ContentStack.astro";
+import SectionHeading from "@/components/custom/SectionHeading.astro";
+import Paragraph from "@/components/Typography/Paragraph.astro";
+import RepoChips from "@/components/custom/RepoChips.astro";
+import ActivityFeed from "@/components/custom/ActivityFeed.astro";
+import VideoList from "@/components/custom/VideoList.astro";
+import { GENERATED_AT, formatDate } from "@/data/activity.ts";
+import { href } from "@/data/links.ts";
+
+const stack = [
+  { name: "Astro", href: "https://astro.build" },
+  { name: "GitHub Pages", href: "https://pages.github.com" },
+  { name: "GitHub Actions", href: "https://github.com/features/actions" },
+  {
+    name: "Código fuente",
+    href: "https://github.com/refactor-ia/refactor-ia.github.io",
+  },
+];
+---
+
+<Layout
+  theme="dark"
+  title="Actividad"
+  description="En qué está trabajando RefactorIA: repos activos, actividad pública en GitHub de los últimos 90 días y los últimos videos de los dos canales."
+>
+  <Section id="ahora">
+    <ContentWrapper>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Actividad"
+          title="En qué estamos trabajando."
+          level="h1"
+        />
+        <Paragraph>
+          Los repos con más movimiento en la organización{" "}
+          <a href={href("github-org")} rel="noopener">refactor-ia</a> y en la cuenta
+          de{" "}
+          <a href={href("github-personal")} rel="noopener">Juan Barbat</a>. Se
+          actualiza solo una vez por día; última actualización:{" "}
+          <time datetime={GENERATED_AT}>{formatDate(GENERATED_AT)}</time>.
+        </Paragraph>
+        <RepoChips />
+      </ContentStack>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="actividad">
+    <ContentWrapper>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Actividad"
+          title="Commits, releases y PRs públicos."
+        />
+        <ActivityFeed />
+      </ContentStack>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="videos">
+    <ContentWrapper>
+      <ContentStack>
+        <SectionHeading eyebrow="Videos" title="Lo último en YouTube." />
+        <VideoList />
+      </ContentStack>
+    </ContentWrapper>
+  </Section>
+
+  <Section id="hecho-con" paddingBottom="large">
+    <ContentWrapper>
+      <ContentStack>
+        <SectionHeading
+          eyebrow="Hecho con"
+          title="Cómo está armado este sitio."
+        />
+        <Paragraph>
+          Sitio estático, sin tokens ni llamadas a APIs desde tu navegador: los
+          datos se bajan al compilar.
+        </Paragraph>
+        <ul class="built-with_list">
+          {
+            stack.map((tool) => (
+              <li>
+                <a href={tool.href} rel="noopener" class="mono-label">
+                  {tool.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </ContentStack>
+    </ContentWrapper>
+  </Section>
+</Layout>
+
+<style is:global>
+  @layer components {
+    .built-with_list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .built-with_list a {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+    }
+
+    #ahora a:not(.button_wrap, [class*="button"]) {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+    }
+  }
+</style>

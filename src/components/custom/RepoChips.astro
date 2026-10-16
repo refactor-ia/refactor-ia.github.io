@@ -1,43 +1,71 @@
 ---
-import Button from "@/components/Button.astro";
+import { GITHUB_ACTIVITY, activeRepos } from "@/data/activity.ts";
 
-interface Repo {
-  name: string;
-  href: string;
+interface Props {
+  /** Maximum number of repos, busiest first. */
+  limit?: number;
 }
 
-const repos: Repo[] = [
-  { name: "presupuestos", href: "https://github.com/refactor-ia/presupuestos" },
-  {
-    name: "streamdeck-nan",
-    href: "https://github.com/refactor-ia/streamdeck-nan",
-  },
-];
+const { limit = 6 } = Astro.props;
+const repos = activeRepos(GITHUB_ACTIVITY, limit).map(({ repo, href }) => {
+  const [owner, name] = repo.split("/");
+  return { owner, name, href };
+});
 ---
 
-<div class="repo-chips_wrap">
+<ul class="repo-chips_wrap">
   {
     repos.map((repo) => (
-      <Button
-        element="link"
-        variant="link"
-        href={repo.href}
-        class="mono-label"
-        rel="noopener"
-      >
-        {repo.name}
-      </Button>
+      <li>
+        <a class="repo-chips_item mono-label" href={repo.href} rel="noopener">
+          <span class="repo-chips_owner">{repo.owner}/</span>
+          <span class="repo-chips_name">{repo.name}</span>
+        </a>
+      </li>
     ))
   }
-</div>
+</ul>
 
 <style is:global>
   @layer components {
     .repo-chips_wrap {
-      display: flex;
-      flex-wrap: wrap;
+      justify-self: stretch;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
       gap: var(--space-3);
-      margin-block: var(--space-5);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .repo-chips_item {
+      display: grid;
+      gap: var(--space-1);
+      height: 100%;
+      padding: var(--space-3) var(--space-4);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      text-decoration: none;
+      transition:
+        border-color var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
+      @media (hover: hover) {
+        &:hover {
+          border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+          box-shadow: var(--glow-md);
+        }
+      }
+    }
+
+    .repo-chips_owner {
+      color: var(--text-2);
+      font-size: var(--text-small);
+    }
+
+    .repo-chips_name {
+      color: var(--text);
+      overflow-wrap: anywhere;
     }
   }
 </style>

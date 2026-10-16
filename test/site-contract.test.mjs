@@ -118,18 +118,38 @@ test("renders the Spanish public landing contract", () => {
     "names Juan Barbat as visible text",
   );
 
-  for (const category of [
-    "Devs",
-    "Labs",
+  const playlists = [
+    "PLFbfYOblJt3U",
+    "PLX7ElcrG0UU4",
+    "PLP3wgshSph74",
+    "PLYyKFx_ubmcw",
+    "PLXgZYNWTtTNE",
+    "PLHyE1_ybzabU",
+    "PLT1Ea8AGLC80c70voLUC2FeJVWwdr-z2D",
+    "PLT1Ea8AGLC83z2BRh0oLHecNUkDoV4H7l",
+    "PLT1Ea8AGLC81mbvCnyusRsspD0czfemoi",
+  ];
+  for (const id of playlists) {
+    assert.equal(
+      $(
+        `#formatos a.content-card_wrap[href="https://www.youtube.com/playlist?list=${id}"]`,
+      ).length,
+      1,
+      `links the ${id} playlist card`,
+    );
+  }
+  assert.equal(
+    $("#formatos .content-card_wrap:not(.linked)").length,
+    0,
+    "has no unlinked content cards",
+  );
+  for (const removed of [
     "TurboTips",
     "Snippetazos",
     "DevLore",
-    "Migraciones",
+    "Archivo PC Soft",
   ]) {
-    assert.ok(
-      $("main").text().includes(category),
-      `includes the ${category} category`,
-    );
+    assert.ok(!$("main").text().includes(removed), `drops ${removed}`);
   }
   assert.ok(
     $("main").text().includes("RefactorIA Music"),
@@ -247,5 +267,41 @@ test("renders the /links hub with every public link", () => {
       .some((el) => $(el).text() === "https://refactoria.dev/links/") ||
       readOutput("sitemap-0.xml").includes("https://refactoria.dev/links/"),
     "sitemap lists /links",
+  );
+});
+
+const activity = JSON.parse(
+  readFileSync(join(process.cwd(), "src/data/generated/activity.json"), "utf8"),
+);
+
+test("renders the /now page from the generated activity", () => {
+  const $ = load(readOutput("now/index.html"));
+
+  assert.equal($("h1").length, 1);
+  for (const id of ["ahora", "actividad", "videos", "hecho-con"]) {
+    assert.equal($(`section#${id}`).length, 1, `has section #${id}`);
+  }
+  assert.equal(
+    $("#actividad .activity-feed_item").length,
+    activity.github.length,
+  );
+  for (const item of activity.github) {
+    assert.ok(
+      $(`#actividad a[href="${item.url}"]`).length >= 1,
+      `links ${item.url}`,
+    );
+  }
+  assert.equal($("#videos .video-list_item").length, activity.videos.length);
+  assert.ok($("time[datetime]").length >= activity.github.length);
+});
+
+test("home summarizes activity and links to /now", () => {
+  const $ = load(readOutput("index.html"));
+
+  assert.ok($('a[href="/now"]').length >= 1, "links to /now");
+  const items = $("#oss .activity-feed_item").length;
+  assert.ok(items >= 1 && items <= 5, "shows a short activity summary");
+  assert.ok(
+    $(".video-list_item").length >= 1 && $(".video-list_item").length <= 4,
   );
 });
