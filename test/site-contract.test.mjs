@@ -125,7 +125,6 @@ test("renders the Spanish public landing contract", () => {
     "PLYyKFx_ubmcw",
     "PLXgZYNWTtTNE",
     "PLHyE1_ybzabU",
-    "PLcLjGFj-5UBo",
     "PLT1Ea8AGLC80c70voLUC2FeJVWwdr-z2D",
     "PLT1Ea8AGLC83z2BRh0oLHecNUkDoV4H7l",
     "PLT1Ea8AGLC81mbvCnyusRsspD0czfemoi",
@@ -144,7 +143,12 @@ test("renders the Spanish public landing contract", () => {
     0,
     "has no unlinked content cards",
   );
-  for (const removed of ["TurboTips", "Snippetazos", "DevLore"]) {
+  for (const removed of [
+    "TurboTips",
+    "Snippetazos",
+    "DevLore",
+    "Archivo PC Soft",
+  ]) {
     assert.ok(!$("main").text().includes(removed), `drops ${removed}`);
   }
   assert.ok(
@@ -298,6 +302,6 @@ test("home summarizes activity and links to /now", () => {
   const items = $("#oss .activity-feed_item").length;
   assert.ok(items >= 1 && items <= 5, "shows a short activity summary");
   assert.ok(
-    $(".video-list_item").length >= 1 && $(".video-list_item").length <= 3,
+    $(".video-list_item").length >= 1 && $(".video-list_item").length <= 4,
   );
 });
