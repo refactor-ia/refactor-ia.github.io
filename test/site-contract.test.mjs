@@ -118,18 +118,34 @@ test("renders the Spanish public landing contract", () => {
     "names Juan Barbat as visible text",
   );
 
-  for (const category of [
-    "Devs",
-    "Labs",
-    "TurboTips",
-    "Snippetazos",
-    "DevLore",
-    "Migraciones",
-  ]) {
-    assert.ok(
-      $("main").text().includes(category),
-      `includes the ${category} category`,
+  const playlists = [
+    "PLFbfYOblJt3U",
+    "PLX7ElcrG0UU4",
+    "PLP3wgshSph74",
+    "PLYyKFx_ubmcw",
+    "PLXgZYNWTtTNE",
+    "PLHyE1_ybzabU",
+    "PLcLjGFj-5UBo",
+    "PLT1Ea8AGLC80c70voLUC2FeJVWwdr-z2D",
+    "PLT1Ea8AGLC83z2BRh0oLHecNUkDoV4H7l",
+    "PLT1Ea8AGLC81mbvCnyusRsspD0czfemoi",
+  ];
+  for (const id of playlists) {
+    assert.equal(
+      $(
+        `#formatos a.content-card_wrap[href="https://www.youtube.com/playlist?list=${id}"]`,
+      ).length,
+      1,
+      `links the ${id} playlist card`,
     );
+  }
+  assert.equal(
+    $("#formatos .content-card_wrap:not(.linked)").length,
+    0,
+    "has no unlinked content cards",
+  );
+  for (const removed of ["TurboTips", "Snippetazos", "DevLore"]) {
+    assert.ok(!$("main").text().includes(removed), `drops ${removed}`);
   }
   assert.ok(
     $("main").text().includes("RefactorIA Music"),

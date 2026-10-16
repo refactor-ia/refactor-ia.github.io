@@ -53,38 +53,76 @@ const jsonLd = {
   ],
 };
 
+const playlist = (id: string) => `https://www.youtube.com/playlist?list=${id}`;
+
 const channels = [
   {
     title: "RefactorIA Devs",
     href: href("youtube-devs"),
-    description:
-      "Tutoriales y contenido curado para aprender con criterio, no con copy/paste.",
+    playlists: [
+      {
+        title: "IA para desarrolladores",
+        id: "PLHyE1_ybzabU",
+        description:
+          "Cómo meter IA en el flujo de trabajo sin perder el criterio.",
+      },
+      {
+        title: "Agentes IA",
+        id: "PLYyKFx_ubmcw",
+        description:
+          "Agentes de código en proyectos reales: qué hacen bien y dónde fallan.",
+      },
+      {
+        title: "Arquitectura",
+        id: "PLXgZYNWTtTNE",
+        description:
+          "Decisiones de diseño, trade-offs y lo que deja el software que sobrevive.",
+      },
+      {
+        title: "Saliendo de Windev",
+        id: "PLX7ElcrG0UU4",
+        description:
+          "La migración desde PC Soft hacia un stack moderno, paso a paso.",
+      },
+      {
+        title: "Devlogs",
+        id: "PLFbfYOblJt3U",
+        description:
+          "Bitácora de lo que estamos construyendo, con lo que sale mal incluido.",
+      },
+      {
+        title: "Open Build Room: NaN.Builders y Gentle-AI",
+        id: "PLP3wgshSph74",
+        description: "Construcción en abierto junto a otras comunidades.",
+      },
+      {
+        title: "Archivo PC Soft / WinDev",
+        id: "PLcLjGFj-5UBo",
+        description:
+          "El material histórico de WinDev, para quien todavía lo mantiene.",
+      },
+    ],
   },
   {
     title: "RefactorIA Labs",
     href: href("youtube-labs"),
-    description:
-      "Streams, experimentos y sesiones largas construyendo en vivo, con lo que sale mal incluido.",
-  },
-  {
-    title: "TurboTips",
-    description:
-      "Consejos cortos para destrabar el trabajo real del día a día.",
-  },
-  {
-    title: "Snippetazos",
-    description:
-      "Fragmentos de código listos para usar, con el criterio detrás de cada línea.",
-  },
-  {
-    title: "DevLore",
-    description:
-      "Decisiones de arquitectura, trade-offs y lecciones que deja el software que sobrevive.",
-  },
-  {
-    title: "Migraciones",
-    description:
-      "Casos reales de modernización: cambiar de stack sin tirar lo que funciona.",
+    playlists: [
+      {
+        title: "Labs",
+        id: "PLT1Ea8AGLC80c70voLUC2FeJVWwdr-z2D",
+        description: "Streams y experimentos largos construyendo en vivo.",
+      },
+      {
+        title: "Open Build Room",
+        id: "PLT1Ea8AGLC83z2BRh0oLHecNUkDoV4H7l",
+        description: "Sesiones abiertas de construcción, en vivo y sin editar.",
+      },
+      {
+        title: "Talleres",
+        id: "PLT1Ea8AGLC81mbvCnyusRsspD0czfemoi",
+        description: "Sesiones prácticas para hacer, no solo mirar.",
+      },
+    ],
   },
 ];
 ---
@@ -136,15 +174,24 @@ const channels = [
           eyebrow="Contenido"
           title="Hecho para leer, mirar y usar en tu proyecto."
         />
-        <CardGrid>
-          {
-            channels.map((channel) => (
-              <ContentCard title={channel.title} href={channel.href}>
-                {channel.description}
-              </ContentCard>
-            ))
-          }
-        </CardGrid>
+        {
+          channels.map((channel) => (
+            <div class="channel-group">
+              <h3 class="channel-group_title mono-label">
+                <a href={channel.href} rel="noopener">
+                  {channel.title}
+                </a>
+              </h3>
+              <CardGrid>
+                {channel.playlists.map((item) => (
+                  <ContentCard title={item.title} href={playlist(item.id)}>
+                    {item.description}
+                  </ContentCard>
+                ))}
+              </CardGrid>
+            </div>
+          ))
+        }
         <VideoList limit={3} />
       </ContentStack>
     </ContentWrapper>
@@ -238,6 +285,27 @@ const channels = [
 
 <style is:global>
   @layer components {
+    .channel-group {
+      display: grid;
+      gap: var(--space-4);
+      justify-self: stretch;
+    }
+
+    .channel-group_title {
+      margin: 0;
+      font-size: var(--text-small);
+    }
+
+    .channel-group_title a {
+      color: color-mix(in srgb, var(--brand-500), white 30%);
+      text-decoration: none;
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
     .prose-stack_wrap {
       display: grid;
       gap: var(--space-4);
