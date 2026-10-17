@@ -175,7 +175,13 @@ test("renders the Spanish public landing contract", () => {
       `does not publish ${forbiddenTerm} content`,
     );
   }
-  assert.equal($("script[src]").length, 0, "ships no client-side JavaScript");
+  assert.deepEqual(
+    $("script[src]")
+      .map((_, el) => $(el).attr("src"))
+      .get(),
+    ["https://analytics.innit.com.uy/script.js"],
+    "ships no client-side JavaScript besides the analytics tracker",
+  );
 });
 
 test("publishes structured identity data connecting RefactorIA, Juan Barbat and official channels", () => {
@@ -378,4 +384,18 @@ test("home and /now list the barbat.dev articles, linking out", () => {
   const items = home("#escritos .article-list_item").length;
   assert.ok(items >= 1 && items <= 3, "home shows the latest articles");
   assert.ok(home('#escritos a[href^="https://barbat.dev"]').length >= 1);
+});
+
+test("every page loads the Umami tracker for refactoria.dev only", () => {
+  for (const page of ["index.html", "now/index.html"]) {
+    const $ = load(readOutput(page));
+    const tracker = $('script[src="https://analytics.innit.com.uy/script.js"]');
+    assert.equal(tracker.length, 1, `${page} has one tracker`);
+    assert.equal(
+      tracker.attr("data-website-id"),
+      "e210c9ee-837c-4528-847c-c10474590c43",
+    );
+    assert.equal(tracker.attr("data-domains"), "refactoria.dev");
+    assert.notEqual(tracker.attr("defer"), undefined);
+  }
 });
