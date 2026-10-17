@@ -399,3 +399,14 @@ test("every page loads the Umami tracker for refactoria.dev only", () => {
     assert.notEqual(tracker.attr("defer"), undefined);
   }
 });
+
+test("every page tracks outbound link clicks with Umami", () => {
+  for (const page of ["index.html", "now/index.html", "links/index.html"]) {
+    const $ = load(readOutput(page));
+    const inline = $("script:not([src])")
+      .map((_, el) => $(el).html())
+      .get()
+      .join("\n");
+    assert.match(inline, /umami\.track\("outbound"/, `${page} tracks clicks`);
+  }
+});

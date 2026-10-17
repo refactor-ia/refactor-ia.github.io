@@ -33,6 +33,18 @@ const { theme = "dark", overlap = false, ...seo } = Astro.props;
       src="https://analytics.innit.com.uy/script.js"
       data-website-id="e210c9ee-837c-4528-847c-c10474590c43"
       data-domains="refactoria.dev"></script>
+    <!-- Records clicks on external links with their host and page section. -->
+    <script is:inline>
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest?.("a[href^='http']");
+        if (!link || link.host === location.host || !window.umami) return;
+        window.umami.track("outbound", {
+          host: link.host,
+          url: link.href,
+          section: link.closest("[id]")?.id ?? "page",
+        });
+      });
+    </script>
     <slot name="head" />
   </head>
   <body>
