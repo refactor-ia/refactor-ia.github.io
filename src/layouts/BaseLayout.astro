@@ -26,6 +26,13 @@ const { theme = "dark", overlap = false, ...seo } = Astro.props;
 <html lang="es" class:list={[theme !== "inherit" && `theme-${theme}`]}>
   <head>
     <BaseHead {...seo} />
+    <!-- Cookieless analytics; data-domains keeps local and preview builds out. -->
+    <script
+      is:inline
+      defer
+      src="https://analytics.innit.com.uy/script.js"
+      data-website-id="e210c9ee-837c-4528-847c-c10474590c43"
+      data-domains="refactoria.dev"></script>
     <slot name="head" />
   </head>
   <body>
