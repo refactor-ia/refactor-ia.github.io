@@ -5,6 +5,7 @@ import {
   enrichPullRequests,
   fetchMostViewed,
   normalizeGithubEvents,
+  parseAtomFeed,
   parseYoutubeFeed,
 } from "../scripts/fetch-activity.mjs";
 
@@ -326,4 +327,44 @@ test("adds the popular list to the activity document", () => {
     now,
   });
   assert.deepEqual(doc.popular, [{ id: "a" }]);
+});
+
+test("parses the barbat.dev Atom feed into newest-first articles", () => {
+  const xml = `<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>https://barbat.dev/blog/old/</id>
+    <title>Old &amp; gold</title>
+    <summary>First summary.</summary>
+    <link rel="alternate" type="text/html" href="https://barbat.dev/blog/old/" />
+    <published>2026-09-01T00:00:00.000Z</published>
+  </entry>
+  <entry>
+    <id>https://barbat.dev/blog/new/</id>
+    <title>New post</title>
+    <summary>Second summary.</summary>
+    <link href="https://barbat.dev/blog/new/" />
+    <updated>2026-10-02T00:00:00.000Z</updated>
+  </entry>
+</feed>`;
+  assert.deepEqual(parseAtomFeed(xml, { limit: 5 }), [
+    {
+      title: "New post",
+      summary: "Second summary.",
+      url: "https://barbat.dev/blog/new/",
+      published: "2026-10-02T00:00:00.000Z",
+    },
+    {
+      title: "Old & gold",
+      summary: "First summary.",
+      url: "https://barbat.dev/blog/old/",
+      published: "2026-09-01T00:00:00.000Z",
+    },
+  ]);
+  assert.equal(parseAtomFeed(xml, { limit: 1 }).length, 1);
+});
+
+test("buildActivity includes articles", () => {
+  const articles = [{ title: "A", summary: "", url: "u", published: "p" }];
+  const doc = buildActivity({ github: [], videos: [], articles, now });
+  assert.deepEqual(doc.articles, articles);
 });

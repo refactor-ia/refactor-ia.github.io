@@ -1,4 +1,4 @@
-// Fetches public GitHub activity and the latest YouTube videos at build time
+// Fetches public GitHub activity, the latest YouTube videos and barbat.dev articles at build time
 // and writes them to src/data/generated/activity.json. No token reaches the client.
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
@@ -13,6 +13,7 @@ const YOUTUBE_CHANNELS = [
   { channel: "@RefactorIA", id: "UCKmxvQBWXbN2UOpPVmxAOJQ" },
   { channel: "@RefactorIADevs", id: "UC7GZzyf9BMjMnXoYxsGWAxQ" },
 ];
+const ARTICLES_FEED = "https://barbat.dev/feed.atom";
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const repoUrl = (repo) => `https://github.com/${repo}`;
@@ -138,6 +139,28 @@ export function parseYoutubeFeed(xml, { channel, limit = 5 }) {
 }
 
 /**
+ * Parses the barbat.dev Atom feed into the newest articles. Only metadata is
+ * kept: the articles themselves stay on barbat.dev.
+ */
+export function parseAtomFeed(xml, { limit = 6 } = {}) {
+  const entries = xml.match(/<entry>[\s\S]*?<\/entry>/g) ?? [];
+  const pick = (entry, tag) =>
+    entry.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`))?.[1]?.trim();
+  return entries
+    .map((entry) => ({
+      title: decodeXml(pick(entry, "title") ?? ""),
+      summary: decodeXml(pick(entry, "summary") ?? ""),
+      url:
+        entry.match(/<link[^>]*href="([^"]+)"/)?.[1] ?? pick(entry, "id") ?? "",
+      published: new Date(
+        pick(entry, "published") ?? pick(entry, "updated"),
+      ).toISOString(),
+    }))
+    .sort((a, b) => b.published.localeCompare(a.published))
+    .slice(0, limit);
+}
+
+/**
  * Fills in the real titles of pull requests, since the Events API trims them.
  * A failed lookup keeps the "#<number>" fallback.
  */
@@ -156,8 +179,15 @@ export async function enrichPullRequests(items, getPull) {
   );
 }
 
-export function buildActivity({ github, videos, popular, now = new Date() }) {
+export function buildActivity({
+  github,
+  videos,
+  articles,
+  popular,
+  now = new Date(),
+}) {
   const doc = { generatedAt: now.toISOString(), github, videos };
+  if (articles) doc.articles = articles;
   // Popular videos need the Data API key; without it the field is left out.
   if (popular) doc.popular = popular;
   return doc;
@@ -259,6 +289,13 @@ async function fetchYoutube({ channel, id }) {
   return parseYoutubeFeed(await response.text(), { channel });
 }
 
+async function fetchArticles() {
+  const response = await fetch(ARTICLES_FEED);
+  if (!response.ok)
+    throw new Error(`Articles feed returned ${response.status}`);
+  return parseAtomFeed(await response.text());
+}
+
 async function main() {
   const now = new Date();
   const events = (await Promise.all(GITHUB_SOURCES.map(fetchGithub))).flatMap(
@@ -285,11 +322,12 @@ async function main() {
         .flat()
         .sort((a, b) => b.views - a.views)
     : undefined;
-  const activity = buildActivity({ github, videos, popular, now });
+  const articles = await fetchArticles();
+  const activity = buildActivity({ github, videos, articles, popular, now });
   await mkdir(dirname(OUTPUT), { recursive: true });
   await writeFile(OUTPUT, `${JSON.stringify(activity, null, 2)}\n`);
   console.log(
-    `Wrote ${activity.github.length} GitHub items, ${videos.length} videos and ${popular?.length ?? "no"} popular videos to ${OUTPUT}`,
+    `Wrote ${activity.github.length} GitHub items, ${videos.length} videos, ${articles.length} articles and ${popular?.length ?? "no"} popular videos to ${OUTPUT}`,
   );
 }
 

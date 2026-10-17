@@ -295,5 +295,31 @@
       "published": "2026-09-22T11:52:32.000Z",
       "channel": "@RefactorIA"
     }
+  ],
+  "articles": [
+    {
+      "title": "De 48 horas a minutos: le metí IA a un proceso de mi empresa (y no queda corriendo con tokens)",
+      "summary": "La facturación masiva mensual me comía 48 horas por mes. La IA construyó los cambios, y hoy la corrida es determinística: minutos, sin tokens. La mejor automatización no es un agente operando tu negocio.",
+      "url": "https://barbat.dev/blog/le-meti-un-agente-de-ia-a-un-proceso-de-mi-empresa/",
+      "published": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "title": "Qué necesito de una IA para construir un producto real",
+      "summary": "No todos hacemos el mismo trabajo ni necesitamos el mismo modelo. Sobre qué necesito de una IA cuando el producto ya existe y hay usuarios reales.",
+      "url": "https://barbat.dev/blog/que-necesito-de-una-ia-para-construir-un-producto-real/",
+      "published": "2026-09-22T00:00:00.000Z"
+    },
+    {
+      "title": "Cómo verificamos código generado por IA antes de llevarlo a producción",
+      "summary": "La IA puede acelerar una entrega. La responsabilidad de verificar qué entra a producción sigue siendo nuestra.",
+      "url": "https://barbat.dev/blog/como-verificamos-codigo-generado-por-ia-antes-de-produccion/",
+      "published": "2026-08-25T00:00:00.000Z"
+    },
+    {
+      "title": "El modelo más fuerte no tiene que hacer todo",
+      "summary": "Arquitectura real, no teórica. El modelo más fuerte decide; NaN absorbe el volumen; Gentle AI gobierna el ciclo. Con evidencia de costo de uso real.",
+      "url": "https://barbat.dev/blog/el-modelo-mas-fuerte-no-tiene-que-hacer-todo/",
+      "published": "2026-08-12T00:00:00.000Z"
+    }
   ]
 }
