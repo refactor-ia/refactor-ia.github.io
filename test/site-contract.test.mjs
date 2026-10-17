@@ -330,12 +330,24 @@ test("/now shows the most viewed videos only when the data has them", () => {
 test("highlights the Gentle AI maintainer and NaN.Builders ambassador roles", () => {
   const $ = load(readOutput("index.html"));
   const about = $("#about");
-  assert.ok(about.text().includes("Maintainer de Gentle AI"), "names the Gentle AI role");
-  assert.ok(about.text().includes("Embajador de NaN.Builders"), "names the NaN.Builders role");
-  assert.equal(about.find('a[href="https://github.com/Gentleman-Programming/gentle-ai"]').length, 1);
+  assert.ok(
+    about.text().includes("Maintainer de Gentle AI"),
+    "names the Gentle AI role",
+  );
+  assert.ok(
+    about.text().includes("Embajador de NaN.Builders"),
+    "names the NaN.Builders role",
+  );
+  assert.equal(
+    about.find('a[href="https://github.com/Gentleman-Programming/gentle-ai"]')
+      .length,
+    1,
+  );
   assert.equal(about.find('a[href="https://nan.builders"]').length, 1);
 
-  const graph = JSON.parse($('script[type="application/ld+json"]').html())["@graph"];
+  const graph = JSON.parse($('script[type="application/ld+json"]').html())[
+    "@graph"
+  ];
   const person = graph.find((node) => node["@type"] === "Person");
   const urls = person.affiliation.map((org) => org.url);
   assert.deepEqual(urls, [
@@ -352,4 +364,18 @@ test("links hub lists Gentle AI and NaN.Builders", () => {
   ]) {
     assert.equal($(`a[href="${href}"]`).length, 1, `links hub links ${href}`);
   }
+});
+
+test("home and /now list the barbat.dev articles, linking out", () => {
+  const articles = activity.articles ?? [];
+  assert.ok(articles.length > 0, "generated data has articles");
+  const now = load(readOutput("now/index.html"));
+  assert.equal(now("#escritos .article-list_item").length, articles.length);
+  for (const article of articles) {
+    assert.equal(now(`#escritos a[href="${article.url}"]`).length, 1);
+  }
+  const home = load(readOutput("index.html"));
+  const items = home("#escritos .article-list_item").length;
+  assert.ok(items >= 1 && items <= 3, "home shows the latest articles");
+  assert.ok(home('#escritos a[href^="https://barbat.dev"]').length >= 1);
 });

@@ -1,0 +1,87 @@
+---
+import { ARTICLES, formatDate, type Article } from "@/data/activity.ts";
+
+interface Props {
+  /** Articles to show; defaults to the latest barbat.dev posts. */
+  articles?: Article[];
+  /** Maximum number of articles. */
+  limit?: number;
+}
+
+const { articles = ARTICLES, limit = articles.length } = Astro.props;
+---
+
+<ul class="article-list_wrap">
+  {
+    articles.slice(0, limit).map((article) => (
+      <li class="article-list_item">
+        <a href={article.url} rel="noopener" class="article-list_title">
+          {article.title}
+        </a>
+        <p class="article-list_summary">{article.summary}</p>
+        <p class="article-list_meta mono-label">
+          barbat.dev ·{" "}
+          <time datetime={article.published}>
+            {formatDate(article.published)}
+          </time>
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style is:global>
+  @layer components {
+    .article-list_wrap {
+      justify-self: stretch;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+      gap: var(--space-5);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .article-list_item {
+      display: grid;
+      gap: var(--space-2);
+      align-content: start;
+      padding: var(--space-5);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-small);
+      transition:
+        border-color var(--duration-hover) var(--ease-out-expo),
+        box-shadow var(--duration-hover) var(--ease-out-expo);
+      @media (hover: hover) {
+        &:has(a:hover) {
+          border-color: color-mix(in srgb, var(--brand-500) 65%, transparent);
+          box-shadow: var(--glow-md);
+        }
+      }
+    }
+
+    .article-list_title {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .article-list_summary {
+      margin: 0;
+      color: var(--text-2);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-list_meta {
+      margin: 0;
+      color: var(--text-2);
+      font-size: var(--text-small);
+    }
+  }
+</style>

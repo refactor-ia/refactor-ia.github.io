@@ -17,6 +17,8 @@ import IdentityList from "@/components/custom/IdentityList.astro";
 import RepoChips from "@/components/custom/RepoChips.astro";
 import ActivityFeed from "@/components/custom/ActivityFeed.astro";
 import VideoList from "@/components/custom/VideoList.astro";
+import ArticleList from "@/components/custom/ArticleList.astro";
+import { ARTICLES } from "@/data/activity.ts";
 import { SAME_AS, href } from "@/data/links.ts";
 
 const roles = [
@@ -216,6 +218,27 @@ const channels = [
     </ContentWrapper>
   </Section>
 
+  {
+    ARTICLES.length > 0 && (
+      <Section id="escritos">
+        <ContentWrapper>
+          <ContentStack>
+            <SectionHeading
+              eyebrow="Escritos"
+              title="Lo que escribo sobre IA aplicada."
+            />
+            <ArticleList limit={3} />
+            <ButtonWrapper>
+              <Button element="link" href="https://barbat.dev/blog">
+                Ver todo en barbat.dev
+              </Button>
+            </ButtonWrapper>
+          </ContentStack>
+        </ContentWrapper>
+      </Section>
+    )
+  }
+
   <Section id="oss">
     <ContentWrapper>
       <ContentStack>
@@ -279,8 +302,8 @@ const channels = [
         />
         <Paragraph>
           RefactorIA es una comunidad independiente creada y dirigida por{" "}
-          <a href={href("github-personal")} rel="noopener">Juan Barbat</a>,
-          que responde por el proyecto en todas sus plataformas: este sitio, la
+          <a href={href("github-personal")} rel="noopener">Juan Barbat</a>, que
+          responde por el proyecto en todas sus plataformas: este sitio, la
           organización de GitHub, los dos canales de YouTube y RefactorIA Music.
         </Paragraph>
         <ul class="roles_wrap">
@@ -379,8 +402,9 @@ const channels = [
     .roles_item a {
       @media (hover: hover) {
         &:hover img {
-          filter: drop-shadow(0 0 0.75rem
-              color-mix(in srgb, var(--brand-500) 55%, transparent));
+          filter: drop-shadow(
+            0 0 0.75rem color-mix(in srgb, var(--brand-500) 55%, transparent)
+          );
         }
       }
     }
