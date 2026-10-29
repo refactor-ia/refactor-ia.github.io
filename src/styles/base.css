@@ -287,6 +287,7 @@
   --text-2: color-mix(in lab, currentcolor 60%, transparent);
   --border: color-mix(in lab, var(--text) 20%, transparent);
   --heading-accent: color-mix(in srgb, var(--brand-500), black 20%);
+  --accent-spark: #7a4a00;
 
   --selection-background: var(--text);
   --selection-text: var(--background);
@@ -323,6 +324,7 @@
   --text-2: color-mix(in lab, currentcolor 60%, transparent);
   --border: color-mix(in lab, var(--text) 20%, transparent);
   --heading-accent: var(--brand-500);
+  --accent-spark: #ffb547;
 
   --selection-background: var(--text);
   --selection-text: var(--background);
@@ -358,6 +360,7 @@
   --text-2: color-mix(in lab, var(--brand-text) 85%, var(--brand-500));
   --border: color-mix(in lab, var(--text) 20%, transparent);
   --heading-accent: color-mix(in srgb, var(--text), white 20%);
+  --accent-spark: #ffd08a;
 
   --selection-background: var(--text);
   --selection-text: var(--background);
