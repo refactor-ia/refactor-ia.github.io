@@ -23,6 +23,11 @@ export default defineConfig({
             style: "normal",
             src: ["./src/assets/fonts/inter-regular.woff2"],
           },
+          {
+            weight: 500,
+            style: "normal",
+            src: ["./src/assets/fonts/inter-medium.woff2"],
+          },
         ],
       },
     },
