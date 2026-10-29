@@ -6,19 +6,19 @@ Sitio público estático de [refactoria.dev](https://refactoria.dev): la casa ca
 
 ## Inicio rápido
 
-1. Usá Node.js 24 y npm 11 o versiones compatibles.
-2. Instalá dependencias con `npm ci`.
-3. Iniciá el sitio con `npm run dev`.
+1. Usá Node.js 24 y pnpm 12 (la versión exacta está en `packageManager` de `package.json`).
+2. Instalá dependencias con `pnpm install --frozen-lockfile`.
+3. Iniciá el sitio con `pnpm run dev`.
 
 ## Comandos
 
-| Comando          | Propósito                                               |
-| ---------------- | ------------------------------------------------------- |
-| `npm run dev`    | Servidor local de Astro.                                |
-| `npm run format` | Verifica el formato.                                    |
-| `npm run check`  | Ejecuta la verificación de Astro y TypeScript.          |
-| `npm test`       | Construye el sitio y valida el HTML estático publicado. |
-| `npm run build`  | Genera el sitio estático en `dist/`.                    |
+| Comando           | Propósito                                               |
+| ----------------- | ------------------------------------------------------- |
+| `pnpm run dev`    | Servidor local de Astro.                                |
+| `pnpm run format` | Verifica el formato.                                    |
+| `pnpm run check`  | Ejecuta la verificación de Astro y TypeScript.          |
+| `pnpm test`       | Construye el sitio y valida el HTML estático publicado. |
+| `pnpm run build`  | Genera el sitio estático en `dist/`.                    |
 
 ## Estructura
 
